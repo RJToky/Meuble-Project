@@ -8,19 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/lib/bootstrap/css/bootstrap.min.css">
-    <title><%= content %></title>
+    <title>Meuble Project</title>
   </head>
   <body>
 
     <main id="content">
         <% if (content.equalsIgnoreCase("insertion-matiere")) { %>
-          <%@ include file="../pages/insertion_matiere.jsp" %>
+          <%@ include file="../pages/insertion-matiere.jsp" %>
 
         <% } else if(content.equalsIgnoreCase("insertion-style")) { %>
-          <%@ include file="../pages/insertion_style.jsp" %>
+          <%@ include file="../pages/insertion-style.jsp" %>
           
         <% } else if(content.equalsIgnoreCase("matiere-style")) { %>
-          <%@ include file="../pages/matiere_style.jsp" %>
+          <%@ include file="../pages/matiere-style.jsp" %>
         <% } %>
     </main>
 

@@ -11,12 +11,12 @@ import model.Style;
 
 @WebServlet("/matiere-style")
 public class MatiereStyleController extends HttpServlet {
-    
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            if (req.getParameter("style") != null) {
-                int id = Integer.parseInt(req.getParameter("style"));
+            if (req.getParameter("idStyle") != null) {
+                int id = Integer.parseInt(req.getParameter("idStyle"));
                 Style style = new Style(id, "");
                 req.setAttribute("matieres", style.getMatieres());
             }
@@ -26,7 +26,7 @@ public class MatiereStyleController extends HttpServlet {
             e.printStackTrace();
         }
         req.setAttribute("content", "matiere-style");
-        req.getRequestDispatcher("layouts/layout_app.jsp").forward(req, resp);
+        req.getRequestDispatcher("layouts/layout-app.jsp").forward(req, resp);
     }
-    
+
 }

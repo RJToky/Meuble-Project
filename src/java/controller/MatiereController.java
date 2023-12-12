@@ -15,7 +15,7 @@ public class MatiereController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("content", "insertion-matiere");
-        req.getRequestDispatcher("layouts/layout_app.jsp").forward(req, resp);
+        req.getRequestDispatcher("layouts/layout-app.jsp").forward(req, resp);
     }
 
     @Override

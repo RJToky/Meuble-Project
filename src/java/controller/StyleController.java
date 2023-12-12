@@ -12,7 +12,7 @@ import model.Style;
 
 @WebServlet("/style")
 public class StyleController extends HttpServlet {
-    
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
@@ -21,7 +21,7 @@ public class StyleController extends HttpServlet {
             e.printStackTrace();
         }
         req.setAttribute("content", "insertion-style");
-        req.getRequestDispatcher("layouts/layout_app.jsp").forward(req, resp);
+        req.getRequestDispatcher("layouts/layout-app.jsp").forward(req, resp);
     }
 
     @Override

@@ -4,18 +4,19 @@
 <div class="container py-5">
     <div class="row mb-3">
         <div class="col-md-4">
-            <h1>Rechercher les matieres selon le style</h1>
+            <h1>Rechercher des matieres selon le style</h1>
             <br>
             <form action="matiere-style" method="get" class="form-inline">
                 <div class="form-group">
-                    <select name="style" class="form-control mb-2">
+                    <select name="idStyle" class="form-control mb-2">
                         <% for(Style style : styles) { %>
-                            <option value="<%= style.getId() %>"><%= style.getNom() %></option>
+                        <option value="<%= style.getId() %>"><%= style.getNom() %></option>
                         <% } %>
                     </select>
                     <button type="submit" class="btn btn-primary">Valider</button>
                 </div>
             </form>
+
         </div>
     </div>
     <% if(request.getAttribute("matieres") != null) { %>

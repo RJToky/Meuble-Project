@@ -19,6 +19,7 @@ public class MatiereStyleController extends HttpServlet {
                 int id = Integer.parseInt(req.getParameter("idStyle"));
                 Style style = new Style(id, "");
                 req.setAttribute("matieres", style.getMatieres());
+                req.setAttribute("idStyle", id);
             }
 
             req.setAttribute("styles", Style.getAll());

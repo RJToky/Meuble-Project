@@ -1,4 +1,3 @@
-<%@ page import="java.util.ArrayList, model.Style, model.Matiere" %>
 <% ArrayList<Style> styles = (ArrayList<Style>) request.getAttribute("styles"); %>
 
 <div class="page-wrapper" style="display: block;">
@@ -30,7 +29,7 @@
                             <form action="matiere-style" method="get" class="col-lg-4">
                                 <label>Styles</label>
                                 <div class="input-group">
-                                    <select class="custom-select" name="idStyle">
+                                    <select class="custom-select" name="idStyle" required="">
                                         <option value="">Choisir...</option>
                                         <% for (Style style : styles) { %>
                                         <% 

@@ -1,6 +1,4 @@
-<%@ page import="java.util.ArrayList, model.Matiere" %>
 <% ArrayList<Matiere> matieres = (ArrayList<Matiere>) request.getAttribute("matieres"); %>
-
 
 <div class="page-wrapper" style="display: block;">
     <!-- ============================================================== -->

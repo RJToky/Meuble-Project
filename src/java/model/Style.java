@@ -10,6 +10,7 @@ import java.util.ArrayList;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Style extends GenericDAO<Style> {
+
     int id;
     String nom;
 
@@ -32,10 +33,22 @@ public class Style extends GenericDAO<Style> {
     public void insert(String[] listIdMatiere) throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
             this.save(con);
-            
-            int lastIdStyle = this.findLast(con).getId();
+            Style lastStyle = this.findLast(con);
+            lastStyle.addMatieres(con, listIdMatiere);
+        }
+    }
+
+    public void addMatieres(Connection con, String[] listIdMatiere) throws Exception {
+        for (String idMatiere : listIdMatiere) {
+            MatiereStyle matiereStyle = new MatiereStyle(0, Integer.parseInt(idMatiere), this.getId());
+            matiereStyle.save(con);
+        }
+    }
+
+    public void addMatieres(String[] listIdMatiere) throws Exception {
+        try (Connection con = ConnectionPostgres.getConnection()) {
             for (String idMatiere : listIdMatiere) {
-                MatiereStyle matiereStyle = new MatiereStyle(0, Integer.parseInt(idMatiere), lastIdStyle);
+                MatiereStyle matiereStyle = new MatiereStyle(0, Integer.parseInt(idMatiere), this.getId());
                 matiereStyle.save(con);
             }
         }
@@ -45,7 +58,37 @@ public class Style extends GenericDAO<Style> {
         ArrayList<Matiere> matieres;
         try (Connection con = ConnectionPostgres.getConnection()) {
             String query = """
-                select m.* from matiere m join MatiereStyle ms on m.id = ms.idMatiere where ms.idStyle = %s
+                select
+                    m.*
+                from
+                    matiere m
+                join MatiereStyle ms on m.id = ms.idMatiere
+                where
+                    ms.idStyle = %s
+            """.formatted(this.id);
+            matieres = new Matiere().find(con, query);
+        }
+        return matieres;
+    }
+
+    public ArrayList<Matiere> getNotMatieres() throws Exception {
+        ArrayList<Matiere> matieres;
+        try (Connection con = ConnectionPostgres.getConnection()) {
+            String query = """
+               select
+                    m.*
+                from
+                    matiere m
+                where
+                    id not in (
+                        select
+                            m.id
+                        from
+                            matiere m
+                        join MatiereStyle ms on m.id = ms.idMatiere
+                        where
+                            ms.idStyle = %s
+                    )
                     """.formatted(this.id);
             matieres = new Matiere().find(con, query);
         }

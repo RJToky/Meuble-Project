@@ -30,17 +30,23 @@ public class Meuble extends GenericDAO<Meuble> {
         try (Connection con = ConnectionPostgres.getConnection()) {
             this.save(con);
         }
-
     }
 
-    public ArrayList<Meuble> getAll() throws Exception {
+    public static ArrayList<Meuble> getAll() throws Exception {
         Connection con = ConnectionPostgres.getConnection();
         ArrayList<Meuble> meubles = new Meuble().findAll(con);
         con.close();
         return meubles;
     }
+    
+    public static Meuble getById(int id) throws Exception {
+        Connection con = ConnectionPostgres.getConnection();
+        Meuble meuble = new Meuble().findById(con, id);
+        con.close();
+        return meuble;
+    }
 
-    public ArrayList<Meuble> getMeubles(int idMatiere) throws ClassNotFoundException, SQLException, Exception {
+    public static ArrayList<Meuble> getMeubles(int idMatiere) throws ClassNotFoundException, SQLException, Exception {
         Connection con = ConnectionPostgres.getConnection();
         ArrayList<Meuble> meubles = new ArrayList<>();
         String query = """

@@ -8,7 +8,7 @@
             <div class="card mb-4">
                 <h5 class="card-header">Liste matières utilisées</h5>
                 <div class="card-body">
-                    <div class="row mb-4">
+                    <div class="row">
                         <form class="col-12" action="matiere-style" method="get">
                             <div class="row d-flex align-items-end">
                                 <div class="col-7 mb-3">
@@ -38,7 +38,7 @@
 
                     <% if(request.getAttribute("matieres") != null) { %>
                     <% ArrayList<Matiere> matieres = (ArrayList<Matiere>) request.getAttribute("matieres"); %>
-                    <div class="row">
+                    <div class="row mt-4">
                         <div class="table-responsive col-12">
                             <table class="table">
                                 <thead class="table-active">

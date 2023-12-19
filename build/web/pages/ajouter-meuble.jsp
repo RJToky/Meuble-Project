@@ -1,3 +1,4 @@
+<% ArrayList<Categorie> categories = (ArrayList<Categorie>) request.getAttribute("categories"); %>
 <% ArrayList<Style> styles = (ArrayList<Style>) request.getAttribute("styles"); %>
 
 <div>
@@ -20,19 +21,20 @@
                                 />
                         </div>
                         <div class="mb-3">
+                            <label class="form-label">Categorie</label>
+                            <select class="form-select" name="idCategorie">
+                                <option value="">Choisir...</option>
+                                <% for (Categorie categorie : categories) { %>
+                                <option value="<%= categorie.getId() %>"><%= categorie.getNom() %></option>
+                                <% } %>
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label">Style</label>
                             <select class="form-select" name="idStyle">
                                 <option value="">Choisir...</option>
                                 <% for (Style style : styles) { %>
-                                <% 
-                                    boolean isSelected = false;
-                                    int idStyle = 0;
-                                    if(request.getAttribute("idStyle") != null) {
-                                        idStyle = (int) request.getAttribute("idStyle");
-                                        isSelected = (style.getId() == idStyle);
-                                    }
-                                %>
-                                <option value="<%= style.getId() %>" <%= isSelected ? "selected" : "" %>><%= style.getNom() %></option>
+                                <option value="<%= style.getId() %>"><%= style.getNom() %></option>
                                 <% } %>
                             </select>
                         </div>

@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import model.Categorie;
+import model.Meuble;
 import model.Style;
 
 @WebServlet("/ajouter-meuble")
@@ -15,6 +17,7 @@ public class AjouterMeubleController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            req.setAttribute("categories", Categorie.getAll());
             req.setAttribute("styles", Style.getAll());
             req.setAttribute("active", "meuble");
             req.setAttribute("content", "ajouter-meuble");
@@ -32,8 +35,8 @@ public class AjouterMeubleController extends HttpServlet {
                 int idCategorie = Integer.parseInt(req.getParameter("idCategorie"));
                 int idStyle = Integer.parseInt(req.getParameter("idStyle"));
                 if (!nom.equals("")) {
-//                    Matiere matiere = new Matiere(0, nom);
-//                    matiere.insert();
+                    Meuble meuble = new Meuble(0, nom, idCategorie, idStyle);
+                    meuble.insert();
                 }
             }
             resp.sendRedirect("ajouter-meuble");

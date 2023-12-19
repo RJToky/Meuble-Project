@@ -1,4 +1,4 @@
-<% // ArrayList<Meuble> meubles = (ArrayList<Meuble>) request.getAttribute("meubles"); %>
+<% ArrayList<Meuble> meubles = (ArrayList<Meuble>) request.getAttribute("meubles"); %>
 
 <div>
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Meuble /</span> Fabrication</h4>
@@ -15,6 +15,9 @@
                                     <label class="form-label">Nom du meuble</label>
                                     <select class="form-select" name="idMeuble">
                                         <option value="">Choisir...</option>
+                                        <% for (Meuble meuble : meubles) { %>
+                                        <option value="<%= meuble.getId() %>"><%= meuble.getNom() %></option>
+                                        <% } %>
                                     </select>
                                 </div>
 
@@ -28,20 +31,28 @@
             </div>
         </div>
 
+        <% if(request.getAttribute("idMeuble") != null) { %>
+        <% ArrayList<Taille> tailles = (ArrayList<Taille>) request.getAttribute("tailles"); %>
+        <% ArrayList<Matiere> matieres = (ArrayList<Matiere>) request.getAttribute("matieres"); %>
         <div class="col-md-6">
             <div class="card mb-4">
                 <h5 class="card-header">Fabrication</h5>
                 <div class="card-body">
                     <form action="fabrication-meuble" method="post">
+                        <input type="hidden" name="idMeuble" value="<%= request.getAttribute("idMeuble") %>" />
                         <div class="mb-3">
                             <label class="form-label">Taille</label>
                             <select class="form-select" name="idTaille">
                                 <option value="">Choisir...</option>
+                                <% for (Taille taille : tailles) { %>
+                                <option value="<%= taille.getId() %>"><%= taille.getNom() %></option>
+                                <% } %>
                             </select>
                         </div>
+                        <% for (Matiere matiere : matieres) { %>
                         <div class="mb-3">
-                            <label class="form-label">Matiere A</label>
-                            <input type="hidden" name="idMatiere[]" value="" />
+                            <label class="form-label"><%= matiere.getNom() %></label>
+                            <input type="hidden" name="idMatiere[]" value="<%= matiere.getId() %>" />
                             <input
                                 type="number"
                                 class="form-control"
@@ -50,9 +61,11 @@
                                 required
                                 />
                         </div>
+                        <% } %>
                     </form>
                 </div>
             </div>
         </div>
+        <% } %>
     </div>
 </div>

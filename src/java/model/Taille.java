@@ -21,7 +21,7 @@ public class Taille extends GenericDAO<Taille> {
         this.nom = nom;
     }
 
-    public ArrayList<Taille> getAll() throws Exception {
+    public static ArrayList<Taille> getAll() throws Exception {
         Connection con = ConnectionPostgres.getConnection();
         ArrayList<Taille> tailles = new Taille().findAll(con);
         con.close();

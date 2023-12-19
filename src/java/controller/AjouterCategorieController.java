@@ -5,9 +5,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Matiere;
 
 import java.io.IOException;
+import model.Categorie;
 
 @WebServlet("/ajouter-categorie")
 public class AjouterCategorieController extends HttpServlet {
@@ -25,8 +25,8 @@ public class AjouterCategorieController extends HttpServlet {
             if (req.getParameter("nom") != null) {
                 String nom = req.getParameter("nom").trim();
                 if (!nom.equals("")) {
-//                    Matiere matiere = new Matiere(0, nom);
-//                    matiere.insert();
+                    Categorie categorie = new Categorie(0, nom);
+                    categorie.insert();
                 }
             }
             resp.sendRedirect("ajouter-categorie");

@@ -1,4 +1,4 @@
-<% ArrayList<Style> styles = (ArrayList<Style>) request.getAttribute("styles"); %>
+<% ArrayList<Matiere> matieres = (ArrayList<Matiere>) request.getAttribute("matieres"); %>
 
 <div>
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Meuble /</span> Liste par matières</h4>
@@ -8,13 +8,16 @@
             <div class="card mb-4">
                 <h5 class="card-header">Liste par matières</h5>
                 <div class="card-body">
-                    <div class="row mb-4">
+                    <div class="row">
                         <form class="col-12" action="meuble-matiere" method="get">
                             <div class="row d-flex align-items-end">
                                 <div class="col-7 mb-3">
-                                    <label class="form-label">Nom du meuble</label>
-                                    <select class="form-select" name="idMeuble">
+                                    <label class="form-label">Nom de la matiere</label>
+                                    <select class="form-select" name="idMatiere">
                                         <option value="">Choisir...</option>
+                                        <% for (Matiere matiere : matieres) { %>
+                                        <option value="<%= matiere.getId() %>"><%= matiere.getNom() %></option>
+                                        <% } %>
                                     </select>
                                 </div>
 
@@ -27,7 +30,7 @@
 
                     <% if(request.getAttribute("meubles") != null) { %>
                     <% ArrayList<Meuble> meubles = (ArrayList<Meuble>) request.getAttribute("meubles"); %>
-                    <div class="row">
+                    <div class="row mt-4">
                         <div class="table-responsive col-12">
                             <table class="table">
                                 <thead class="table-active">
@@ -42,7 +45,7 @@
                                     <tr>
                                         <td><%= meuble.getId() %></td>
                                         <td><%= meuble.getNom() %></td>
-                                        <td><a href="meuble-matiere" class="btn btn-info">Detail</a></td>
+                                        <td><a href="meuble-matiere?idMeuble=<%= meuble.getId() %>" class="btn btn-info">Detail</a></td>
                                     </tr>
                                     <% } %>
                                 </tbody>

@@ -7,7 +7,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Style;
+
+import model.Meuble;
+import model.Matiere;
 
 @WebServlet("/meuble-matiere")
 public class MeubleMatiereController extends HttpServlet {
@@ -15,6 +17,15 @@ public class MeubleMatiereController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            if (req.getParameter("idMatiere") != null) {
+                int idMatiere = Integer.parseInt(req.getParameter("idMatiere"));
+                req.setAttribute("meubles", Meuble.getMeubles(idMatiere));
+            }
+            if(req.getParameter("idMeuble") != null) {
+                int idMeuble = Integer.parseInt(req.getParameter("idMeuble"));
+                req.setAttribute("", null);
+            }
+            req.setAttribute("matieres", Matiere.getAll());
             req.setAttribute("active", "meuble");
             req.setAttribute("content", "meuble-matiere");
             req.getRequestDispatcher("layouts/layout-app.jsp").forward(req, resp);

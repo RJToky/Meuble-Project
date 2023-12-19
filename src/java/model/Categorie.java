@@ -20,11 +20,12 @@ public class Categorie extends GenericDAO<Categorie> {
         this.id = id;
         this.nom = nom;
     }
-
-    public ArrayList<Categorie> getAll() throws Exception {
-        Connection con = ConnectionPostgres.getConnection();
-        ArrayList<Categorie> categories = new Categorie().findAll(con);
-        con.close();
+    
+    public static ArrayList<Categorie> getAll() throws Exception {
+        ArrayList<Categorie> categories;
+        try (Connection con = ConnectionPostgres.getConnection()) {
+            categories = new Categorie().findAll(con);
+        }
         return categories;
     }
 

@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import model.Taille;
 
 @WebServlet("/ajouter-taille")
 public class AjouterTailleController extends HttpServlet {
@@ -24,8 +25,8 @@ public class AjouterTailleController extends HttpServlet {
             if (req.getParameter("nom") != null) {
                 String nom = req.getParameter("nom").trim();
                 if (!nom.equals("")) {
-//                    Matiere matiere = new Matiere(0, nom);
-//                    matiere.insert();
+                    Taille taille = new Taille(0, nom);
+                    taille.insert();
                 }
             }
             resp.sendRedirect("ajouter-taille");

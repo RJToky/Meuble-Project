@@ -33,17 +33,18 @@ public class MatiereStyleController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getParameter("idStyle") != null && req.getParameterValues("idMatiere[]") != null) {
-            try {
-                String[] listIdMatiere = req.getParameterValues("idMatiere[]");
+        try {
+            if (req.getParameter("idStyle") != null) {
                 int idStyle = Integer.parseInt(req.getParameter("idStyle"));
-                Style style = new Style(idStyle, "");
-                style.addMatieres(listIdMatiere);
-               
+                if (req.getParameterValues("idMatiere[]") != null) {
+                    String[] listIdMatiere = req.getParameterValues("idMatiere[]");
+                    Style style = new Style(idStyle, "");
+                    style.addMatieres(listIdMatiere);
+                }
                 resp.sendRedirect("matiere-style?idStyle=" + idStyle);
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

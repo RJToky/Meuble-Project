@@ -40,3 +40,11 @@ create table Meuble(
     idCategorie int references Categorie(id),
     idStyle int references Style(id)
 );
+
+create table FabricationMeuble(
+    id serial primary key,
+    idMeuble int references Meuble(id),
+    idTaille int references Taille(id),
+    idMatiere int references Matiere(id),
+    quantite double precision
+);

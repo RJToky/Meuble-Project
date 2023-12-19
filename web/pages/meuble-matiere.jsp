@@ -34,6 +34,7 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Nom du meuble</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -41,6 +42,7 @@
                                     <tr>
                                         <td><%= meuble.getId() %></td>
                                         <td><%= meuble.getNom() %></td>
+                                        <td><a href="meuble-matiere" class="btn btn-info">Detail</a></td>
                                     </tr>
                                     <% } %>
                                 </tbody>

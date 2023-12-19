@@ -24,8 +24,8 @@ public class AjouterMatiereController extends HttpServlet {
         try {
             if (req.getParameter("nom") != null) {
                 String nom = req.getParameter("nom").trim();
-                Matiere matiere = new Matiere(0, nom);
                 if (!nom.equals("")) {
+                    Matiere matiere = new Matiere(0, nom);
                     matiere.insert();
                 }
             }

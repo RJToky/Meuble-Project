@@ -90,7 +90,11 @@
                         </div>
 
                         <div>
+                            <% if(autresMatieres.size() == 0) { %>
+                            <button type="submit" class="btn btn-success" disabled>Valider</button>
+                            <% } else { %>
                             <button type="submit" class="btn btn-success">Valider</button>
+                            <% } %>
                         </div>
                     </form>
                 </div>

@@ -1,5 +1,5 @@
 <div>
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Matiere /</span> Ajouter</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Matière /</span> Ajouter</h4>
 
     <div class="row">
         <div class="col-md-6">

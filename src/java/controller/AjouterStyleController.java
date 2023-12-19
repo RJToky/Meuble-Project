@@ -31,8 +31,8 @@ public class AjouterStyleController extends HttpServlet {
             if (req.getParameter("nom") != null) {
                 String[] listIdMatiere = req.getParameterValues("idMatiere[]");
                 String nom = req.getParameter("nom").trim();
-                Style style = new Style(0, nom);
                 if (!nom.equals("")) {
+                    Style style = new Style(0, nom);
                     style.insert(listIdMatiere);
                 }
             }

@@ -59,4 +59,17 @@ public class Meuble extends GenericDAO<Meuble> {
         return meubles;
     }
 
+    public ArrayList<Matiere> getMatieres() throws Exception {
+        ArrayList<Matiere> matieres;
+        try (Connection con = ConnectionPostgres.getConnection()) {
+            String query
+                    = """
+                        SELECT m.* FROM (SELECT * FROM fabricationmeuble WHERE idMeuble = %s) fm JOIN
+                        (SELECT * FROM matiere) m ON fm.idMatiere=m.id
+                        """.formatted(this.id);
+            matieres = new Matiere().find(con, query);
+        }
+        return matieres;
+    }
+
 }

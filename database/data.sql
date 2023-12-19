@@ -71,3 +71,20 @@ INSERT INTO meuble (nom, idcategorie, idstyle)
 VALUES ('Meuble K', 1, 2);
 INSERT INTO meuble (nom, idcategorie, idstyle)
 VALUES ('Meuble I', 3, 2);
+
+INSERT INTO fabricationmeuble (idmeuble, idtaille, idmatiere, quantite) 
+	VALUES (1, 1, 1, 2.0);
+INSERT INTO fabricationmeuble (idmeuble, idtaille, idmatiere, quantite) 
+	VALUES (1, 1, 3, 3.0);
+INSERT INTO fabricationmeuble (idmeuble, idtaille, idmatiere, quantite) 
+	VALUES (2, 3, 1, 2.0);
+INSERT INTO fabricationmeuble (idmeuble, idtaille, idmatiere, quantite) 
+	VALUES (2, 2, 2, 4.0);
+INSERT INTO fabricationmeuble (idmeuble, idtaille, idmatiere, quantite) 
+	VALUES (3, 2, 2, 1.0);
+INSERT INTO fabricationmeuble (idmeuble, idtaille, idmatiere, quantite) 
+	VALUES (3, 2, 1, 4.0);
+INSERT INTO fabricationmeuble (idmeuble, idtaille, idmatiere, quantite) 
+	VALUES (3, 1, 2, 2.0);
+INSERT INTO fabricationmeuble (idmeuble, idtaille, idmatiere, quantite) 
+	VALUES (2, 2, 1, 4.0);

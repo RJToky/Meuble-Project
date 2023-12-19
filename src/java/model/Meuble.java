@@ -48,12 +48,12 @@ public class Meuble extends GenericDAO<Meuble> {
 
     public static ArrayList<Meuble> getMeubles(int idMatiere) throws ClassNotFoundException, SQLException, Exception {
         Connection con = ConnectionPostgres.getConnection();
-        ArrayList<Meuble> meubles = new ArrayList<>();
+        ArrayList<Meuble> meubles;
         String query = """
                        SELECT * FROM meuble WHERE id IN(
-                            SELECT idMeuble from FabricationMeuble GROUP BY idMeuble
+                            SELECT idMeuble from FabricationMeuble WHERE idMatiere = %s GROUP BY idMeuble
                        )
-                       """;
+                       """.formatted(idMatiere);
         meubles = new Meuble().find(con, query);
         con.close();
         return meubles;
@@ -62,11 +62,22 @@ public class Meuble extends GenericDAO<Meuble> {
     public ArrayList<Matiere> getMatieres() throws Exception {
         ArrayList<Matiere> matieres;
         try (Connection con = ConnectionPostgres.getConnection()) {
-            String query
+             String query
                     = """
-                        SELECT m.* FROM (SELECT * FROM fabricationmeuble WHERE idMeuble = %s) fm JOIN
-                        (SELECT * FROM matiere) m ON fm.idMatiere=m.id
+                        select *
+                        from matiere
+                        where id in (
+                            select idMatiere
+                            from matiereStyle
+                            where idStyle in (
+                                select s.id
+                                from meuble m
+                                join style s on s.id = m.idStyle
+                                where m.id = %s
+                            )
+                        )
                         """.formatted(this.id);
+            
             matieres = new Matiere().find(con, query);
         }
         return matieres;

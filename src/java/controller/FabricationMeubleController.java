@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Meuble;
+import model.FabricationMeuble;
 
 import java.io.IOException;
 import model.Taille;
@@ -18,9 +19,11 @@ public class FabricationMeubleController extends HttpServlet {
         try {
             if (req.getParameter("idMeuble") != null) {
                 int idMeuble = Integer.parseInt(req.getParameter("idMeuble"));
-                Meuble meuble = Meuble.getById(idMeuble);
-                req.setAttribute("taille", Taille.getAll());
-                req.setAttribute("matieres", null);
+                Meuble meuble = new Meuble();
+                meuble.setId(idMeuble);
+                req.setAttribute("tailles", Taille.getAll());
+                req.setAttribute("matieres", meuble.getMatieres());
+                req.setAttribute("idMeuble", idMeuble);
             }
             req.setAttribute("meubles", Meuble.getAll());
             req.setAttribute("active", "meuble");
@@ -34,12 +37,16 @@ public class FabricationMeubleController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            if (req.getParameter("idTaille") != null && req.getParameterValues("idMatiere[]") != null && req.getParameterValues("quantite[]") != null) {
+            if (req.getParameter("idMeuble") != null && req.getParameter("idTaille") != null && req.getParameterValues("idMatiere[]") != null && req.getParameterValues("quantite[]") != null) {
+                int idMeuble = Integer.parseInt(req.getParameter("idMeuble"));
                 int idTaille = Integer.parseInt(req.getParameter("idTaille"));
                 String[] listIdMatieres = req.getParameterValues("idMatiere[]");
                 String[] listQuantites = req.getParameterValues("quantite[]");
-                int idStyle = Integer.parseInt(req.getParameter("idStyle"));
                 
+                FabricationMeuble fabricationMeuble = new FabricationMeuble();
+                fabricationMeuble.setIdMeuble(idMeuble);
+                fabricationMeuble.setIdTaille(idTaille);
+                fabricationMeuble.insert(listIdMatieres, listQuantites);
             }
             resp.sendRedirect("ajouter-meuble");
         } catch (Exception e) {

@@ -16,7 +16,15 @@
                                     <select class="form-select" name="idMeuble">
                                         <option value="">Choisir...</option>
                                         <% for (Meuble meuble : meubles) { %>
-                                        <option value="<%= meuble.getId() %>"><%= meuble.getNom() %></option>
+                                        <% 
+                                            boolean isSelected = false;
+                                            int idMeuble = 0;
+                                            if(request.getAttribute("idMeuble") != null) {
+                                                idMeuble = (int) request.getAttribute("idMeuble");
+                                                isSelected = (meuble.getId() == idMeuble);
+                                            }
+                                        %>
+                                        <option value="<%= meuble.getId() %>" <%= isSelected ? "selected" : "" %>><%= meuble.getNom() %></option>
                                         <% } %>
                                     </select>
                                 </div>
@@ -62,6 +70,9 @@
                                 />
                         </div>
                         <% } %>
+                        <div>
+                            <button type="submit" class="btn btn-success">Valider</button>
+                        </div>
                     </form>
                 </div>
             </div>

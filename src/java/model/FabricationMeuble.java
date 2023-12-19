@@ -27,10 +27,15 @@ public class FabricationMeuble extends GenericDAO<FabricationMeuble> {
     }
 
     
-    public void insert() throws Exception {
+    public void insert(String[] listIdMatieres, String[] quantites) throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
-            this.save(con);
+            for (int i = 0; i < listIdMatieres.length; i++) {
+                FabricationMeuble fm = new FabricationMeuble(0, this.idMeuble, this.idMatiere, Integer.parseInt(listIdMatieres[i]), Double.parseDouble(quantites[i]));
+                fm.save(con);
+            }
+            con.close();
         }
+
     }
 
 }

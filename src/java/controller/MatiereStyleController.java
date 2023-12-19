@@ -23,12 +23,12 @@ public class MatiereStyleController extends HttpServlet {
                 req.setAttribute("idStyle", id);
             }
             req.setAttribute("styles", Style.getAll());
+            req.setAttribute("active", "style");
+            req.setAttribute("content", "matiere-style");
+            req.getRequestDispatcher("layouts/layout-app.jsp").forward(req, resp);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        req.setAttribute("active", "style");
-        req.setAttribute("content", "matiere-style");
-        req.getRequestDispatcher("layouts/layout-app.jsp").forward(req, resp);
     }
 
     @Override
@@ -42,6 +42,8 @@ public class MatiereStyleController extends HttpServlet {
                     style.addMatieres(listIdMatiere);
                 }
                 resp.sendRedirect("matiere-style?idStyle=" + idStyle);
+            } else {
+                resp.sendRedirect("matiere-style");
             }
         } catch (Exception e) {
             e.printStackTrace();

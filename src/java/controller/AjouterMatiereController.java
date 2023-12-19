@@ -21,16 +21,18 @@ public class AjouterMatiereController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getParameter("nom") != null) {
-            String nom = req.getParameter("nom");
-            Matiere matiere = new Matiere(0, nom);
-            try {
-                matiere.insert();
-            } catch (Exception e) {
-                e.printStackTrace();
+        try {
+            if (req.getParameter("nom") != null) {
+                String nom = req.getParameter("nom").trim();
+                Matiere matiere = new Matiere(0, nom);
+                if (!nom.equals("")) {
+                    matiere.insert();
+                }
             }
+            resp.sendRedirect("ajouter-matiere");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        resp.sendRedirect("ajouter-matiere");
     }
 
 }

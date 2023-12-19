@@ -10,7 +10,6 @@ import java.util.ArrayList;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Style extends GenericDAO<Style> {
-
     int id;
     String nom;
 
@@ -96,5 +95,5 @@ public class Style extends GenericDAO<Style> {
         }
         return matieres;
     }
-
+    
 }

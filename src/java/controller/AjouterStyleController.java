@@ -17,27 +17,29 @@ public class AjouterStyleController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             req.setAttribute("matieres", Matiere.getAll());
+            req.setAttribute("active", "style");
+            req.setAttribute("content", "ajouter-style");
+            req.getRequestDispatcher("layouts/layout-app.jsp").forward(req, resp);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        req.setAttribute("active", "style");
-        req.setAttribute("content", "ajouter-style");
-        req.getRequestDispatcher("layouts/layout-app.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getParameter("nom") != null) {
-            try {
+        try {
+            if (req.getParameter("nom") != null) {
                 String[] listIdMatiere = req.getParameterValues("idMatiere[]");
-                String nom = req.getParameter("nom");
+                String nom = req.getParameter("nom").trim();
                 Style style = new Style(0, nom);
-                style.insert(listIdMatiere);
-            } catch (Exception e) {
-                e.printStackTrace();
+                if (!nom.equals("")) {
+                    style.insert(listIdMatiere);
+                }
             }
+            resp.sendRedirect("ajouter-style");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        resp.sendRedirect("ajouter-style");
     }
 
 }

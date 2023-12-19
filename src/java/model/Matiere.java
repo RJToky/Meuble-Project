@@ -10,8 +10,8 @@ import util.ConnectionPostgres;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Matiere extends GenericDAO<Matiere> {
-    int id;
-    String nom;
+    private int id;
+    private String nom;
 
     public Matiere() {
     }
@@ -22,11 +22,13 @@ public class Matiere extends GenericDAO<Matiere> {
     }
 
     public static ArrayList<Matiere> getAll() throws Exception {
-        ArrayList<Matiere> matieres;
         try (Connection con = ConnectionPostgres.getConnection()) {
-            matieres = new Matiere().findAll(con);
+            return new Matiere().findAll(con);
         }
-        return matieres;
+    }
+
+    public static Matiere getById(Connection con, int id) throws Exception {
+        return new Matiere().findById(con, id);
     }
 
     public void insert() throws Exception {
@@ -35,4 +37,21 @@ public class Matiere extends GenericDAO<Matiere> {
         }
     }
 
+    public ArrayList<FabricationMeuble> getFabricationMeubles() throws ClassNotFoundException, SQLException, Exception {
+        try (Connection con = ConnectionPostgres.getConnection()) {
+            String query = """
+                SELECT *
+                FROM FabricationMeuble
+                WHERE idMatiere = %s
+                ORDER BY idMeuble ASC
+            """.formatted(this.getId());
+            ArrayList<FabricationMeuble> fabricationMeubles = new FabricationMeuble().find(con, query);
+            for (FabricationMeuble fabricationMeuble : fabricationMeubles) {
+                fabricationMeuble.setMeuble(Meuble.getById(con, fabricationMeuble.getIdMeuble()));
+                fabricationMeuble.setTaille(Taille.getById(con, fabricationMeuble.getIdTaille()));
+                fabricationMeuble.setMatiere(Matiere.getById(con, fabricationMeuble.getIdMatiere()));
+            }
+            return fabricationMeubles;
+        }
+    }
 }

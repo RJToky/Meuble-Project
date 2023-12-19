@@ -5,21 +5,30 @@
         <group>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/database/table.sql</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/model/Style.java</file>
-            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/web/pages/matiere-style.jsp</file>
+            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/web/pages/ajouter-categorie.jsp</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/controller/MatiereStyleController.java</file>
-            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/model/MatiereStyle.java</file>
+            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/web/pages/fabrication-meuble.jsp</file>
+            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/web/pages/meuble-matiere.jsp</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/web/pages/ajouter-matiere.jsp</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/model/Matiere.java</file>
-            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/util/ConnectionPostgres.java</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/web/index.jsp</file>
+            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/web/pages/ajouter-style.jsp</file>
+            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/controller/AjouterCategorieController.java</file>
+            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/controller/MeubleMatiereController.java</file>
+            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/model/Taille.java</file>
+            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/web/pages/ajouter-meuble.jsp</file>
+            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/web/pages/matiere-style.jsp</file>
+            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/model/MatiereStyle.java</file>
+            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/web/pages/ajouter-taille.jsp</file>
+            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/util/ConnectionPostgres.java</file>
+            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/controller/FabricationMeubleController.java</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/database/view.sql</file>
-            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/model/Meuble.java</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/controller/AjouterStyleController.java</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/web/layouts/layout-app.jsp</file>
+            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/model/Meuble.java</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/controller/AjouterMatiereController.java</file>
-            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/web/pages/ajouter-style.jsp</file>
+            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/controller/AjouterMeubleController.java</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/model/Categorie.java</file>
-            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/model/Taille.java</file>
         </group>
     </open-files>
 </project-private>

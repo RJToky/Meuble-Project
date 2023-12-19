@@ -10,8 +10,8 @@ import util.ConnectionPostgres;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Categorie extends GenericDAO<Categorie> {
-    int id;
-    String nom;
+    private int id;
+    private String nom;
 
     public Categorie() {
     }
@@ -22,11 +22,13 @@ public class Categorie extends GenericDAO<Categorie> {
     }
     
     public static ArrayList<Categorie> getAll() throws Exception {
-        ArrayList<Categorie> categories;
         try (Connection con = ConnectionPostgres.getConnection()) {
-            categories = new Categorie().findAll(con);
+            return new Categorie().findAll(con);
         }
-        return categories;
+    }
+    
+    public static Categorie getById(Connection con, int id) throws Exception {
+        return new Categorie().findById(con, id);
     }
 
     public void insert() throws Exception {
@@ -34,5 +36,4 @@ public class Categorie extends GenericDAO<Categorie> {
             this.save(con);
         }
     }
-
 }

@@ -1,14 +1,15 @@
 package controller;
 
+import java.io.IOException;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import model.Meuble;
 import model.FabricationMeuble;
-
-import java.io.IOException;
 import model.Taille;
 
 @WebServlet("/fabrication-meuble")
@@ -40,18 +41,17 @@ public class FabricationMeubleController extends HttpServlet {
             if (req.getParameter("idMeuble") != null && req.getParameter("idTaille") != null && req.getParameterValues("idMatiere[]") != null && req.getParameterValues("quantite[]") != null) {
                 int idMeuble = Integer.parseInt(req.getParameter("idMeuble"));
                 int idTaille = Integer.parseInt(req.getParameter("idTaille"));
-                String[] listIdMatieres = req.getParameterValues("idMatiere[]");
-                String[] listQuantites = req.getParameterValues("quantite[]");
+                String[] listIdMatiere = req.getParameterValues("idMatiere[]");
+                String[] quantites = req.getParameterValues("quantite[]");
                 
                 FabricationMeuble fabricationMeuble = new FabricationMeuble();
                 fabricationMeuble.setIdMeuble(idMeuble);
                 fabricationMeuble.setIdTaille(idTaille);
-                fabricationMeuble.insert(listIdMatieres, listQuantites);
+                fabricationMeuble.insert(listIdMatiere, quantites);
+                resp.sendRedirect("fabrication-meuble?idMeuble=" + idMeuble);
             }
-            resp.sendRedirect("ajouter-meuble");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }

@@ -1,13 +1,14 @@
 package controller;
 
+import java.io.IOException;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Matiere;
 
-import java.io.IOException;
+import model.Matiere;
 
 @WebServlet("/ajouter-matiere")
 public class AjouterMatiereController extends HttpServlet {
@@ -34,5 +35,4 @@ public class AjouterMatiereController extends HttpServlet {
             e.printStackTrace();
         }
     }
-
 }

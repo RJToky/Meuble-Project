@@ -7,9 +7,9 @@ import rj.util.GenericDAO;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class MatiereStyle extends GenericDAO<MatiereStyle> {
-    int id;
-    int idMatiere;
-    int idStyle;
+    private int id;
+    private int idMatiere;
+    private int idStyle;
 
     public MatiereStyle() {
     }
@@ -19,5 +19,4 @@ public class MatiereStyle extends GenericDAO<MatiereStyle> {
         this.idMatiere = idMatiere;
         this.idStyle = idStyle;
     }
-
 }

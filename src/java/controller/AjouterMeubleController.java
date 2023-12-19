@@ -1,12 +1,13 @@
 package controller;
 
+import java.io.IOException;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import java.io.IOException;
 import model.Categorie;
 import model.Meuble;
 import model.Style;
@@ -39,10 +40,10 @@ public class AjouterMeubleController extends HttpServlet {
                     meuble.insert();
                 }
             }
-            resp.sendRedirect("ajouter-meuble");
+            Meuble lastMeuble = Meuble.getLast();
+            resp.sendRedirect("fabrication-meuble?idMeuble=" + lastMeuble.getId());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }

@@ -4,7 +4,7 @@
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Meuble /</span> Liste par matières</h4>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="card mb-4">
                 <h5 class="card-header">Liste par matières</h5>
                 <div class="card-body">
@@ -16,7 +16,15 @@
                                     <select class="form-select" name="idMatiere">
                                         <option value="">Choisir...</option>
                                         <% for (Matiere matiere : matieres) { %>
-                                        <option value="<%= matiere.getId() %>"><%= matiere.getNom() %></option>
+                                        <% 
+                                            boolean isSelected = false;
+                                            int idMatiere = 0;
+                                            if(request.getAttribute("idMatiere") != null) {
+                                                idMatiere = (int) request.getAttribute("idMatiere");
+                                                isSelected = (matiere.getId() == idMatiere);
+                                            }
+                                        %>
+                                        <option value="<%= matiere.getId() %>" <%= isSelected ? "selected" : "" %>><%= matiere.getNom() %></option>
                                         <% } %>
                                     </select>
                                 </div>
@@ -28,8 +36,8 @@
                         </form> 
                     </div>
 
-                    <% if(request.getAttribute("meubles") != null) { %>
-                    <% ArrayList<Meuble> meubles = (ArrayList<Meuble>) request.getAttribute("meubles"); %>
+                    <% if(request.getAttribute("fabricationMeubles") != null) { %>
+                    <% ArrayList<FabricationMeuble> fabricationMeubles = (ArrayList<FabricationMeuble>) request.getAttribute("fabricationMeubles"); %>
                     <div class="row mt-4">
                         <div class="table-responsive col-12">
                             <table class="table">
@@ -37,15 +45,21 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Nom du meuble</th>
-                                        <th>Action</th>
+                                        <th>Categorie</th>
+                                        <th>Style</th>
+                                        <th>Taille</th>
+                                        <th>Quantite</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% for(Meuble meuble : meubles) { %>
+                                    <% for(FabricationMeuble fabricationMeuble : fabricationMeubles) { %>
                                     <tr>
-                                        <td><%= meuble.getId() %></td>
-                                        <td><%= meuble.getNom() %></td>
-                                        <td><a href="meuble-matiere?idMeuble=<%= meuble.getId() %>" class="btn btn-info">Detail</a></td>
+                                        <td><%= fabricationMeuble.getIdMeuble() %></td>
+                                        <td><%= fabricationMeuble.getMeuble().getNom() %></td>
+                                        <td><%= fabricationMeuble.getMeuble().getCategorie().getNom() %></td>
+                                        <td><%= fabricationMeuble.getMeuble().getStyle().getNom() %></td>
+                                        <td><%= fabricationMeuble.getTaille().getNom() %></td>
+                                        <td><%= fabricationMeuble.getQuantite() %></td>
                                     </tr>
                                     <% } %>
                                 </tbody>
@@ -56,45 +70,6 @@
                 </div>
             </div>
         </div>
-
-        <% if(request.getAttribute("autresMatieres") != null) { %>
-        <% ArrayList<Matiere> autresMatieres = (ArrayList<Matiere>) request.getAttribute("autresMatieres"); %>
-        <div class="col-md-6">
-            <div class="card mb-4">
-                <h5 class="card-header">Ajouter autres matières pour ce style</h5>
-                <div class="card-body">
-                    <form  action="matiere-style" method="post">
-                        <input type="hidden" name="idStyle" value="<%= request.getAttribute("idStyle") %>" />
-                        <div class="mb-3">
-                            <label class="form-label">Selectionner les matieres</label>
-                            <div class="row">
-                                <% for(Matiere matiere : autresMatieres) { %>
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="idMatiere[]" value="<%= matiere.getId() %>" />
-                                            <label class="form-check-label">
-                                                <%= matiere.getNom() %>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <% } %>
-                            </div>
-                        </div>
-
-                        <div>
-                            <% if(autresMatieres.size() == 0) { %>
-                            <button type="submit" class="btn btn-success" disabled>Valider</button>
-                            <% } else { %>
-                            <button type="submit" class="btn btn-success">Valider</button>
-                            <% } %>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <% } %>
     </div>
 </div>
 

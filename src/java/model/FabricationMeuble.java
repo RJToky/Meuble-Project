@@ -9,11 +9,15 @@ import util.ConnectionPostgres;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class FabricationMeuble extends GenericDAO<FabricationMeuble> {
-    int id;
-    int idMeuble;
-    int idTaille;
-    int idMatiere;
-    double quantite;
+    private int id;
+    private int idMeuble;
+    private int idTaille;
+    private int idMatiere;
+    private double quantite;
+    
+    private Meuble meuble;
+    private Taille taille;
+    private Matiere matiere;
 
     public FabricationMeuble() {
     }
@@ -26,15 +30,12 @@ public class FabricationMeuble extends GenericDAO<FabricationMeuble> {
         this.quantite = quantite;
     }
 
-    
-    public void insert(String[] listIdMatieres, String[] quantites) throws Exception {
+    public void insert(String[] listIdMatiere, String[] quantites) throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
-            for (int i = 0; i < listIdMatieres.length; i++) {
-                FabricationMeuble fm = new FabricationMeuble(0, this.idMeuble, this.idTaille, Integer.parseInt(listIdMatieres[i]), Double.parseDouble(quantites[i]));
-                fm.save(con);
+            for (int i = 0; i < listIdMatiere.length; i++) {
+                FabricationMeuble fabricationMeuble = new FabricationMeuble(0, this.getIdMeuble(), this.getIdTaille(), Integer.parseInt(listIdMatiere[i]), Double.parseDouble(quantites[i]));
+                fabricationMeuble.save(con);
             }
-            con.close();
         }
-
     }
 }

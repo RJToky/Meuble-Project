@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import model.Meuble;
 import model.Matiere;
 
 @WebServlet("/meuble-matiere")
@@ -19,9 +18,11 @@ public class MeubleMatiereController extends HttpServlet {
         try {
             if (req.getParameter("idMatiere") != null) {
                 int idMatiere = Integer.parseInt(req.getParameter("idMatiere"));
-                req.setAttribute("meubles", Meuble.getMeubles(idMatiere));
+                Matiere matiere = new Matiere();
+                matiere.setId(idMatiere);
+                req.setAttribute("fabricationMeubles", matiere.getFabricationMeubles());
+                req.setAttribute("idMatiere", idMatiere);
             }
-            
             req.setAttribute("matieres", Matiere.getAll());
             req.setAttribute("active", "meuble");
             req.setAttribute("content", "meuble-matiere");
@@ -33,21 +34,5 @@ public class MeubleMatiereController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        try {
-//            if (req.getParameter("idStyle") != null) {
-//                int idStyle = Integer.parseInt(req.getParameter("idStyle"));
-//                if (req.getParameterValues("idMatiere[]") != null) {
-//                    String[] listIdMatiere = req.getParameterValues("idMatiere[]");
-//                    Style style = new Style(idStyle, "");
-//                    style.addMatieres(listIdMatiere);
-//                }
-//                resp.sendRedirect("matiere-style?idStyle=" + idStyle);
-//            } else {
-//                resp.sendRedirect("matiere-style");
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
-
 }

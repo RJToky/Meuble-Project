@@ -7,6 +7,7 @@ drop table MatiereStyle cascade;
 drop table Categorie cascade;
 drop table Taille cascade;
 drop table Meuble cascade;
+drop table FabricationMeuble cascade;
 
 create table Matiere(
     id serial primary key,

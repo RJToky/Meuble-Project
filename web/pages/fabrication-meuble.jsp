@@ -31,7 +31,7 @@
             </div>
         </div>
 
-        <% if(request.getAttribute("idMeuble") != null) { %>
+        <% if(request.getAttribute("matieres") != null) { %>
         <% ArrayList<Taille> tailles = (ArrayList<Taille>) request.getAttribute("tailles"); %>
         <% ArrayList<Matiere> matieres = (ArrayList<Matiere>) request.getAttribute("matieres"); %>
         <div class="col-md-6">

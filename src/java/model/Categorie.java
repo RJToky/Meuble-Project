@@ -2,6 +2,7 @@ package model;
 
 import lombok.Data;
 import java.sql.*;
+import java.util.ArrayList;
 import lombok.EqualsAndHashCode;
 import rj.util.GenericDAO;
 import util.ConnectionPostgres;
@@ -18,6 +19,13 @@ public class Categorie extends GenericDAO<Categorie> {
     public Categorie(int id, String nom) {
         this.id = id;
         this.nom = nom;
+    }
+
+    public ArrayList<Categorie> getAll() throws Exception {
+        Connection con = ConnectionPostgres.getConnection();
+        ArrayList<Categorie> categories = new Categorie().findAll(con);
+        con.close();
+        return categories;
     }
 
     public void insert() throws Exception {

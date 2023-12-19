@@ -37,5 +37,4 @@ public class FabricationMeuble extends GenericDAO<FabricationMeuble> {
         }
 
     }
-
 }

@@ -34,7 +34,9 @@ public class Style extends GenericDAO<Style> {
         try (Connection con = ConnectionPostgres.getConnection()) {
             this.save(con);
             Style lastStyle = this.findLast(con);
-            lastStyle.addMatieres(con, listIdMatiere);
+            if (listIdMatiere != null) {
+                lastStyle.addMatieres(con, listIdMatiere);
+            }
         }
     }
 

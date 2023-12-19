@@ -27,7 +27,7 @@ public class AjouterStyleController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getParameter("nom") != null && req.getParameterValues("idMatiere[]") != null) {
+        if (req.getParameter("nom") != null) {
             try {
                 String[] listIdMatiere = req.getParameterValues("idMatiere[]");
                 String nom = req.getParameter("nom");

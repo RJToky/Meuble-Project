@@ -4,19 +4,20 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/database/table.sql</file>
-            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/model/Style.java</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/web/pages/ajouter-categorie.jsp</file>
-            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/controller/MatiereStyleController.java</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/web/pages/fabrication-meuble.jsp</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/web/pages/meuble-matiere.jsp</file>
+            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/controller/AjouterTailleController.java</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/web/pages/ajouter-matiere.jsp</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/model/Matiere.java</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/web/index.jsp</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/web/pages/ajouter-style.jsp</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/controller/AjouterCategorieController.java</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/controller/MeubleMatiereController.java</file>
+            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/model/FabricationMeuble.java</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/model/Taille.java</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/web/pages/ajouter-meuble.jsp</file>
+            <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/database/sqlfile.sql</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/web/pages/matiere-style.jsp</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/src/java/model/MatiereStyle.java</file>
             <file>file:/D:/ITU/S5/Mme%20Baovola/Meuble-Project/web/pages/ajouter-taille.jsp</file>

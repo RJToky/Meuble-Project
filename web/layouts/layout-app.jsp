@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.ArrayList, model.Style, model.Matiere" %>
+<%@ page import="java.util.ArrayList, model.*" %>
 
 <% String active = (String) request.getAttribute("active"); %>
 <% String content = (String) request.getAttribute("content"); %>
@@ -137,12 +137,14 @@
                             <span class="menu-header-text">Pages</span>
                         </li>
 
-<!--                        <li class="menu-item <% if(active.equalsIgnoreCase("accueil")) { out.print("active"); } %>">
-                            <a href="#" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                                <div>Accueil</div>
-                            </a>
-                        </li>-->
+                        <!--
+                             <li class="menu-item <% if(active.equalsIgnoreCase("accueil")) { out.print("active"); } %>">
+                                 <a href="#" class="menu-link">
+                                     <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                                     <div>Accueil</div>
+                                 </a>
+                             </li>
+                        -->
 
                         <li class="menu-item <% if(active.equalsIgnoreCase("matiere")) { out.print("active open"); } %>">
                             <a href="" class="menu-link menu-toggle">
@@ -174,6 +176,62 @@
                                 <li class="menu-item <% if(content.equalsIgnoreCase("matiere-style")) { out.print("active"); } %>">
                                     <a href="matiere-style" class="menu-link">
                                         <div>Matières utilisées</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="menu-item <% if(active.equalsIgnoreCase("categorie")) { out.print("active open"); } %>">
+                            <a href="" class="menu-link menu-toggle">
+                                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                                <div>Categorie</div>
+                            </a>
+                            <ul class="menu-sub">
+                                <li class="menu-item <% if(content.equalsIgnoreCase("ajouter-categorie")) { out.print("active"); } %>">
+                                    <a href="ajouter-categorie" class="menu-link">
+                                        <div>Ajouter</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="menu-item <% if(active.equalsIgnoreCase("taille")) { out.print("active open"); } %>">
+                            <a href="" class="menu-link menu-toggle">
+                                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                                <div>Taille</div>
+                            </a>
+                            <ul class="menu-sub">
+                                <li class="menu-item <% if(content.equalsIgnoreCase("ajouter-taille")) { out.print("active"); } %>">
+                                    <a href="ajouter-taille" class="menu-link">
+                                        <div>Ajouter</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="menu-item <% if(active.equalsIgnoreCase("meuble")) { out.print("active open"); } %>">
+                            <a href="" class="menu-link menu-toggle">
+                                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                                <div>Meuble</div>
+                            </a>
+                            <ul class="menu-sub">
+                                <li class="menu-item <% if(content.equalsIgnoreCase("ajouter-meuble")) { out.print("active"); } %>">
+                                    <a href="ajouter-meuble" class="menu-link">
+                                        <div>Ajouter</div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="menu-sub">
+                                <li class="menu-item <% if(content.equalsIgnoreCase("fabrication-meuble")) { out.print("active"); } %>">
+                                    <a href="fabrication-meuble" class="menu-link">
+                                        <div>Fabrication</div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="menu-sub">
+                                <li class="menu-item <% if(content.equalsIgnoreCase("meuble-matiere")) { out.print("active"); } %>">
+                                    <a href="meuble-matiere" class="menu-link">
+                                        <div>Liste par matière</div>
                                     </a>
                                 </li>
                             </ul>
@@ -264,6 +322,21 @@
 
                             <% } else if(content.equalsIgnoreCase("matiere-style")) { %>
                             <%@ include file="../pages/matiere-style.jsp" %>
+
+                            <% } else if(content.equalsIgnoreCase("ajouter-categorie")) { %>
+                            <%@ include file="../pages/ajouter-categorie.jsp" %>
+
+                            <% } else if(content.equalsIgnoreCase("ajouter-taille")) { %>
+                            <%@ include file="../pages/ajouter-taille.jsp" %>
+
+                            <% } else if(content.equalsIgnoreCase("ajouter-meuble")) { %>
+                            <%@ include file="../pages/ajouter-meuble.jsp" %>
+
+                            <% } else if(content.equalsIgnoreCase("fabrication-meuble")) { %>
+                            <%@ include file="../pages/fabrication-meuble.jsp" %>
+                            
+                            <% } else if(content.equalsIgnoreCase("meuble-matiere")) { %>
+                            <%@ include file="../pages/meuble-matiere.jsp" %>
                             <% } %>
                         </div>
                         <!-- / Content -->

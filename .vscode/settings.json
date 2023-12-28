@@ -1,9 +1,0 @@
-{
-  "java.project.referencedLibraries": [
-    "lib/**/*.jar",
-    "d:\\AUTRES\\Library\\JBase.jar",
-    "d:\\AUTRES\\Library\\lombok.jar",
-    "d:\\AUTRES\\Library\\postgresql-42.5.0.jar",
-    "d:\\AUTRES\\Library\\servlet-api.jar"
-  ]
-}

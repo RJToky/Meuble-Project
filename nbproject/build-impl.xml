@@ -184,7 +184,7 @@
         <property name="excludes" value=""/>
         <property name="runmain.jvmargs" value=""/>
         <path id="endorsed.classpath.path" path="${endorsed.classpath}"/>
-        <condition else="" property="endorsed.classpath.cmd.line.arg" value="-Xbootclasspath/p:'${toString:endorsed.classpath.path}'">
+        <condition else="" property="endorsed.classpath.cmd.line.arg" value="">
             <and>
                 <isset property="endorsed.classpath"/>
                 <length length="0" string="${endorsed.classpath}" when="greater"/>
@@ -986,10 +986,6 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.lombok.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.postgresql-42.5.0.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.servlet-api.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${file.reference.JBase.jar-1}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${file.reference.lombok.jar-1}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${file.reference.postgresql-42.5.0.jar-1}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${file.reference.servlet-api.jar-1}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <mkdir dir="${build.web.dir}/META-INF"/>
         <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update"/>
     </target>
@@ -998,10 +994,6 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.lombok.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.postgresql-42.5.0.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.servlet-api.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.JBase.jar-1}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.lombok.jar-1}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.postgresql-42.5.0.jar-1}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.servlet-api.jar-1}" todir="${build.web.dir}/WEB-INF/lib"/>
     </target>
     <target depends="init" if="dist.ear.dir" name="-clean-webinf-lib">
         <delete dir="${build.web.dir}/WEB-INF/lib"/>

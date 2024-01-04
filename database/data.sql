@@ -35,13 +35,13 @@ VALUES (4, 1);
 INSERT INTO matierestyle (idmatiere, idstyle)
 VALUES (4, 3);
 
-
 INSERT INTO taille (nom)
 VALUES ('Taille A');
 INSERT INTO taille (nom)
 VALUES ('Taille B');
 INSERT INTO taille (nom)
 VALUES ('Taille C');
+
 INSERT INTO categorie (nom)
 VALUES ('Categ A');
 INSERT INTO categorie (nom)
@@ -88,3 +88,40 @@ INSERT INTO fabricationmeuble (idmeuble, idtaille, idmatiere, quantite)
 	VALUES (3, 1, 2, 2.0);
 INSERT INTO fabricationmeuble (idmeuble, idtaille, idmatiere, quantite) 
 	VALUES (2, 2, 1, 4.0);
+
+
+---------------------------------------------------------
+
+
+insert into Matiere values
+    (default, 'Tissu'),
+    (default, 'Perle'),
+    (default, 'Chaine');
+
+insert into "Style" values
+    (default, 'Boheme');
+
+insert into MatiereStyle values
+    (default, 1, 1),
+    (default, 2, 1),
+    (default, 3, 1);
+
+insert into Categorie values
+    (default, 'Table'),
+    (default, 'Chaise'),
+    (default, 'Canape');
+
+insert into Taille values
+    (default, 'Petit'),
+    (default, 'Grand');
+
+insert into Meuble values
+    (default, 'Canape Boheme', 3, 1);
+
+insert into FabricationMeuble values
+    (default, 1, 1, 1, 2),
+    (default, 1, 1, 2, 10),
+    (default, 1, 1, 3, 3),
+    (default, 1, 2, 1, 4),
+    (default, 1, 2, 2, 30),
+    (default, 1, 2, 3, 5);

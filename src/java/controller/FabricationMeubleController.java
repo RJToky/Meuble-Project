@@ -20,11 +20,17 @@ public class FabricationMeubleController extends HttpServlet {
         try {
             if (req.getParameter("idMeuble") != null) {
                 int idMeuble = Integer.parseInt(req.getParameter("idMeuble"));
+                req.setAttribute("idMeuble", idMeuble);
+                
                 Meuble meuble = new Meuble();
                 meuble.setId(idMeuble);
-                req.setAttribute("tailles", Taille.getAll());
                 req.setAttribute("matieres", meuble.getMatieres());
-                req.setAttribute("idMeuble", idMeuble);
+                
+                FabricationMeuble fabricationMeuble = new FabricationMeuble();
+                fabricationMeuble.setIdMeuble(idMeuble);
+                req.setAttribute("fabricationMeubles", fabricationMeuble.getByIdMeuble());
+                
+                req.setAttribute("tailles", meuble.getTailles());
             }
             req.setAttribute("meubles", Meuble.getAll());
             req.setAttribute("active", "meuble");
@@ -38,16 +44,24 @@ public class FabricationMeubleController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            if (req.getParameter("idMeuble") != null && req.getParameter("idTaille") != null && req.getParameterValues("idMatiere[]") != null && req.getParameterValues("quantite[]") != null) {
+            if (req.getParameter("idMeuble") != null && req.getParameter("idTaille") != null && req.getParameterValues("idMatiere[]") != null) {
                 int idMeuble = Integer.parseInt(req.getParameter("idMeuble"));
                 int idTaille = Integer.parseInt(req.getParameter("idTaille"));
                 String[] listIdMatiere = req.getParameterValues("idMatiere[]");
-                String[] quantites = req.getParameterValues("quantite[]");
-                
+
+                double[] quantites = new double[listIdMatiere.length];
+                for (int i = 0; i < quantites.length; i++) {
+                    quantites[i] = 0;
+                    if (!req.getParameter("quantite-" + listIdMatiere[i]).isEmpty()) {
+                        quantites[i] = Double.parseDouble(req.getParameter("quantite-" + listIdMatiere[i]));
+                    }
+                }
+
                 FabricationMeuble fabricationMeuble = new FabricationMeuble();
                 fabricationMeuble.setIdMeuble(idMeuble);
                 fabricationMeuble.setIdTaille(idTaille);
                 fabricationMeuble.insert(listIdMatiere, quantites);
+
                 resp.sendRedirect("fabrication-meuble?idMeuble=" + idMeuble);
             }
         } catch (Exception e) {

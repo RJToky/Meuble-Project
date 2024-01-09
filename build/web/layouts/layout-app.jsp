@@ -137,15 +137,6 @@
                             <span class="menu-header-text">Pages</span>
                         </li>
 
-                        <!--
-                             <li class="menu-item <% if(active.equalsIgnoreCase("accueil")) { out.print("active"); } %>">
-                                 <a href="#" class="menu-link">
-                                     <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                                     <div>Accueil</div>
-                                 </a>
-                             </li>
-                        -->
-
                         <li class="menu-item <% if(active.equalsIgnoreCase("matiere")) { out.print("active open"); } %>">
                             <a href="" class="menu-link menu-toggle">
                                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
@@ -173,8 +164,8 @@
                                 </li>
                             </ul>
                             <ul class="menu-sub">
-                                <li class="menu-item <% if(content.equalsIgnoreCase("matiere-style")) { out.print("active"); } %>">
-                                    <a href="matiere-style" class="menu-link">
+                                <li class="menu-item <% if(content.equalsIgnoreCase("style-matiere")) { out.print("active"); } %>">
+                                    <a href="style-matiere" class="menu-link">
                                         <div>Matières utilisées</div>
                                     </a>
                                 </li>
@@ -222,6 +213,13 @@
                                 </li>
                             </ul>
                             <ul class="menu-sub">
+                                <li class="menu-item <% if(content.equalsIgnoreCase("meuble-taille")) { out.print("active"); } %>">
+                                    <a href="meuble-taille" class="menu-link">
+                                        <div>Tailles utilisées</div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="menu-sub">
                                 <li class="menu-item <% if(content.equalsIgnoreCase("fabrication-meuble")) { out.print("active"); } %>">
                                     <a href="fabrication-meuble" class="menu-link">
                                         <div>Fabrication</div>
@@ -232,6 +230,13 @@
                                 <li class="menu-item <% if(content.equalsIgnoreCase("meuble-matiere")) { out.print("active"); } %>">
                                     <a href="meuble-matiere" class="menu-link">
                                         <div>Liste par matière</div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="menu-sub">
+                                <li class="menu-item <% if(content.equalsIgnoreCase("meuble-valeur")) { out.print("active"); } %>">
+                                    <a href="meuble-valeur" class="menu-link">
+                                        <div>Liste par valeur</div>
                                     </a>
                                 </li>
                             </ul>
@@ -314,14 +319,18 @@
 
                         <!-- Content -->
                         <div class="container-xxl flex-grow-1 container-p-y">
-                            <% if (content.equalsIgnoreCase("ajouter-matiere")) { %>
+
+                            <% if (content.equalsIgnoreCase("alerte")) { %>
+                            <%@ include file="../pages/alerte.jsp" %>
+
+                            <% } else if(content.equalsIgnoreCase("ajouter-matiere")) { %>
                             <%@ include file="../pages/ajouter-matiere.jsp" %>
 
                             <% } else if(content.equalsIgnoreCase("ajouter-style")) { %>
                             <%@ include file="../pages/ajouter-style.jsp" %>
 
-                            <% } else if(content.equalsIgnoreCase("matiere-style")) { %>
-                            <%@ include file="../pages/matiere-style.jsp" %>
+                            <% } else if(content.equalsIgnoreCase("style-matiere")) { %>
+                            <%@ include file="../pages/style-matiere.jsp" %>
 
                             <% } else if(content.equalsIgnoreCase("ajouter-categorie")) { %>
                             <%@ include file="../pages/ajouter-categorie.jsp" %>
@@ -332,11 +341,17 @@
                             <% } else if(content.equalsIgnoreCase("ajouter-meuble")) { %>
                             <%@ include file="../pages/ajouter-meuble.jsp" %>
 
+                            <% } else if(content.equalsIgnoreCase("meuble-taille")) { %>
+                            <%@ include file="../pages/meuble-taille.jsp" %>
+
                             <% } else if(content.equalsIgnoreCase("fabrication-meuble")) { %>
                             <%@ include file="../pages/fabrication-meuble.jsp" %>
-                            
+
                             <% } else if(content.equalsIgnoreCase("meuble-matiere")) { %>
                             <%@ include file="../pages/meuble-matiere.jsp" %>
+
+                            <% } else if(content.equalsIgnoreCase("meuble-valeur")) { %>
+                            <%@ include file="../pages/meuble-valeur.jsp" %>
                             <% } %>
                         </div>
                         <!-- / Content -->

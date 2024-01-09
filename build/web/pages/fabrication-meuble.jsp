@@ -4,7 +4,7 @@
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Meuble /</span> Fabrication</h4>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="card mb-4">
                 <h5 class="card-header">Choix meuble</h5>
                 <div class="card-body">
@@ -37,12 +37,50 @@
                     </div>
                 </div>
             </div>
+
+            <% if(request.getAttribute("fabricationMeubles") != null) { %>
+            <% ArrayList<Taille> tailles = (ArrayList<Taille>) request.getAttribute("tailles"); %>
+            <% ArrayList<FabricationMeuble> fabricationMeubles = (ArrayList<FabricationMeuble>) request.getAttribute("fabricationMeubles"); %>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <% int i = 0; %>
+                    <% for(Taille taille : tailles) { %>
+                    <div class="row <% if(i == tailles.size() - 1) { out.print("mb-3"); } else { out.print("mb-5"); } %>">
+                        <h6 class="text-uppercase">Taille <%= taille.getNom() %></h6>
+                        <div class="table-responsive col-12">
+                            <table class="table">
+                                <thead class="table-active">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Matiere</th>
+                                        <th>Quantite</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for(FabricationMeuble fabricationMeuble : fabricationMeubles) { %>
+                                    <% if(fabricationMeuble.getTaille().getId() == taille.getId()) { %>
+                                    <tr>
+                                        <td><%= fabricationMeuble.getMatiere().getId() %></td>
+                                        <td><%= fabricationMeuble.getMatiere().getNom() %></td>
+                                        <td><%= fabricationMeuble.getQuantite() %></td>
+                                    </tr>
+                                    <% } %>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <% i++; %>
+                    <% } %>
+                </div>
+            </div>
+            <% } %>
         </div>
 
         <% if(request.getAttribute("matieres") != null) { %>
         <% ArrayList<Taille> tailles = (ArrayList<Taille>) request.getAttribute("tailles"); %>
         <% ArrayList<Matiere> matieres = (ArrayList<Matiere>) request.getAttribute("matieres"); %>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card mb-4">
                 <h5 class="card-header">Fabrication</h5>
                 <div class="card-body">
@@ -64,9 +102,8 @@
                             <input
                                 type="number"
                                 class="form-control"
-                                name="quantite[]"
+                                name="quantite-<%= matiere.getId() %>"
                                 placeholder="Quantité"
-                                required
                                 />
                         </div>
                         <% } %>

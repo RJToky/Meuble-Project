@@ -10,6 +10,7 @@ import util.ConnectionPostgres;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Taille extends GenericDAO<Taille> {
+
     private int id;
     private String nom;
 

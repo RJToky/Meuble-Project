@@ -17,6 +17,16 @@
                                 required
                                 />
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label">Prix unitaire</label>
+                            <input
+                                type="number"
+                                class="form-control"
+                                name="prixUnitaire"
+                                placeholder="100000"
+                                required
+                                />
+                        </div>
                         <div>
                             <button type="submit" class="btn btn-success">Valider</button>
                         </div>

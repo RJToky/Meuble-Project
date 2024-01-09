@@ -10,6 +10,7 @@ import util.ConnectionPostgres;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Categorie extends GenericDAO<Categorie> {
+
     private int id;
     private String nom;
 
@@ -20,13 +21,13 @@ public class Categorie extends GenericDAO<Categorie> {
         this.id = id;
         this.nom = nom;
     }
-    
+
     public static ArrayList<Categorie> getAll() throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
             return new Categorie().findAll(con);
         }
     }
-    
+
     public static Categorie getById(Connection con, int id) throws Exception {
         return new Categorie().findById(con, id);
     }

@@ -3,15 +3,17 @@ create database meuble;
 
 drop table Matiere cascade;
 drop table Style cascade;
-drop table MatiereStyle cascade;
+drop table StyleMatiere cascade;
 drop table Categorie cascade;
 drop table Taille cascade;
 drop table Meuble cascade;
+drop table MeubleTaille cascade;
 drop table FabricationMeuble cascade;
 
 create table Matiere(
     id serial primary key,
-    nom varchar(50) not null
+    nom varchar(50) not null,
+    prixUnitaire double precision not null
 );
 
 create table Style(
@@ -19,10 +21,10 @@ create table Style(
     nom varchar(50) not null
 );
 
-create table MatiereStyle(
+create table StyleMatiere(
     id serial primary key,
-    idMatiere int references Matiere(id),
-    idStyle int references Style(id)
+    idStyle int references Style(id),
+    idMatiere int references Matiere(id)
 );
 
 create table Categorie(
@@ -40,6 +42,12 @@ create table Meuble(
     nom varchar(50) not null,
     idCategorie int references Categorie(id),
     idStyle int references Style(id)
+);
+
+create table MeubleTaille(
+    id serial primary key,
+    idMeuble int references Meuble(id),
+    idTaille int references Taille(id)
 );
 
 create table FabricationMeuble(

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Style extends GenericDAO<Style> {
+
     private int id;
     private String nom;
 
@@ -40,8 +41,8 @@ public class Style extends GenericDAO<Style> {
     public void insert(String[] listIdMatiere) throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
             this.save(con);
-            Style lastStyle = this.findLast(con);
             if (listIdMatiere != null) {
+                Style lastStyle = this.findLast(con);
                 lastStyle.addMatieres(con, listIdMatiere);
             }
         }
@@ -49,52 +50,45 @@ public class Style extends GenericDAO<Style> {
 
     public void addMatieres(Connection con, String[] listIdMatiere) throws Exception {
         for (String idMatiere : listIdMatiere) {
-            MatiereStyle matiereStyle = new MatiereStyle(0, Integer.parseInt(idMatiere), this.getId());
-            matiereStyle.save(con);
+            StyleMatiere styleMatiere = new StyleMatiere(0, this.getId(), Integer.parseInt(idMatiere));
+            styleMatiere.save(con);
         }
     }
 
     public void addMatieres(String[] listIdMatiere) throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
             for (String idMatiere : listIdMatiere) {
-                MatiereStyle matiereStyle = new MatiereStyle(0, Integer.parseInt(idMatiere), this.getId());
-                matiereStyle.save(con);
+                StyleMatiere styleMatiere = new StyleMatiere(0, this.getId(), Integer.parseInt(idMatiere));
+                styleMatiere.save(con);
             }
         }
     }
 
     public ArrayList<Matiere> getMatieres() throws Exception {
-        ArrayList<Matiere> matieres;
         try (Connection con = ConnectionPostgres.getConnection()) {
             String query = """
-                SELECT m.*
-                FROM Matiere m
-                JOIN MatiereStyle ms ON m.id = ms.idMatiere
-                WHERE ms.idStyle = %s
+                select m.*
+                from Matiere m
+                join StyleMatiere sm on m.id = sm.idMatiere
+                where sm.idStyle = %s
             """.formatted(this.getId());
-            matieres = new Matiere().find(con, query);
+            return new Matiere().find(con, query);
         }
-        return matieres;
     }
 
     public ArrayList<Matiere> getNotMatieres() throws Exception {
-        ArrayList<Matiere> matieres;
         try (Connection con = ConnectionPostgres.getConnection()) {
             String query = """
-                SELECT m.*
-                FROM Matiere m
-                WHERE id NOT IN (
-                        SELECT
-                            m.id
-                        FROM
-                            Matiere m
-                        JOIN MatiereStyle ms ON m.id = ms.idMatiere
-                        WHERE
-                            ms.idStyle = %s
+                select m.*
+                from Matiere m
+                where id not in (
+                    select m.id
+                    from Matiere m
+                    join StyleMatiere sm on m.id = sm.idMatiere
+                    where sm.idStyle = %s
                 )
             """.formatted(this.getId());
-            matieres = new Matiere().find(con, query);
+            return new Matiere().find(con, query);
         }
-        return matieres;
     }
 }

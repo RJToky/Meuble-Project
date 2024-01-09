@@ -10,15 +10,18 @@ import util.ConnectionPostgres;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Matiere extends GenericDAO<Matiere> {
+
     private int id;
     private String nom;
+    private double prixUnitaire;
 
     public Matiere() {
     }
 
-    public Matiere(int id, String nom) {
+    public Matiere(int id, String nom, double prixUnitaire) throws Exception {
         this.id = id;
         this.nom = nom;
+        this.setPrixUnitaire(prixUnitaire);
     }
 
     public static ArrayList<Matiere> getAll() throws Exception {
@@ -40,10 +43,10 @@ public class Matiere extends GenericDAO<Matiere> {
     public ArrayList<FabricationMeuble> getFabricationMeubles() throws ClassNotFoundException, SQLException, Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
             String query = """
-                SELECT *
-                FROM FabricationMeuble
-                WHERE idMatiere = %s
-                ORDER BY idMeuble ASC
+                select *
+                from FabricationMeuble
+                where idMatiere = %s
+                order by idMeuble asc
             """.formatted(this.getId());
             ArrayList<FabricationMeuble> fabricationMeubles = new FabricationMeuble().find(con, query);
             for (FabricationMeuble fabricationMeuble : fabricationMeubles) {
@@ -53,5 +56,12 @@ public class Matiere extends GenericDAO<Matiere> {
             }
             return fabricationMeubles;
         }
+    }
+
+    public void setPrixUnitaire(double prixUnitaire) throws Exception {
+        if (prixUnitaire <= 0) {
+            throw new Exception("Le prix unitaire doit etre superieur a zero");
+        }
+        this.prixUnitaire = prixUnitaire;
     }
 }

@@ -1,5 +1,6 @@
 <% ArrayList<Categorie> categories = (ArrayList<Categorie>) request.getAttribute("categories"); %>
 <% ArrayList<Style> styles = (ArrayList<Style>) request.getAttribute("styles"); %>
+<% ArrayList<Taille> tailles = (ArrayList<Taille>) request.getAttribute("tailles"); %>
 
 <div>
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Meuble /</span> Ajouter</h4>
@@ -20,6 +21,7 @@
                                 required
                                 />
                         </div>
+                        
                         <div class="mb-3">
                             <label class="form-label">Categorie</label>
                             <select class="form-select" name="idCategorie">
@@ -29,6 +31,7 @@
                                 <% } %>
                             </select>
                         </div>
+                            
                         <div class="mb-3">
                             <label class="form-label">Style</label>
                             <select class="form-select" name="idStyle">
@@ -37,6 +40,24 @@
                                 <option value="<%= style.getId() %>"><%= style.getNom() %></option>
                                 <% } %>
                             </select>
+                        </div>
+                            
+                        <div class="mb-3">
+                            <label class="form-label">Selectionner les tailles</label>
+                            <div class="row">
+                                <% for(Taille taille : tailles) { %>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="idTaille[]" value="<%= taille.getId() %>">
+                                            <label class="form-check-label">
+                                                <%= taille.getNom() %>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% } %>
+                            </div>
                         </div>
                         <div>
                             <button type="submit" class="btn btn-success">Valider</button>

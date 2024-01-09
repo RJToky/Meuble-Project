@@ -10,11 +10,12 @@ import util.ConnectionPostgres;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Meuble extends GenericDAO<Meuble> {
+
     private int id;
     private String nom;
     private int idCategorie;
     private int idStyle;
-    
+
     private Categorie categorie;
     private Style style;
 
@@ -28,9 +29,29 @@ public class Meuble extends GenericDAO<Meuble> {
         this.idStyle = idStyle;
     }
 
-    public void insert() throws Exception {
+    public void insert(String[] listIdTaille) throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
             this.save(con);
+            if (listIdTaille != null) {
+                Meuble lastMeuble = this.findLast(con);
+                lastMeuble.addTaille(con, listIdTaille);
+            }
+        }
+    }
+
+    public void addTaille(Connection con, String[] listIdTaille) throws Exception {
+        for (String idTaille : listIdTaille) {
+            MeubleTaille meubleTaille = new MeubleTaille(0, this.getId(), Integer.parseInt(idTaille));
+            meubleTaille.save(con);
+        }
+    }
+
+    public void addTaille(String[] listIdTaille) throws Exception {
+        try (Connection con = ConnectionPostgres.getConnection()) {
+            for (String idTaille : listIdTaille) {
+                MeubleTaille meubleTaille = new MeubleTaille(0, this.getId(), Integer.parseInt(idTaille));
+                meubleTaille.save(con);
+            }
         }
     }
 
@@ -46,7 +67,7 @@ public class Meuble extends GenericDAO<Meuble> {
         meuble.setStyle(Style.getById(con, meuble.getIdStyle()));
         return meuble;
     }
-    
+
     public static Meuble getLast() throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
             return new Meuble().findLast(con);
@@ -57,21 +78,49 @@ public class Meuble extends GenericDAO<Meuble> {
         ArrayList<Matiere> matieres;
         try (Connection con = ConnectionPostgres.getConnection()) {
             String query = """
-                SELECT *
-                FROM Matiere
-                WHERE id IN (
-                    SELECT idMatiere
-                    FROM MatiereStyle
-                    WHERE idStyle IN (
-                        SELECT s.id
-                        FROM Meuble m
-                        JOIN Style s ON s.id = m.idStyle
-                        WHERE m.id = %s
+                select *
+                from Matiere
+                where id in (
+                    select idMatiere
+                    from StyleMatiere
+                    where idStyle in (
+                        select s.id
+                        from Meuble m
+                        join Style s on s.id = m.idStyle
+                        where m.id = %s
                     )
                 )
             """.formatted(this.getId());
             matieres = new Matiere().find(con, query);
         }
         return matieres;
+    }
+
+    public ArrayList<Taille> getTailles() throws Exception {
+        try (Connection con = ConnectionPostgres.getConnection()) {
+            String query = """
+                select t.*
+                from Taille t
+                join MeubleTaille mt on t.id = mt.idTaille
+                where mt.idMeuble = %s
+            """.formatted(this.getId());
+            return new Taille().find(con, query);
+        }
+    }
+
+    public ArrayList<Taille> getNotTailles() throws Exception {
+        try (Connection con = ConnectionPostgres.getConnection()) {
+            String query = """
+                select t.*
+                from Taille t
+                where id not in (
+                    select t.id
+                    from Taille t
+                    join MeubleTaille mt on t.id = mt.idTaille
+                    where mt.idMeuble = %s
+                )
+            """.formatted(this.getId());
+            return new Taille().find(con, query);
+        }
     }
 }

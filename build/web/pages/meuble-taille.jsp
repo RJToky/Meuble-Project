@@ -88,7 +88,6 @@
                                 <% } %>
                             </div>
                         </div>
-
                         <div>
                             <% if(autresTailles.size() == 0) { %>
                             <button type="submit" class="btn btn-success" disabled>Valider</button>

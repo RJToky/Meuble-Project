@@ -1,1 +1,1 @@
-<% response.sendRedirect("matiere-style"); %>
+<% response.sendRedirect("style-matiere"); %>

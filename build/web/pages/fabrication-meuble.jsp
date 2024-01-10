@@ -13,7 +13,7 @@
                             <div class="row d-flex align-items-end">
                                 <div class="col-7 mb-3">
                                     <label class="form-label">Nom du meuble</label>
-                                    <select class="form-select" name="idMeuble">
+                                    <select class="form-select" name="idMeuble" required="">
                                         <option value="">Choisir...</option>
                                         <% for (Meuble meuble : meubles) { %>
                                         <% 
@@ -88,7 +88,7 @@
                         <input type="hidden" name="idMeuble" value="<%= request.getAttribute("idMeuble") %>" />
                         <div class="mb-3">
                             <label class="form-label">Taille</label>
-                            <select class="form-select" name="idTaille">
+                            <select class="form-select" name="idTaille" required="">
                                 <option value="">Choisir...</option>
                                 <% for (Taille taille : tailles) { %>
                                 <option value="<%= taille.getId() %>"><%= taille.getNom() %></option>

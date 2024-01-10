@@ -16,12 +16,12 @@
                                 class="form-control"
                                 name="nom"
                                 placeholder="ex : Moderne"
-                                required
+                                required=""
                                 />
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Selectionner les matieres</label>
+                            <label class="form-label">Selectionner les matieres (optionnel)</label>
                             <div class="row">
                                 <% for(Matiere matiere : matieres) { %>
                                 <div class="col-md-4">

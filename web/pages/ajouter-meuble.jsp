@@ -18,13 +18,13 @@
                                 class="form-control"
                                 name="nom"
                                 placeholder="ex : Canapé gigogne"
-                                required
+                                required=""
                                 />
                         </div>
                         
                         <div class="mb-3">
                             <label class="form-label">Categorie</label>
-                            <select class="form-select" name="idCategorie">
+                            <select class="form-select" name="idCategorie" required="">
                                 <option value="">Choisir...</option>
                                 <% for (Categorie categorie : categories) { %>
                                 <option value="<%= categorie.getId() %>"><%= categorie.getNom() %></option>
@@ -34,7 +34,7 @@
                             
                         <div class="mb-3">
                             <label class="form-label">Style</label>
-                            <select class="form-select" name="idStyle">
+                            <select class="form-select" name="idStyle" required="">
                                 <option value="">Choisir...</option>
                                 <% for (Style style : styles) { %>
                                 <option value="<%= style.getId() %>"><%= style.getNom() %></option>
@@ -43,7 +43,7 @@
                         </div>
                             
                         <div class="mb-3">
-                            <label class="form-label">Selectionner les tailles</label>
+                            <label class="form-label">Selectionner les tailles (optionnel)</label>
                             <div class="row">
                                 <% for(Taille taille : tailles) { %>
                                 <div class="col-md-4">

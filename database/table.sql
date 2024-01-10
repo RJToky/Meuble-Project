@@ -2,6 +2,7 @@ create database meuble;
 \c meuble
 
 drop table Matiere cascade;
+drop table PrixMatiere cascade;
 drop table Style cascade;
 drop table StyleMatiere cascade;
 drop table Categorie cascade;
@@ -12,8 +13,14 @@ drop table FabricationMeuble cascade;
 
 create table Matiere(
     id serial primary key,
-    nom varchar(50) not null,
-    prixUnitaire double precision not null
+    nom varchar(50) not null
+);
+
+create table PrixMatiere(
+    id serial primary key,
+    idMatiere int references Matiere(id),
+    prixUnitaire double precision not null,
+    dateInsertion timestamp not null
 );
 
 create table Style(

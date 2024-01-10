@@ -28,8 +28,10 @@ public class Taille extends GenericDAO<Taille> {
         }
     }
 
-    public static Taille getById(Connection con, int id) throws Exception {
-        return new Taille().findById(con, id);
+    public static Taille getById(int id) throws Exception {
+        try (Connection con = ConnectionPostgres.getConnection()) {
+            return new Taille().findById(con, id);
+        }
     }
 
     public void insert() throws SQLException, Exception, ClassNotFoundException {

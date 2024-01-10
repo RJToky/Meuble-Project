@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import model.Meuble;
 import model.FabricationMeuble;
-import model.Taille;
 
 @WebServlet("/fabrication-meuble")
 public class FabricationMeubleController extends HttpServlet {
@@ -21,15 +20,15 @@ public class FabricationMeubleController extends HttpServlet {
             if (req.getParameter("idMeuble") != null) {
                 int idMeuble = Integer.parseInt(req.getParameter("idMeuble"));
                 req.setAttribute("idMeuble", idMeuble);
-                
+
                 Meuble meuble = new Meuble();
                 meuble.setId(idMeuble);
                 req.setAttribute("matieres", meuble.getMatieres());
-                
+
                 FabricationMeuble fabricationMeuble = new FabricationMeuble();
                 fabricationMeuble.setIdMeuble(idMeuble);
                 req.setAttribute("fabricationMeubles", fabricationMeuble.getByIdMeuble());
-                
+
                 req.setAttribute("tailles", meuble.getTailles());
             }
             req.setAttribute("meubles", Meuble.getAll());

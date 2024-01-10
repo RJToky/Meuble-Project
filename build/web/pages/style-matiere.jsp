@@ -13,7 +13,7 @@
                             <div class="row d-flex align-items-end">
                                 <div class="col-7 mb-3">
                                     <label class="form-label">Nom du style</label>
-                                    <select class="form-select" name="idStyle">
+                                    <select class="form-select" name="idStyle" required="">
                                         <option value="">Choisir...</option>
                                         <% for (Style style : styles) { %>
                                         <% 
@@ -36,8 +36,8 @@
                         </form> 
                     </div>
 
-                    <% if(request.getAttribute("matieres") != null) { %>
-                    <% ArrayList<Matiere> matieres = (ArrayList<Matiere>) request.getAttribute("matieres"); %>
+                    <% if(request.getAttribute("vDetailMatieres") != null) { %>
+                    <% ArrayList<VDetailMatiere> vDetailMatieres = (ArrayList<VDetailMatiere>) request.getAttribute("vDetailMatieres"); %>
                     <div class="row mt-4">
                         <div class="table-responsive col-12">
                             <table class="table">
@@ -45,15 +45,15 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Nom de la matiere</th>
-                                        <th>Prix unitaire</th>
+                                        <th>Prix unitaire actuel</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% for(Matiere matiere : matieres) { %>
+                                    <% for(VDetailMatiere vDetailMatiere : vDetailMatieres) { %>
                                     <tr>
-                                        <td><%= matiere.getId() %></td>
-                                        <td><%= matiere.getNom() %></td>
-                                        <td><%= matiere.getPrixUnitaire() %></td>
+                                        <td><%= vDetailMatiere.getIdMatiere() %></td>
+                                        <td><%= vDetailMatiere.getNomMatiere() %></td>
+                                        <td><%= vDetailMatiere.getPrixUnitaire() %></td>
                                     </tr>
                                     <% } %>
                                 </tbody>

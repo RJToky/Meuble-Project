@@ -149,6 +149,13 @@
                                     </a>
                                 </li>
                             </ul>
+                            <ul class="menu-sub">
+                                <li class="menu-item <% if(content.equalsIgnoreCase("liste-matiere")) { out.print("active"); } %>">
+                                    <a href="liste-matiere" class="menu-link">
+                                        <div>Liste</div>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
 
                         <li class="menu-item <% if(active.equalsIgnoreCase("style")) { out.print("active open"); } %>">
@@ -325,6 +332,9 @@
 
                             <% } else if(content.equalsIgnoreCase("ajouter-matiere")) { %>
                             <%@ include file="../pages/ajouter-matiere.jsp" %>
+
+                            <% } else if(content.equalsIgnoreCase("liste-matiere")) { %>
+                            <%@ include file="../pages/liste-matiere.jsp" %>
 
                             <% } else if(content.equalsIgnoreCase("ajouter-style")) { %>
                             <%@ include file="../pages/ajouter-style.jsp" %>

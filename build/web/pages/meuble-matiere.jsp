@@ -13,7 +13,7 @@
                             <div class="row d-flex align-items-end">
                                 <div class="col-7 mb-3">
                                     <label class="form-label">Nom de la matiere</label>
-                                    <select class="form-select" name="idMatiere">
+                                    <select class="form-select" name="idMatiere" required="">
                                         <option value="">Choisir...</option>
                                         <% for (Matiere matiere : matieres) { %>
                                         <% 

@@ -63,6 +63,18 @@ public class Style extends GenericDAO<Style> {
             }
         }
     }
+    
+    public ArrayList<VDetailMatiere> getVDetailMatieres() throws Exception {
+        try (Connection con = ConnectionPostgres.getConnection()) {
+            String query = """
+                select vdm.*
+                from VDetailMatiere vdm
+                join StyleMatiere sm on vdm.idMatiere = sm.idMatiere
+                where sm.idStyle = %s
+            """.formatted(this.getId());
+            return new VDetailMatiere().find(con, query);
+        }
+    }
 
     public ArrayList<Matiere> getMatieres() throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {

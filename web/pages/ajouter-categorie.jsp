@@ -14,7 +14,7 @@
                                 class="form-control"
                                 name="nom"
                                 placeholder="ex : Table"
-                                required
+                                required=""
                                 />
                         </div>
                         <div>

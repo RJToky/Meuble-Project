@@ -14,7 +14,7 @@
                                 class="form-control"
                                 name="nom"
                                 placeholder="ex : GM"
-                                required
+                                required=""
                                 />
                         </div>
                         <div>

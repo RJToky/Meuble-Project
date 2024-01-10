@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,15 +14,13 @@ public class Matiere extends GenericDAO<Matiere> {
 
     private int id;
     private String nom;
-    private double prixUnitaire;
 
     public Matiere() {
     }
 
-    public Matiere(int id, String nom, double prixUnitaire) throws Exception {
+    public Matiere(int id, String nom) throws Exception {
         this.id = id;
         this.nom = nom;
-        this.setPrixUnitaire(prixUnitaire);
     }
 
     public static ArrayList<Matiere> getAll() throws Exception {
@@ -30,13 +29,20 @@ public class Matiere extends GenericDAO<Matiere> {
         }
     }
 
-    public static Matiere getById(Connection con, int id) throws Exception {
-        return new Matiere().findById(con, id);
+    public static Matiere getById(int id) throws Exception {
+        try (Connection con = ConnectionPostgres.getConnection()) {
+            return new Matiere().findById(con, id);
+        }
     }
 
-    public void insert() throws Exception {
+    public void insert(double prixUnitaire) throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
             this.save(con);
+            if(prixUnitaire != 0) {
+                Matiere lastMatiere = this.findLast(con);
+                PrixMatiere prixMatiere = new PrixMatiere(0, lastMatiere.getId(), prixUnitaire, LocalDateTime.now().toString());
+                prixMatiere.save(con);
+            }
         }
     }
 
@@ -51,17 +57,10 @@ public class Matiere extends GenericDAO<Matiere> {
             ArrayList<FabricationMeuble> fabricationMeubles = new FabricationMeuble().find(con, query);
             for (FabricationMeuble fabricationMeuble : fabricationMeubles) {
                 fabricationMeuble.setMeuble(Meuble.getById(con, fabricationMeuble.getIdMeuble()));
-                fabricationMeuble.setTaille(Taille.getById(con, fabricationMeuble.getIdTaille()));
-                fabricationMeuble.setMatiere(Matiere.getById(con, fabricationMeuble.getIdMatiere()));
+                fabricationMeuble.setTaille(new Taille().findById(con, fabricationMeuble.getIdTaille()));
+                fabricationMeuble.setMatiere(new Matiere().findById(con, fabricationMeuble.getIdMatiere()));
             }
             return fabricationMeubles;
         }
-    }
-
-    public void setPrixUnitaire(double prixUnitaire) throws Exception {
-        if (prixUnitaire <= 0) {
-            throw new Exception("Le prix unitaire doit etre superieur a zero");
-        }
-        this.prixUnitaire = prixUnitaire;
     }
 }

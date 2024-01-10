@@ -19,7 +19,7 @@ public class StyleMatiereController extends HttpServlet {
             if (req.getParameter("idStyle") != null) {
                 int idStyle = Integer.parseInt(req.getParameter("idStyle"));
                 Style style = new Style(idStyle, "");
-                req.setAttribute("matieres", style.getMatieres());
+                req.setAttribute("vDetailMatieres", style.getVDetailMatieres());
                 req.setAttribute("autresMatieres", style.getNotMatieres());
                 req.setAttribute("idStyle", idStyle);
             }

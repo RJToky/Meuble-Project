@@ -54,8 +54,8 @@ public class FabricationMeuble extends GenericDAO<FabricationMeuble> {
             ArrayList<FabricationMeuble> fabricationMeubles = new FabricationMeuble().find(con, query);
             for (FabricationMeuble fabricationMeuble : fabricationMeubles) {
                 fabricationMeuble.setMeuble(Meuble.getById(con, fabricationMeuble.getIdMeuble()));
-                fabricationMeuble.setTaille(Taille.getById(con, fabricationMeuble.getIdTaille()));
-                fabricationMeuble.setMatiere(Matiere.getById(con, fabricationMeuble.getIdMatiere()));
+                fabricationMeuble.setTaille(new Taille().findById(con, fabricationMeuble.getIdTaille()));
+                fabricationMeuble.setMatiere(new Matiere().findById(con, fabricationMeuble.getIdMatiere()));
             }
             return fabricationMeubles;
         }

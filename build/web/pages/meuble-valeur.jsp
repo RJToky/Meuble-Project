@@ -63,7 +63,7 @@
                                 <tbody>
                                     <% for(VMeubleValeur vMeubleValeur : vMeubleValeurs) { %>
                                     <tr>
-                                        <td><%= vMeubleValeur.getIdMeuble() %></td>
+                                        <td><%= vMeubleValeur.getId() %></td>
                                         <td><%= vMeubleValeur.getNomMeuble() %></td>
                                         <td><%= vMeubleValeur.getNomTaille() %></td>
                                         <td><%= vMeubleValeur.getValeur() %></td>

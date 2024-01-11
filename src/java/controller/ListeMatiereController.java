@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 
 import model.VDetailMatiere;
 
@@ -21,7 +22,8 @@ public class ListeMatiereController extends HttpServlet {
             req.setAttribute("content", "liste-matiere");
             req.getRequestDispatcher("layouts/layout-app.jsp").forward(req, resp);
         } catch (Exception e) {
-            e.printStackTrace();
+            PrintWriter out = resp.getWriter();
+            out.println(e.getMessage());
         }
     }
 

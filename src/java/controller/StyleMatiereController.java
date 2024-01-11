@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 
 import model.Style;
 
@@ -28,7 +29,8 @@ public class StyleMatiereController extends HttpServlet {
             req.setAttribute("content", "style-matiere");
             req.getRequestDispatcher("layouts/layout-app.jsp").forward(req, resp);
         } catch (Exception e) {
-            e.printStackTrace();
+            PrintWriter out = resp.getWriter();
+            out.println(e.getMessage());
         }
     }
 
@@ -47,7 +49,8 @@ public class StyleMatiereController extends HttpServlet {
                 resp.sendRedirect("style-matiere");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            PrintWriter out = resp.getWriter();
+            out.println(e.getMessage());
         }
     }
 }

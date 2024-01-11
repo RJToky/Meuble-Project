@@ -1,5 +1,5 @@
 create or replace view VDetailMatiere as(
-    select m1.id idMatiere, m1.nom nomMatiere, coalesce(pm1.prixUnitaire, 0) prixUnitaire
+    select m1.id, m1.nom nomMatiere, coalesce(pm1.prixUnitaire, 0) prixUnitaire
     from Matiere m1
     left join (
         select pm2.*
@@ -15,18 +15,19 @@ create or replace view VDetailMatiere as(
 );
 
 create or replace view VMeubleValeur as(
-    select m.id idMeuble, m.nom nomMeuble, t.id idTaille, t.nom nomTaille, sum(fm.quantite * vdm.prixUnitaire) valeur
+    select m.id, m.nom nomMeuble, t.id idTaille, t.nom nomTaille, sum(fm.quantite * vdm.prixUnitaire) valeur
     from Meuble m
     join FabricationMeuble fm on fm.idMeuble = m.id
     join Taille t on t.id = fm.idTaille
-    join VDetailMatiere vdm on vdm.idMatiere = fm.idMatiere
+    join VDetailMatiere vdm on vdm.id = fm.idMatiere
     group by m.id, t.id
+    order by m.id asc
 );
 
 create or replace view VEtatStockMatiere as(
-    select m.id, m.nom nomMatiere, sum(sm.quantite) quantite
-    from StockMatiere sm
-    join Matiere m on m.id = sm.idMatiere
+    select m.id, m.nom nomMatiere, coalesce((sum(msm.quantiteEntree) - sum(msm.quantiteSortie)), 0) quantite
+    from Matiere m
+    left join MouvementStockMatiere msm on msm.idMatiere = m.id
     group by m.id, m.nom
     order by m.id asc
 );

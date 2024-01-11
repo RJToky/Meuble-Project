@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
 
 import model.Matiere;
@@ -23,7 +24,8 @@ public class AjouterMatiereController extends HttpServlet {
             req.setAttribute("content", "ajouter-matiere");
             req.getRequestDispatcher("layouts/layout-app.jsp").forward(req, resp);
         } catch (Exception e) {
-            e.printStackTrace();
+            PrintWriter out = resp.getWriter();
+            out.println(e.getMessage());
         }
     }
 
@@ -49,7 +51,6 @@ public class AjouterMatiereController extends HttpServlet {
             resp.sendRedirect("ajouter-matiere");
         } catch (Exception e) {
             resp.sendRedirect("alerte?message=" + e.getMessage());
-            e.printStackTrace();
         }
     }
 }

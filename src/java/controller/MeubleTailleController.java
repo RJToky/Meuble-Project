@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 
 import model.Meuble;
 
@@ -20,7 +21,7 @@ public class MeubleTailleController extends HttpServlet {
                 int idMeuble = Integer.parseInt(req.getParameter("idMeuble"));
                 Meuble meuble = new Meuble();
                 meuble.setId(idMeuble);
-                
+
                 req.setAttribute("tailles", meuble.getTailles());
                 req.setAttribute("autresTailles", meuble.getNotTailles());
                 req.setAttribute("idMeuble", idMeuble);
@@ -30,7 +31,8 @@ public class MeubleTailleController extends HttpServlet {
             req.setAttribute("content", "meuble-taille");
             req.getRequestDispatcher("layouts/layout-app.jsp").forward(req, resp);
         } catch (Exception e) {
-            e.printStackTrace();
+            PrintWriter out = resp.getWriter();
+            out.println(e.getMessage());
         }
     }
 
@@ -50,7 +52,8 @@ public class MeubleTailleController extends HttpServlet {
                 resp.sendRedirect("meuble-taille");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            PrintWriter out = resp.getWriter();
+            out.println(e.getMessage());
         }
     }
 }

@@ -7,10 +7,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
 
 import model.Matiere;
-import model.StockMatiere;
+import model.MouvementStockMatiere;
 
 @WebServlet("/acheter-matiere")
 public class AcheterMatiereController extends HttpServlet {
@@ -23,7 +24,8 @@ public class AcheterMatiereController extends HttpServlet {
             req.setAttribute("content", "acheter-matiere");
             req.getRequestDispatcher("layouts/layout-app.jsp").forward(req, resp);
         } catch (Exception e) {
-            e.printStackTrace();
+            PrintWriter out = resp.getWriter();
+            out.println(e.getMessage());
         }
     }
 
@@ -39,13 +41,12 @@ public class AcheterMatiereController extends HttpServlet {
                     dateAchat = localDateTime.toString();
                 } catch (Exception e) {
                 }
-                StockMatiere achatMatiere = new StockMatiere(0, idMatiere, quantite, dateAchat);
-                achatMatiere.entrerStock();
+                MouvementStockMatiere mouvementStockMatiere = new MouvementStockMatiere(0, idMatiere, quantite, 0, dateAchat);
+                mouvementStockMatiere.entrerStock();
             }
             resp.sendRedirect("acheter-matiere");
         } catch (Exception e) {
             resp.sendRedirect("alerte?message=" + e.getMessage());
-            e.printStackTrace();
         }
     }
 }

@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 
 import model.Matiere;
 import model.Style;
@@ -22,7 +23,8 @@ public class AjouterStyleController extends HttpServlet {
             req.setAttribute("content", "ajouter-style");
             req.getRequestDispatcher("layouts/layout-app.jsp").forward(req, resp);
         } catch (Exception e) {
-            e.printStackTrace();
+            PrintWriter out = resp.getWriter();
+            out.println(e.getMessage());
         }
     }
 
@@ -39,7 +41,8 @@ public class AjouterStyleController extends HttpServlet {
             }
             resp.sendRedirect("ajouter-style");
         } catch (Exception e) {
-            e.printStackTrace();
+            PrintWriter out = resp.getWriter();
+            out.println(e.getMessage());
         }
     }
 }

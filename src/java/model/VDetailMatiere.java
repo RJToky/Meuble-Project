@@ -11,17 +11,11 @@ import util.ConnectionPostgres;
 @EqualsAndHashCode(callSuper = false)
 public class VDetailMatiere extends GenericDAO<VDetailMatiere> {
 
-    private int idMatiere;
+    private int id;
     private String nomMatiere;
     private double prixUnitaire;
 
     public VDetailMatiere() {
-    }
-
-    public VDetailMatiere(int idMatiere, String nomMatiere, double prixUnitaire) throws Exception {
-        this.idMatiere = idMatiere;
-        this.nomMatiere = nomMatiere;
-        this.setPrixUnitaire(prixUnitaire);
     }
 
     public static ArrayList<VDetailMatiere> getAll() throws Exception {

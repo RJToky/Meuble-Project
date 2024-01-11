@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.time.LocalDateTime;
 
 import model.Meuble;
@@ -37,7 +38,8 @@ public class FabricationMeubleController extends HttpServlet {
             req.setAttribute("content", "fabrication-meuble");
             req.getRequestDispatcher("layouts/layout-app.jsp").forward(req, resp);
         } catch (Exception e) {
-            e.printStackTrace();
+            PrintWriter out = resp.getWriter();
+            out.println(e.getMessage());
         }
     }
 
@@ -63,18 +65,27 @@ public class FabricationMeubleController extends HttpServlet {
                 fabricationMeuble.insert(listIdMatiere, quantites);
 
                 resp.sendRedirect("fabrication-meuble?idMeuble=" + idMeuble);
+
             } else if (req.getParameter("idMeuble") != null && req.getParameter("idTaille") != null && req.getParameter("quantite") != null) {
                 int idMeuble = Integer.parseInt(req.getParameter("idMeuble"));
                 int idTaille = Integer.parseInt(req.getParameter("idTaille"));
                 int quantite = Integer.parseInt(req.getParameter("quantite"));
-                Meuble meuble = Meuble.getById(idMeuble);
-                meuble.commander(idTaille, quantite, LocalDateTime.now().toString());
+                
+                
+                String dateCommande = LocalDateTime.now().toString();
+                try {
+                    LocalDateTime localDateTime = LocalDateTime.parse(req.getParameter("dateCommande"));
+                    dateCommande = localDateTime.toString();
+                } catch (Exception e) {
+                }
+                Meuble meuble = new Meuble();
+                meuble.setId(idMeuble);
+                meuble.commander(idTaille, quantite, dateCommande);
 
                 resp.sendRedirect("fabrication-meuble?idMeuble=" + idMeuble);
             }
         } catch (Exception e) {
             resp.sendRedirect("alerte?message=" + e.getMessage());
-            e.printStackTrace();
         }
     }
 }

@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 
 import model.Categorie;
 import model.Meuble;
@@ -26,7 +27,8 @@ public class AjouterMeubleController extends HttpServlet {
             req.setAttribute("content", "ajouter-meuble");
             req.getRequestDispatcher("layouts/layout-app.jsp").forward(req, resp);
         } catch (Exception e) {
-            e.printStackTrace();
+            PrintWriter out = resp.getWriter();
+            out.println(e.getMessage());
         }
     }
 
@@ -46,7 +48,8 @@ public class AjouterMeubleController extends HttpServlet {
             Meuble lastMeuble = Meuble.getLast();
             resp.sendRedirect("fabrication-meuble?idMeuble=" + lastMeuble.getId());
         } catch (Exception e) {
-            e.printStackTrace();
+            PrintWriter out = resp.getWriter();
+            out.println(e.getMessage());
         }
     }
 }

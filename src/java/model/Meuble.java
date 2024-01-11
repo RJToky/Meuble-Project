@@ -159,11 +159,24 @@ public class Meuble extends GenericDAO<Meuble> {
     }
 
     public void verifierStock(Connection con, ArrayList<FabricationMeuble> fabricationMeubles, int quantite) throws Exception {
+        StringBuilder message = new StringBuilder();
+        boolean quantiteInsuffisante = false;
         for (FabricationMeuble fabricationMeuble : fabricationMeubles) {
             VEtatStockMatiere vEtatStockMatiere = new VEtatStockMatiere().findById(con, fabricationMeuble.getIdMatiere());
             if (vEtatStockMatiere.getQuantite() - fabricationMeuble.getQuantite() * quantite < 0) {
-                throw new Exception("Quantite insuffisante pour la matiere : " + vEtatStockMatiere.getNomMatiere());
+                quantiteInsuffisante = true;
+                message
+                        .append("<p>Matiere : ")
+                        .append(vEtatStockMatiere.getNomMatiere())
+                        .append(", Quantite necessaire : ")
+                        .append(fabricationMeuble.getQuantite() * quantite)
+                        .append(", Quantite restante : ")
+                        .append(vEtatStockMatiere.getQuantite())
+                        .append("</p>");
             }
+        }
+        if (quantiteInsuffisante) {
+            throw new Exception(message.toString());
         }
     }
 
@@ -175,7 +188,7 @@ public class Meuble extends GenericDAO<Meuble> {
             this.verifierStock(con, fabricationMeubles, quantite);
 
             for (FabricationMeuble fabricationMeuble : fabricationMeubles) {
-                StockMatiere stockMatiere = new StockMatiere(0, fabricationMeuble.getIdMatiere(), -fabricationMeuble.getQuantite() * quantite, dateNow);
+                MouvementStockMatiere stockMatiere = new MouvementStockMatiere(0, fabricationMeuble.getIdMatiere(), 0, fabricationMeuble.getQuantite() * quantite, dateNow);
                 stockMatiere.sortirStock();
 
                 CommandeMeuble commandeMeuble = new CommandeMeuble(0, this.getId(), idTaille, quantite, dateCommande);

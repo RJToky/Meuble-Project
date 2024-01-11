@@ -3,6 +3,7 @@ create database meuble;
 
 drop table Matiere cascade;
 drop table PrixMatiere cascade;
+drop table MouvementStockMatiere cascade;
 drop table Style cascade;
 drop table StyleMatiere cascade;
 drop table Categorie cascade;
@@ -10,6 +11,7 @@ drop table Taille cascade;
 drop table Meuble cascade;
 drop table MeubleTaille cascade;
 drop table FabricationMeuble cascade;
+drop table CommandeMeuble cascade;
 
 create table Matiere(
     id serial primary key,
@@ -23,10 +25,11 @@ create table PrixMatiere(
     dateInsertion timestamp not null
 );
 
-create table StockMatiere(
+create table MouvementStockMatiere(
     id serial primary key,
     idMatiere int references Matiere(id),
-    quantite double precision not null,
+    quantiteEntree double precision,
+    quantiteSortie double precision,
     dateInsertion timestamp not null
 );
 
@@ -69,7 +72,7 @@ create table FabricationMeuble(
     idMeuble int references Meuble(id),
     idTaille int references Taille(id),
     idMatiere int references Matiere(id),
-    quantite double precision
+    quantite double precision not null
 );
 
 create table CommandeMeuble(
@@ -79,11 +82,3 @@ create table CommandeMeuble(
     quantite int not null,
     dateCommande timestamp not null
 );
-
-insert into CommandeMeuble values
-    (default, 1, 1, 1, now())
-;
-
-select * 
-from CommandeMeuble cm
-join Meuble m on m.id = cm.idMeuble

@@ -21,7 +21,7 @@
                                 <tbody>
                                     <% for(VDetailMatiere vDetailMatiere : vDetailMatieres) { %>
                                     <tr>
-                                        <td><%= vDetailMatiere.getIdMatiere() %></td>
+                                        <td><%= vDetailMatiere.getId() %></td>
                                         <td><%= vDetailMatiere.getNomMatiere() %></td>
                                         <td><%= vDetailMatiere.getPrixUnitaire() %></td>
                                     </tr>

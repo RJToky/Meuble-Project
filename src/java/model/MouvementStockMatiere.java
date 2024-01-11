@@ -9,38 +9,40 @@ import util.ConnectionPostgres;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class StockMatiere extends GenericDAO<StockMatiere> {
+public class MouvementStockMatiere extends GenericDAO<MouvementStockMatiere> {
 
     private int id;
     private int idMatiere;
-    private double quantite;
+    private double quantiteEntree;
+    private double quantiteSortie;
     private String dateInsertion;
 
-    public StockMatiere() {
+    public MouvementStockMatiere() {
     }
 
-    public StockMatiere(int id, int idMatiere, double quantite, String dateInsertion) throws Exception {
+    public MouvementStockMatiere(int id, int idMatiere, double quantiteEntree, double quantiteSortie, String dateInsertion) throws Exception {
         this.id = id;
         this.idMatiere = idMatiere;
-        this.quantite = quantite;
+        this.quantiteEntree = quantiteEntree;
         this.dateInsertion = dateInsertion;
     }
 
-    public static ArrayList<StockMatiere> getAll() throws Exception {
+    public static ArrayList<MouvementStockMatiere> getAll() throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
-            return new StockMatiere().findAll(con);
+            return new MouvementStockMatiere().findAll(con);
         }
     }
 
-    public static StockMatiere getById(int id) throws Exception {
+    public static MouvementStockMatiere getById(int id) throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
-            return new StockMatiere().findById(con, id);
+            return new MouvementStockMatiere().findById(con, id);
         }
     }
 
     public void entrerStock() throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
-            if(this.getQuantite() > 0) {
+            if(this.getQuantiteEntree() > 0) {
+                this.setQuantiteSortie(0);
                 this.save(con);
             } else {
                 throw new Exception("La quantite doit etre positive");
@@ -50,10 +52,11 @@ public class StockMatiere extends GenericDAO<StockMatiere> {
     
     public void sortirStock() throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
-            if(this.getQuantite() < 0) {
+            if(this.getQuantiteSortie() > 0) {
+                this.setQuantiteEntree(0);
                 this.save(con);
             } else {
-                throw new Exception("La quantite doit etre negative");
+                throw new Exception("La quantite doit etre positive");
             }
         }
     }

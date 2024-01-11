@@ -34,7 +34,6 @@ public class MeubleValeurController extends HttpServlet {
             req.getRequestDispatcher("layouts/layout-app.jsp").forward(req, resp);
         } catch (Exception e) {
             resp.sendRedirect("alerte?message=" + e.getMessage());
-            e.printStackTrace();
         }
     }
 

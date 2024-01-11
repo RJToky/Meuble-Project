@@ -25,6 +25,9 @@ public class MeubleValeurController extends HttpServlet {
                 if (!vMeubleValeurs.isEmpty()) {
                     req.setAttribute("vMeubleValeurs", vMeubleValeurs);
                 }
+                
+                req.setAttribute("valeurMin", valeurMin);
+                req.setAttribute("valeurMax", valeurMax);
             }
             req.setAttribute("active", "meuble");
             req.setAttribute("content", "meuble-valeur");

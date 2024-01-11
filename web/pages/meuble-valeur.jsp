@@ -8,6 +8,14 @@
                 <div class="card-body">
                     <div class="row">
                         <form class="col-12" action="meuble-valeur" method="get">
+                            <% 
+                                boolean valeurMinIsSet = false;
+                                boolean valeurMaxIsSet = false;
+                                if(request.getAttribute("valeurMin") != null && request.getAttribute("valeurMax") != null) {
+                                    valeurMinIsSet = true;
+                                    valeurMaxIsSet = true;
+                                }
+                            %>
                             <div class="row d-flex align-items-end">
                                 <div class="col-4 mb-3">
                                     <label class="form-label">Valeur min</label>
@@ -16,6 +24,7 @@
                                         class="form-control"
                                         name="valeurMin"
                                         placeholder="0"
+                                        value="<%= valeurMinIsSet ? request.getAttribute("valeurMin") : "" %>"
                                         required
                                         />
                                 </div>
@@ -26,6 +35,7 @@
                                         class="form-control"
                                         name="valeurMax"
                                         placeholder="100000"
+                                        value="<%= valeurMaxIsSet ? request.getAttribute("valeurMax") : "" %>"
                                         required
                                         />
                                 </div>

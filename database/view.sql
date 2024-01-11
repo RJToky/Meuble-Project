@@ -22,3 +22,11 @@ create or replace view VMeubleValeur as(
     join VDetailMatiere vdm on vdm.idMatiere = fm.idMatiere
     group by m.id, t.id
 );
+
+create or replace view VEtatStockMatiere as(
+    select m.id, m.nom nomMatiere, sum(sm.quantite) quantite
+    from StockMatiere sm
+    join Matiere m on m.id = sm.idMatiere
+    group by m.id, m.nom
+    order by m.id asc
+);

@@ -35,6 +35,38 @@
                             </div>
                         </form> 
                     </div>
+                    <% if(request.getAttribute("idMeuble") != null) { %>
+                    <% ArrayList<Taille> tailles = (ArrayList<Taille>) request.getAttribute("tailles"); %>
+                    <hr class="my-4">
+                    <div class="row">
+                        <h6 class="text-uppercase mb-3">Commander ce meuble</h6>
+                        <form class="col-7" action="fabrication-meuble" method="post">
+                            <input type="hidden" name="idMeuble" value="<%= request.getAttribute("idMeuble") %>" />
+                            <div class="mb-3">
+                                <label class="form-label">Taille</label>
+                                <select class="form-select" name="idTaille" required="">
+                                    <option value="">Choisir...</option>
+                                    <% for (Taille taille : tailles) { %>
+                                    <option value="<%= taille.getId() %>"><%= taille.getNom() %></option>
+                                    <% } %>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Quantite</label>
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    name="quantite"
+                                    placeholder="5"
+                                    required=""
+                                    />
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-success">Valider</button>
+                            </div>
+                        </form>
+                    </div>
+                    <% } %>
                 </div>
             </div>
 

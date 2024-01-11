@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -68,6 +69,15 @@ public class Meuble extends GenericDAO<Meuble> {
         return meuble;
     }
 
+    public static Meuble getById(int id) throws Exception {
+        try (Connection con = ConnectionPostgres.getConnection()) {
+            Meuble meuble = new Meuble().findById(con, id);
+            meuble.setCategorie(Categorie.getById(con, meuble.getIdCategorie()));
+            meuble.setStyle(Style.getById(con, meuble.getIdStyle()));
+            return meuble;
+        }
+    }
+
     public static Meuble getLast() throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
             return new Meuble().findLast(con);
@@ -121,6 +131,56 @@ public class Meuble extends GenericDAO<Meuble> {
                 )
             """.formatted(this.getId());
             return new Taille().find(con, query);
+        }
+    }
+
+    public ArrayList<FabricationMeuble> getFabricationMeubles() throws Exception {
+        try (Connection con = ConnectionPostgres.getConnection()) {
+            String query = """
+                select *
+                from FabricationMeuble
+                where idMeuble = %s
+            """.formatted(this.getId());
+            return new FabricationMeuble().find(con, query);
+        }
+    }
+
+    public ArrayList<FabricationMeuble> getFabricationMeubles(int idTaille) throws Exception {
+        try (Connection con = ConnectionPostgres.getConnection()) {
+            String query = """
+                select *
+                from FabricationMeuble
+                where
+                    idMeuble = %s
+                    and idTaille = %s
+            """.formatted(this.getId(), idTaille);
+            return new FabricationMeuble().find(con, query);
+        }
+    }
+
+    public void verifierStock(Connection con, ArrayList<FabricationMeuble> fabricationMeubles, int quantite) throws Exception {
+        for (FabricationMeuble fabricationMeuble : fabricationMeubles) {
+            VEtatStockMatiere vEtatStockMatiere = new VEtatStockMatiere().findById(con, fabricationMeuble.getIdMatiere());
+            if (vEtatStockMatiere.getQuantite() - fabricationMeuble.getQuantite() * quantite < 0) {
+                throw new Exception("Quantite insuffisante pour la matiere : " + vEtatStockMatiere.getNomMatiere());
+            }
+        }
+    }
+
+    public void commander(int idTaille, int quantite, String dateCommande) throws Exception {
+        try (Connection con = ConnectionPostgres.getConnection()) {
+            String dateNow = LocalDateTime.now().toString();
+            ArrayList<FabricationMeuble> fabricationMeubles = this.getFabricationMeubles(idTaille);
+
+            this.verifierStock(con, fabricationMeubles, quantite);
+
+            for (FabricationMeuble fabricationMeuble : fabricationMeubles) {
+                StockMatiere stockMatiere = new StockMatiere(0, fabricationMeuble.getIdMatiere(), -fabricationMeuble.getQuantite() * quantite, dateNow);
+                stockMatiere.sortirStock();
+
+                CommandeMeuble commandeMeuble = new CommandeMeuble(0, this.getId(), idTaille, quantite, dateCommande);
+                commandeMeuble.save(con);
+            }
         }
     }
 }

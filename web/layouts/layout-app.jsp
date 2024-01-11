@@ -156,6 +156,20 @@
                                     </a>
                                 </li>
                             </ul>
+                            <ul class="menu-sub">
+                                <li class="menu-item <% if(content.equalsIgnoreCase("acheter-matiere")) { out.print("active"); } %>">
+                                    <a href="acheter-matiere" class="menu-link">
+                                        <div>Acheter</div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="menu-sub">
+                                <li class="menu-item <% if(content.equalsIgnoreCase("etat-stock-matiere")) { out.print("active"); } %>">
+                                    <a href="etat-stock-matiere" class="menu-link">
+                                        <div>Etat stock</div>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
 
                         <li class="menu-item <% if(active.equalsIgnoreCase("style")) { out.print("active open"); } %>">
@@ -335,6 +349,12 @@
 
                             <% } else if(content.equalsIgnoreCase("liste-matiere")) { %>
                             <%@ include file="../pages/liste-matiere.jsp" %>
+
+                            <% } else if(content.equalsIgnoreCase("acheter-matiere")) { %>
+                            <%@ include file="../pages/acheter-matiere.jsp" %>
+
+                            <% } else if(content.equalsIgnoreCase("etat-stock-matiere")) { %>
+                            <%@ include file="../pages/etat-stock-matiere.jsp" %>
 
                             <% } else if(content.equalsIgnoreCase("ajouter-style")) { %>
                             <%@ include file="../pages/ajouter-style.jsp" %>

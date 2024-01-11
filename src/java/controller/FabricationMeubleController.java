@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.time.LocalDateTime;
 
 import model.Meuble;
 import model.FabricationMeuble;
@@ -62,8 +63,17 @@ public class FabricationMeubleController extends HttpServlet {
                 fabricationMeuble.insert(listIdMatiere, quantites);
 
                 resp.sendRedirect("fabrication-meuble?idMeuble=" + idMeuble);
+            } else if (req.getParameter("idMeuble") != null && req.getParameter("idTaille") != null && req.getParameter("quantite") != null) {
+                int idMeuble = Integer.parseInt(req.getParameter("idMeuble"));
+                int idTaille = Integer.parseInt(req.getParameter("idTaille"));
+                int quantite = Integer.parseInt(req.getParameter("quantite"));
+                Meuble meuble = Meuble.getById(idMeuble);
+                meuble.commander(idTaille, quantite, LocalDateTime.now().toString());
+
+                resp.sendRedirect("fabrication-meuble?idMeuble=" + idMeuble);
             }
         } catch (Exception e) {
+            resp.sendRedirect("alerte?message=" + e.getMessage());
             e.printStackTrace();
         }
     }

@@ -23,6 +23,13 @@ create table PrixMatiere(
     dateInsertion timestamp not null
 );
 
+create table StockMatiere(
+    id serial primary key,
+    idMatiere int references Matiere(id),
+    quantite double precision not null,
+    dateInsertion timestamp not null
+);
+
 create table Style(
     id serial primary key,
     nom varchar(50) not null
@@ -64,3 +71,19 @@ create table FabricationMeuble(
     idMatiere int references Matiere(id),
     quantite double precision
 );
+
+create table CommandeMeuble(
+    id serial primary key,
+    idMeuble int references Meuble(id),
+    idTaille int references Taille(id),
+    quantite int not null,
+    dateCommande timestamp not null
+);
+
+insert into CommandeMeuble values
+    (default, 1, 1, 1, now())
+;
+
+select * 
+from CommandeMeuble cm
+join Meuble m on m.id = cm.idMeuble

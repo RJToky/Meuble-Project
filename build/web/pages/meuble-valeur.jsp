@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <div class="row">
                         <form class="col-12" action="meuble-valeur" method="get">
-                            <% 
+                            <%
                                 boolean valeurMinIsSet = false;
                                 boolean valeurMaxIsSet = false;
                                 if(request.getAttribute("valeurMin") != null && request.getAttribute("valeurMax") != null) {

@@ -248,6 +248,13 @@
                                 </li>
                             </ul>
                             <ul class="menu-sub">
+                                <li class="menu-item <% if(content.equalsIgnoreCase("prix-vente-meuble")) { out.print("active"); } %>">
+                                    <a href="prix-vente-meuble" class="menu-link">
+                                        <div>Prix de vente</div>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="menu-sub">
                                 <li class="menu-item <% if(content.equalsIgnoreCase("meuble-matiere")) { out.print("active"); } %>">
                                     <a href="meuble-matiere" class="menu-link">
                                         <div>Liste par matière</div>
@@ -262,7 +269,7 @@
                                 </li>
                             </ul>
                         </li>
-                        
+
                         <li class="menu-item <% if(active.equalsIgnoreCase("personnel")) { out.print("active open"); } %>">
                             <a href="" class="menu-link menu-toggle">
                                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
@@ -390,13 +397,16 @@
 
                             <% } else if(content.equalsIgnoreCase("fabrication-meuble")) { %>
                             <%@ include file="../pages/fabrication-meuble.jsp" %>
+                            
+                            <% } else if(content.equalsIgnoreCase("prix-vente-meuble")) { %>
+                            <%@ include file="../pages/prix-vente-meuble.jsp" %>
 
                             <% } else if(content.equalsIgnoreCase("meuble-matiere")) { %>
                             <%@ include file="../pages/meuble-matiere.jsp" %>
 
                             <% } else if(content.equalsIgnoreCase("meuble-valeur")) { %>
                             <%@ include file="../pages/meuble-valeur.jsp" %>
-                            
+
                             <% } else if(content.equalsIgnoreCase("ajouter-personnel")) { %>
                             <%@ include file="../pages/ajouter-personnel.jsp" %>
                             <% } %>

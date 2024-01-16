@@ -12,7 +12,7 @@ drop table Meuble cascade;
 drop table MeubleTaille cascade;
 drop table FabricationMeuble cascade;
 drop table CommandeMeuble cascade;
-drop table DetailStyle cascade;
+-- drop table DetailStyle cascade;
 drop table DetailTaille cascade;
 drop table CoefficientStyle cascade;
 drop table CoefficientTaille cascade;
@@ -90,11 +90,11 @@ create table CommandeMeuble(
     dateCommande timestamp not null
 );
 
-create table DetailStyle(
-    id serial primary key,
-    idStyle int references Style(id),
-    ordre int not null
-);
+-- create table DetailStyle(
+--     id serial primary key,
+--     idStyle int references Style(id),
+--     ordre int not null
+-- );
 
 create table DetailTaille(
     id serial primary key,

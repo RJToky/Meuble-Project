@@ -262,6 +262,20 @@
                                 </li>
                             </ul>
                         </li>
+                        
+                        <li class="menu-item <% if(active.equalsIgnoreCase("personnel")) { out.print("active open"); } %>">
+                            <a href="" class="menu-link menu-toggle">
+                                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                                <div>Personnel</div>
+                            </a>
+                            <ul class="menu-sub">
+                                <li class="menu-item <% if(content.equalsIgnoreCase("ajouter-personnel")) { out.print("active"); } %>">
+                                    <a href="ajouter-personnel" class="menu-link">
+                                        <div>Ajouter</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </aside>
                 <!-- / Menu -->
@@ -382,6 +396,9 @@
 
                             <% } else if(content.equalsIgnoreCase("meuble-valeur")) { %>
                             <%@ include file="../pages/meuble-valeur.jsp" %>
+                            
+                            <% } else if(content.equalsIgnoreCase("ajouter-personnel")) { %>
+                            <%@ include file="../pages/ajouter-personnel.jsp" %>
                             <% } %>
                         </div>
                         <!-- / Content -->

@@ -12,6 +12,7 @@ drop table Meuble cascade;
 drop table MeubleTaille cascade;
 drop table FabricationMeuble cascade;
 drop table CommandeMeuble cascade;
+drop table Personnel cascade;
 
 create table Matiere(
     id serial primary key,
@@ -81,4 +82,9 @@ create table CommandeMeuble(
     idTaille int references Taille(id),
     quantite int not null,
     dateCommande timestamp not null
+);
+
+create table Personnel(
+    id serial primary key,
+    nom varchar(50) not null
 );

@@ -13,6 +13,7 @@ public class VDetailMatiere extends GenericDAO<VDetailMatiere> {
 
     private int id;
     private String nomMatiere;
+    
     private double prixUnitaire;
 
     public VDetailMatiere() {

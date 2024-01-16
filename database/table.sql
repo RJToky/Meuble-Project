@@ -12,7 +12,13 @@ drop table Meuble cascade;
 drop table MeubleTaille cascade;
 drop table FabricationMeuble cascade;
 drop table CommandeMeuble cascade;
+drop table DetailStyle cascade;
+drop table DetailTaille cascade;
+drop table CoefficientStyle cascade;
+drop table CoefficientTaille cascade;
 drop table Personnel cascade;
+drop table SalairePersonnel cascade;
+drop table PrixVenteMeuble cascade;
 
 create table Matiere(
     id serial primary key,
@@ -84,7 +90,48 @@ create table CommandeMeuble(
     dateCommande timestamp not null
 );
 
+create table DetailStyle(
+    id serial primary key,
+    idStyle int references Style(id),
+    ordre int not null
+);
+
+create table DetailTaille(
+    id serial primary key,
+    idTaille int references Taille(id),
+    ordre int not null
+);
+
+create table CoefficientStyle(
+    id serial primary key,
+    coefficient double precision not null,
+    nombrePersonne int not null,
+    dateInsertion timestamp not null
+);
+
+create table CoefficientTaille(
+    id serial primary key,
+    coefficient double precision not null,
+    volumeHoraire double precision not null,
+    dateInsertion timestamp not null
+);
+
 create table Personnel(
     id serial primary key,
     nom varchar(50) not null
+);
+
+create table SalairePersonnel(
+    id serial primary key,
+    idPersonnel int references Personnel(id),
+    salaire double precision not null,
+    dateInsertion timestamp not null
+);
+
+create table PrixVenteMeuble(
+    id serial primary key,
+    idMeuble int references Meuble(id),
+    idTaille int references Taille(id),
+    prixVente double precision not null,
+    dateInsertion timestamp not null
 );

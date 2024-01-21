@@ -3,6 +3,7 @@ package model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import rj.util.GenericDAO;
 import util.ConnectionPostgres;

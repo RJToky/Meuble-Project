@@ -34,7 +34,7 @@
                 <div class="card-body">
                     <form action="ajouter-taille" method="post">
                         <div class="mb-3">
-                            <label class="form-label">Nom du meuble</label>
+                            <label class="form-label">Nom de la taille</label>
                             <select class="form-select" name="idTaille" required="">
                                 <option value="">Choisir...</option>
                                 <% for(Taille taille : tailles) { %>

@@ -30,10 +30,10 @@ public class AjouterOuvrierController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            if (req.getParameter("poste") != null) {
-                String poste = req.getParameter("poste").trim();
-                if (!poste.equals("")) {
-                    Ouvrier ouvrier = new Ouvrier(0, poste);
+            if (req.getParameter("nom") != null) {
+                String nom = req.getParameter("nom").trim();
+                if (!nom.equals("")) {
+                    Ouvrier ouvrier = new Ouvrier(0, nom);
                     ouvrier.insert();
                 }
             } else if (req.getParameter("idOuvrier") != null && req.getParameter("valeur") != null) {

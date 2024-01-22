@@ -10,12 +10,12 @@
                 <div class="card-body">
                     <form action="ajouter-ouvrier" method="post">
                         <div class="mb-3">
-                            <label class="form-label">Poste</label>
+                            <label class="form-label">Nom</label>
                             <input
                                 type="text"
                                 class="form-control"
-                                name="poste"
-                                placeholder="Nom du poste"
+                                name="nom"
+                                placeholder="Nom"
                                 required=""
                                 />
                         </div>
@@ -35,11 +35,11 @@
                 <div class="card-body">
                     <form action="ajouter-ouvrier" method="post">
                         <div class="mb-3">
-                            <label class="form-label">Nom du poste</label>
+                            <label class="form-label">Ouvrier</label>
                             <select class="form-select" name="idOuvrier" required="">
                                 <option value="">Choisir...</option>
                                 <% for (Ouvrier ouvrier : ouvriers) { %>
-                                <option value="<%= ouvrier.getId() %>"><%= ouvrier.getPoste() %></option>
+                                <option value="<%= ouvrier.getId() %>"><%= ouvrier.getNom() %></option>
                                 <% } %>
                             </select>
                         </div>

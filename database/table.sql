@@ -105,7 +105,7 @@ create table CommandeMeuble(
 
 create table Ouvrier(
     id serial primary key,
-    poste varchar(50) not null
+    nom varchar(50) not null
 );
 
 create table TauxHoraire(

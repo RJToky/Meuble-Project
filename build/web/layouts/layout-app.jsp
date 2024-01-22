@@ -148,22 +148,16 @@
                                         <div>Ajouter</div>
                                     </a>
                                 </li>
-                            </ul>
-                            <ul class="menu-sub">
                                 <li class="menu-item <% if(content.equalsIgnoreCase("liste-matiere")) { out.print("active"); } %>">
                                     <a href="liste-matiere" class="menu-link">
                                         <div>Liste</div>
                                     </a>
                                 </li>
-                            </ul>
-                            <ul class="menu-sub">
                                 <li class="menu-item <% if(content.equalsIgnoreCase("acheter-matiere")) { out.print("active"); } %>">
                                     <a href="acheter-matiere" class="menu-link">
                                         <div>Acheter</div>
                                     </a>
                                 </li>
-                            </ul>
-                            <ul class="menu-sub">
                                 <li class="menu-item <% if(content.equalsIgnoreCase("etat-stock-matiere")) { out.print("active"); } %>">
                                     <a href="etat-stock-matiere" class="menu-link">
                                         <div>Etat stock</div>
@@ -183,8 +177,6 @@
                                         <div>Ajouter</div>
                                     </a>
                                 </li>
-                            </ul>
-                            <ul class="menu-sub">
                                 <li class="menu-item <% if(content.equalsIgnoreCase("style-matiere")) { out.print("active"); } %>">
                                     <a href="style-matiere" class="menu-link">
                                         <div>Matières utilisées</div>
@@ -232,36 +224,26 @@
                                         <div>Ajouter</div>
                                     </a>
                                 </li>
-                            </ul>
-                            <ul class="menu-sub">
                                 <li class="menu-item <% if(content.equalsIgnoreCase("meuble-taille")) { out.print("active"); } %>">
                                     <a href="meuble-taille" class="menu-link">
                                         <div>Tailles utilisées</div>
                                     </a>
                                 </li>
-                            </ul>
-                            <ul class="menu-sub">
                                 <li class="menu-item <% if(content.equalsIgnoreCase("fabrication-meuble")) { out.print("active"); } %>">
                                     <a href="fabrication-meuble" class="menu-link">
                                         <div>Fabrication</div>
                                     </a>
                                 </li>
-                            </ul>
-                            <ul class="menu-sub">
                                 <li class="menu-item <% if(content.equalsIgnoreCase("prix-vente-meuble")) { out.print("active"); } %>">
                                     <a href="prix-vente-meuble" class="menu-link">
                                         <div>Prix de vente</div>
                                     </a>
                                 </li>
-                            </ul>
-                            <ul class="menu-sub">
                                 <li class="menu-item <% if(content.equalsIgnoreCase("meuble-matiere")) { out.print("active"); } %>">
                                     <a href="meuble-matiere" class="menu-link">
                                         <div>Liste par matière</div>
                                     </a>
                                 </li>
-                            </ul>
-                            <ul class="menu-sub">
                                 <li class="menu-item <% if(content.equalsIgnoreCase("meuble-valeur")) { out.print("active"); } %>">
                                     <a href="meuble-valeur" class="menu-link">
                                         <div>Liste par valeur</div>
@@ -279,6 +261,11 @@
                                 <li class="menu-item <% if(content.equalsIgnoreCase("ajouter-ouvrier")) { out.print("active"); } %>">
                                     <a href="ajouter-ouvrier" class="menu-link">
                                         <div>Ajouter</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item <% if(content.equalsIgnoreCase("liste-ouvrier")) { out.print("active"); } %>">
+                                    <a href="liste-ouvrier" class="menu-link">
+                                        <div>Liste</div>
                                     </a>
                                 </li>
                             </ul>
@@ -409,6 +396,9 @@
 
                             <% } else if(content.equalsIgnoreCase("ajouter-ouvrier")) { %>
                             <%@ include file="../pages/ajouter-ouvrier.jsp" %>
+                            
+                            <% } else if(content.equalsIgnoreCase("liste-ouvrier")) { %>
+                            <%@ include file="../pages/liste-ouvrier.jsp" %>
                             <% } %>
                         </div>
                         <!-- / Content -->

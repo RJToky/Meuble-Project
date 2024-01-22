@@ -31,3 +31,19 @@ create or replace view VEtatStockMatiere as(
     group by m.id, m.nom
     order by m.id asc
 );
+
+create or replace view VDetailOuvrier as(
+    select o1.id, o1.nom nomOuvrier, coalesce(th1.valeur, 0) tauxHoraire
+    from Ouvrier o1
+    left join (
+        select th2.*
+        from TauxHoraire th2
+        join Ouvrier o2 on o2.id = th2.idOuvrier
+        where th2.dateInsertion = (
+            select max(th3.dateInsertion)
+            from TauxHoraire th3
+            where th3.idOuvrier = o2.id
+        )
+        order by th2.idOuvrier asc
+    ) th1 on th1.idOuvrier = o1.id
+);

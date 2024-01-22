@@ -69,7 +69,7 @@ public class Style extends GenericDAO<Style> {
             String query = """
                 select vdm.*
                 from VDetailMatiere vdm
-                join StyleMatiere sm on vdm.idMatiere = sm.idMatiere
+                join StyleMatiere sm on vdm.id = sm.idMatiere
                 where sm.idStyle = %s
             """.formatted(this.getId());
             return new VDetailMatiere().find(con, query);

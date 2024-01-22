@@ -19,15 +19,6 @@
                                 required=""
                                 />
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Prix unitaire (optionnel)</label>
-                            <input
-                                type="number"
-                                class="form-control"
-                                name="prixUnitaire"
-                                placeholder="100000"
-                                />
-                        </div>
                         <div>
                             <button type="submit" class="btn btn-success">Valider</button>
                         </div>
@@ -35,6 +26,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
         <div class="col-md-6">
             <div class="card mb-4">
                 <h5 class="card-header">Modifier prix</h5>

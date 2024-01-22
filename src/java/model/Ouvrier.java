@@ -12,14 +12,14 @@ import util.ConnectionPostgres;
 public class Ouvrier extends GenericDAO<Ouvrier> {
 
     private int id;
-    private String type;
+    private String poste;
 
     public Ouvrier() {
     }
 
-    public Ouvrier(int id, String type) {
+    public Ouvrier(int id, String poste) {
         this.id = id;
-        this.type = type;
+        this.poste = poste;
     }
 
     public static ArrayList<Ouvrier> getAll() throws Exception {

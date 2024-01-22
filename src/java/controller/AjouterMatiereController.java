@@ -34,15 +34,11 @@ public class AjouterMatiereController extends HttpServlet {
         try {
             if (req.getParameter("nom") != null) {
                 String nom = req.getParameter("nom").trim();
-                double prixUnitaire = 0.0;
-                if (!req.getParameter("prixUnitaire").isEmpty()) {
-                    prixUnitaire = Double.parseDouble(req.getParameter("prixUnitaire"));
-                }
                 if (!nom.equals("")) {
                     Matiere matiere = new Matiere(0, nom);
-                    matiere.insert(prixUnitaire);
+                    matiere.insert();
                 }
-            } else if(req.getParameter("idMatiere") != null && req.getParameter("prixUnitaire") != null) {
+            } else if (req.getParameter("idMatiere") != null && req.getParameter("prixUnitaire") != null) {
                 int idMatiere = Integer.parseInt(req.getParameter("idMatiere"));
                 double prixUnitaire = Double.parseDouble(req.getParameter("prixUnitaire"));
                 PrixMatiere prixMatiere = new PrixMatiere(0, idMatiere, prixUnitaire, LocalDateTime.now().toString());

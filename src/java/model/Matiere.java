@@ -34,15 +34,10 @@ public class Matiere extends GenericDAO<Matiere> {
             return new Matiere().findById(con, id);
         }
     }
-
-    public void insert(double prixUnitaire) throws Exception {
+    
+    public void insert() throws SQLException, Exception, ClassNotFoundException {
         try (Connection con = ConnectionPostgres.getConnection()) {
             this.save(con);
-            if(prixUnitaire != 0) {
-                Matiere lastMatiere = this.findLast(con);
-                PrixMatiere prixMatiere = new PrixMatiere(0, lastMatiere.getId(), prixUnitaire, LocalDateTime.now().toString());
-                prixMatiere.save(con);
-            }
         }
     }
 

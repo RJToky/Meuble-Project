@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
-import model.DetailTaille;
 
 import model.Taille;
 
@@ -34,14 +33,14 @@ public class AjouterTailleController extends HttpServlet {
             if (req.getParameter("nom") != null) {
                 String nom = req.getParameter("nom").trim();
                 if (!nom.equals("")) {
-                    Taille taille = new Taille(0, nom);
+                    Taille taille = new Taille(0, nom, -1);
                     taille.insert();
                 }
             } else if (req.getParameter("idTaille") != null && req.getParameter("ordre") != null) {
-                int idTaille = Integer.parseInt(req.getParameter("idTaille"));
-                int ordre = Integer.parseInt(req.getParameter("ordre"));
-                DetailTaille detailTaille = new DetailTaille(0, idTaille, ordre);
-                detailTaille.insert();
+                Taille taille = new Taille();
+                taille.set("ordre", req.getParameter("ordre"));
+                taille.where("id", req.getParameter("idTaille"));
+                taille.update();
             }
             resp.sendRedirect("ajouter-taille");
         } catch (Exception e) {

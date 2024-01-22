@@ -24,6 +24,7 @@ public class MouvementStockMatiere extends GenericDAO<MouvementStockMatiere> {
         this.id = id;
         this.idMatiere = idMatiere;
         this.quantiteEntree = quantiteEntree;
+        this.quantiteSortie = quantiteSortie;
         this.dateInsertion = dateInsertion;
     }
 

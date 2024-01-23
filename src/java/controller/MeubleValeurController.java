@@ -25,9 +25,13 @@ public class MeubleValeurController extends HttpServlet {
                 if (!vMeubleValeurs.isEmpty()) {
                     req.setAttribute("vMeubleValeurs", vMeubleValeurs);
                 }
-                
                 req.setAttribute("valeurMin", valeurMin);
                 req.setAttribute("valeurMax", valeurMax);
+            } else {
+                ArrayList<VMeubleValeur> vMeubleValeurs = VMeubleValeur.getByValeurMinMax(Double.MIN_VALUE, Double.MAX_VALUE);
+                if (!vMeubleValeurs.isEmpty()) {
+                    req.setAttribute("vMeubleValeurs", vMeubleValeurs);
+                }
             }
             req.setAttribute("active", "meuble");
             req.setAttribute("content", "meuble-valeur");

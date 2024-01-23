@@ -31,9 +31,8 @@
                         <div class="mb-3">
                             <label class="form-label">Prix de vente</label>
                             <input
-                                type="text"
+                                type="number"
                                 class="form-control"
-                                name="number"
                                 name="prixVente"
                                 placeholder="100000"
                                 required=""

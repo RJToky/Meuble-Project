@@ -58,7 +58,12 @@ public class Meuble extends GenericDAO<Meuble> {
 
     public static ArrayList<Meuble> getAll() throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
-            return new Meuble().findAll(con);
+            ArrayList<Meuble> meubles = new Meuble().findAll(con);
+            for (Meuble meuble : meubles) {
+                meuble.setCategorie(Categorie.getById(con, meuble.getIdCategorie()));
+                meuble.setStyle(Style.getById(con, meuble.getIdStyle()));
+            }
+            return meubles;
         }
     }
 

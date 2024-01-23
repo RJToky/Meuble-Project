@@ -36,9 +36,9 @@ public class AjouterTailleController extends HttpServlet {
                     Taille taille = new Taille(0, nom, -1);
                     taille.insert();
                 }
-            } else if (req.getParameter("idTaille") != null && req.getParameter("ordre") != null) {
+            } else if (req.getParameter("idTaille") != null && req.getParameter("coefficient") != null) {
                 Taille taille = new Taille();
-                taille.set("ordre", req.getParameter("ordre"));
+                taille.set("coefficient", req.getParameter("coefficient"));
                 taille.where("id", req.getParameter("idTaille"));
                 taille.update();
             }

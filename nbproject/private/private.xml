@@ -3,17 +3,62 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/model/StyleMatiere.java</file>
-            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/AjouterOuvrierController.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/web/pages/liste-profil.jsp</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/model/VDetailOuvrier.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/ListeStyleController.java</file>
             <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/FabricationMeubleController.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/web/pages/liste-ouvrier.jsp</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/web/pages/ajouter-style.jsp</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/web/pages/liste-style.jsp</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/ListeMainOeuvreController.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/web/pages/liste-main-oeuvre.jsp</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/AjouterMainOeuvreController.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/web/pages/liste-meuble.jsp</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/AjouterCategorieController.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/web/pages/ajouter-ouvrier.jsp</file>
             <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/database/data.sql</file>
-            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/model/MeubleTaille.java</file>
-            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/model/Ouvrier.java</file>
-            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/AcheterMatiereController.java</file>
-            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/web/pages/acheter-matiere.jsp</file>
-            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/web/pages/ajouter-matiere.jsp</file>
-            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/model/Meuble.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/MeubleBeneficeController.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/model/CoefficientStyle.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/web/pages/liste-taille.jsp</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/model/StyleMatiere.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/AjouterTailleController.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/ListeMeubleController.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/ListeTailleController.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/web/pages/liste-employe.jsp</file>
             <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/AjouterMatiereController.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/model/VDetailMatiere.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/model/Categorie.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/model/MainOeuvre.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/model/Taille.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/model/MeubleTaille.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/model/Profil.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/web/pages/ajouter-matiere.jsp</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/AjouterEmployeController.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/AjouterProfilController.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/web/pages/ajouter-employe.jsp</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/AjouterOuvrierController.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/PrixVenteMeubleController.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/database/view.sql</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/ListeProfilController.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/model/Employe.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/web/pages/meuble-benefice.jsp</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/model/VMeubleBenefice.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/ListeEmployeController.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/ListeOuvrierController.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/model/VEtatStockMatiere.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/web/pages/ajouter-categorie.jsp</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/ListeMatiereController.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/model/VProfilEmploye.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/AcheterMatiereController.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/web/pages/ajouter-profil.jsp</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/web/pages/liste-matiere.jsp</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/web/layouts/layout-app.jsp</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/web/pages/liste-categorie.jsp</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/AjouterStyleController.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/database/table.sql</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/web/pages/ajouter-taille.jsp</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/model/VMeubleValeur.java</file>
+            <file>file:/home/rj-toky/Documents/ITU/S5/Baovola/Meuble-Project/src/java/controller/ListeCategorieController.java</file>
         </group>
     </open-files>
 </project-private>

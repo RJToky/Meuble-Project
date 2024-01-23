@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import rj.util.GenericDAO;
@@ -14,6 +15,7 @@ public class PrixVenteMeuble extends GenericDAO<PrixVenteMeuble> {
     private int idMeuble;
     private int idTaille;
     private double prixVente;
+    private String dateInsertion;
 
     public PrixVenteMeuble(int id, int idMeuble, int idTaille, double prixVente) {
         this.id = id;
@@ -27,6 +29,7 @@ public class PrixVenteMeuble extends GenericDAO<PrixVenteMeuble> {
 
     public void insert() throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
+            this.setDateInsertion(LocalDateTime.now().toString());
             this.save(con);
         }
     }

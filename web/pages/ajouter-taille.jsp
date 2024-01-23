@@ -43,12 +43,12 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Ordre</label>
+                            <label class="form-label">Coefficient</label>
                             <input
                                 type="number"
                                 class="form-control"
-                                name="ordre"
-                                placeholder="Ordre"
+                                name="coefficient"
+                                placeholder="Coefficient"
                                 required=""
                                 />
                         </div>

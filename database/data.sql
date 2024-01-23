@@ -32,8 +32,8 @@ insert into Categorie values
     (default, 'Canape');
 
 insert into Taille values
-    (default, 'Petit'),
-    (default, 'Grand');
+    (default, 'Petit', 1),
+    (default, 'Grand', 2);
 
 insert into Meuble values
     (default, 'Canape Boheme', 3, 1);

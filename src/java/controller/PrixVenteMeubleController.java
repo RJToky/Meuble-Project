@@ -35,7 +35,7 @@ public class PrixVenteMeubleController extends HttpServlet {
                 int idMeuble = Integer.parseInt(req.getParameter("idMeuble"));
                 int idTaille = Integer.parseInt(req.getParameter("idTaille"));
                 double prixVente = Double.parseDouble(req.getParameter("prixVente"));
-                
+
                 PrixVenteMeuble prixVenteMeuble = new PrixVenteMeuble(0, idMeuble, idTaille, prixVente);
                 prixVenteMeuble.insert();
             }

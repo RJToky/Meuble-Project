@@ -35,7 +35,7 @@ public class Matiere extends GenericDAO<Matiere> {
         }
     }
     
-    public void insert() throws SQLException, Exception, ClassNotFoundException {
+    public void insert() throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
             this.save(con);
         }

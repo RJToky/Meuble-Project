@@ -47,3 +47,65 @@ create or replace view VDetailOuvrier as(
         order by th2.idOuvrier asc
     ) th1 on th1.idOuvrier = o1.id
 );
+
+create or replace view VCoutStyle as(
+    select mo.*, (mo.heureTravail * mo.nombrePersonne * vdo.tauxHoraire) cout
+    from MainOeuvre mo
+    join VDetailOuvrier vdo on vdo.id = mo.idOuvrier
+);
+
+create or replace view VCoutMainOeuvre as(
+    select m.id, m.nom nomMeuble, t.id idTaille, t.nom nomTaille, sum(vcs.cout * t.coefficient) cout
+    from Meuble m
+    join MeubleTaille mt on mt.idMeuble = m.id
+    join Taille t on t.id = mt.idTaille
+    join VCoutStyle vcs on vcs.idStyle = m.idStyle
+    group by m.id, m.nom, t.id, t.nom
+    order by t.coefficient asc
+);
+
+create or replace view VPrixRevientMeuble as(
+    select vmv.id, vmv.nomMeuble, vmv.idTaille, vmv.nomTaille, (vmv.valeur + vcmo.cout) prixRevient
+    from VMeubleValeur vmv, VCoutMainOeuvre vcmo
+    where
+        vmv.idTaille = vcmo.idTaille
+        and vmv.id = vcmo.id
+);
+
+create or replace view VMeubleBenefice as(
+    select vprm.id, vprm.nomMeuble, vprm.idTaille, vprm.nomTaille, (pvm.prixVente - vprm.prixRevient) benefice
+    from VPrixRevientMeuble vprm, prixVenteMeuble pvm
+    where
+        vprm.idTaille = pvm.idTaille
+        and vprm.id = pvm.idMeuble
+);
+
+create or replace view VEmployeEmbauche as(
+    select e.id, e.nom nomEmploye, emb.idOuvrier, o.nom nomOuvrier, emb.dateEmbauche
+    from Employe e
+    join Embauche emb on emb.idEmploye = e.id
+    join Ouvrier o on o.id = emb.idOuvrier
+);
+
+create or replace view VProfilEmploye as(
+    select vee.*, extract(year from age(current_date, vee.dateEmbauche)) anneeExperience,
+        (
+            select p.nom
+            from profil p
+            where
+                extract(year from age(current_date, vee.dateEmbauche)) >= p.annee
+            order by p.annee desc
+            limit 1
+        ) profil,
+        ((
+            select p.coefficient
+            from profil p
+            where
+                extract(year from age(current_date, vee.dateEmbauche)) >= p.annee
+            order by p.annee desc
+            limit 1
+        ) * vdo.tauxHoraire) tauxHoraire
+    from VEmployeEmbauche vee
+    join VDetailOuvrier vdo on vdo.id = vee.idOuvrier
+);
+

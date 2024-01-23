@@ -12,11 +12,13 @@ drop table Meuble cascade;
 drop table MeubleTaille cascade;
 drop table FabricationMeuble cascade;
 drop table CommandeMeuble cascade;
--- drop table CoefficientStyle cascade;
--- drop table CoefficientTaille cascade;
 drop table Ouvrier cascade;
 drop table TauxHoraire cascade;
 drop table PrixVenteMeuble cascade;
+drop table MainOeuvre cascade;
+drop table Profil cascade;
+drop table Employe cascade;
+drop table Embauche cascade;
 
 create table Matiere(
     id serial primary key,
@@ -57,7 +59,7 @@ create table Categorie(
 create table Taille(
     id serial primary key,
     nom varchar(50) not null,
-    ordre int unique
+    coefficient int
 );
 
 create table Meuble(
@@ -89,20 +91,6 @@ create table CommandeMeuble(
     dateCommande timestamp not null
 );
 
--- create table CoefficientStyle(
---     id serial primary key,
---     coefficient double precision not null,
---     nombrePersonne int not null,
---     dateInsertion timestamp not null
--- );
--- 
--- create table CoefficientTaille(
---     id serial primary key,
---     coefficient double precision not null,
---     volumeHoraire double precision not null,
---     dateInsertion timestamp not null
--- );
-
 create table Ouvrier(
     id serial primary key,
     nom varchar(50) not null
@@ -121,4 +109,31 @@ create table PrixVenteMeuble(
     idTaille int references Taille(id),
     prixVente double precision not null,
     dateInsertion timestamp not null
+);
+
+create table MainOeuvre(
+    id serial primary key,
+    idStyle int references Style(id),
+    idOuvrier int references Ouvrier(id),
+    heureTravail double precision not null,
+    nombrePersonne int not null
+);
+
+create table Profil(
+    id serial primary key,
+    nom varchar(50) not null,
+    annee int not null,
+    coefficient int not null
+);
+
+create table Employe(
+    id serial primary key,
+    nom varchar(50) not null
+);
+
+create table Embauche(
+    id serial primary key,
+    idEmploye int references Employe(id),
+    idOuvrier int references Ouvrier(id),
+    dateEmbauche date not null
 );

@@ -13,15 +13,15 @@ public class Taille extends GenericDAO<Taille> {
 
     private int id;
     private String nom;
-    private int ordre;
+    private int coefficient;
 
     public Taille() {
     }
 
-    public Taille(int id, String nom, int ordre) {
+    public Taille(int id, String nom, int coefficient) {
         this.id = id;
         this.nom = nom;
-        this.ordre = ordre;
+        this.coefficient = coefficient;
     }
 
     public static ArrayList<Taille> getAll() throws Exception {

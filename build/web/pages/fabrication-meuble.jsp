@@ -39,7 +39,7 @@
                     <% ArrayList<Taille> tailles = (ArrayList<Taille>) request.getAttribute("tailles"); %>
                     <hr class="my-4">
                     <div class="row">
-                        <h6 class="text-uppercase mb-3">Commander ce meuble</h6>
+                        <h6 class="text-uppercase mb-3">Fabriquer ce meuble</h6>
                         <form class="col-7" action="fabrication-meuble" method="post">
                             <input type="hidden" name="idMeuble" value="<%= request.getAttribute("idMeuble") %>" />
                             <div class="mb-3">
@@ -62,7 +62,7 @@
                                     />
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Date commande</label>
+                                <label class="form-label">Date</label>
                                 <input
                                     type="datetime-local"
                                     class="form-control"

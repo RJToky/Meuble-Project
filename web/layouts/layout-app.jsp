@@ -50,6 +50,8 @@
 
         <!-- Page CSS -->
 
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
         <!-- Helpers -->
         <script src="./assets/vendor/js/helpers.js"></script>
 
@@ -244,6 +246,11 @@
                                         <div>Liste</div>
                                     </a>
                                 </li>
+                                <li class="menu-item <% if(content.equalsIgnoreCase("vendre-meuble")) { out.print("active"); } %>">
+                                    <a href="vendre-meuble" class="menu-link">
+                                        <div>Vendre</div>
+                                    </a>
+                                </li>
                                 <li class="menu-item <% if(content.equalsIgnoreCase("meuble-taille")) { out.print("active"); } %>">
                                     <a href="meuble-taille" class="menu-link">
                                         <div>Tailles utilisées</div>
@@ -295,7 +302,7 @@
                                 </li>
                             </ul>
                         </li>
-                        
+
                         <li class="menu-item <% if(active.equalsIgnoreCase("main-oeuvre")) { out.print("active open"); } %>">
                             <a href="" class="menu-link menu-toggle">
                                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
@@ -314,7 +321,7 @@
                                 </li>
                             </ul>
                         </li>
-                        
+
                         <li class="menu-item <% if(active.equalsIgnoreCase("profil")) { out.print("active open"); } %>">
                             <a href="" class="menu-link menu-toggle">
                                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
@@ -333,7 +340,7 @@
                                 </li>
                             </ul>
                         </li>
-                        
+
                         <li class="menu-item <% if(active.equalsIgnoreCase("employe")) { out.print("active open"); } %>">
                             <a href="" class="menu-link menu-toggle">
                                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
@@ -348,6 +355,34 @@
                                 <li class="menu-item <% if(content.equalsIgnoreCase("liste-employe")) { out.print("active"); } %>">
                                     <a href="liste-employe" class="menu-link">
                                         <div>Liste</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="menu-item <% if(active.equalsIgnoreCase("client")) { out.print("active open"); } %>">
+                            <a href="" class="menu-link menu-toggle">
+                                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                                <div>Client</div>
+                            </a>
+                            <ul class="menu-sub">
+                                <li class="menu-item <% if(content.equalsIgnoreCase("ajouter-client")) { out.print("active"); } %>">
+                                    <a href="ajouter-client" class="menu-link">
+                                        <div>Ajouter</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="menu-item <% if(active.equalsIgnoreCase("statistique")) { out.print("active open"); } %>">
+                            <a href="" class="menu-link menu-toggle">
+                                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                                <div>Statistique</div>
+                            </a>
+                            <ul class="menu-sub">
+                                <li class="menu-item <% if(content.equalsIgnoreCase("statistique-vente")) { out.print("active"); } %>">
+                                    <a href="statistique-vente" class="menu-link">
+                                        <div>Vente</div>
                                     </a>
                                 </li>
                             </ul>
@@ -448,7 +483,7 @@
 
                             <% } else if(content.equalsIgnoreCase("ajouter-style")) { %>
                             <%@ include file="../pages/ajouter-style.jsp" %>
-                            
+
                             <% } else if(content.equalsIgnoreCase("liste-style")) { %>
                             <%@ include file="../pages/liste-style.jsp" %>
 
@@ -457,28 +492,31 @@
 
                             <% } else if(content.equalsIgnoreCase("ajouter-categorie")) { %>
                             <%@ include file="../pages/ajouter-categorie.jsp" %>
-                            
+
                             <% } else if(content.equalsIgnoreCase("liste-categorie")) { %>
                             <%@ include file="../pages/liste-categorie.jsp" %>
 
                             <% } else if(content.equalsIgnoreCase("ajouter-taille")) { %>
                             <%@ include file="../pages/ajouter-taille.jsp" %>
-                            
+
                             <% } else if(content.equalsIgnoreCase("liste-taille")) { %>
                             <%@ include file="../pages/liste-taille.jsp" %>
 
                             <% } else if(content.equalsIgnoreCase("ajouter-meuble")) { %>
                             <%@ include file="../pages/ajouter-meuble.jsp" %>
-                            
+
                             <% } else if(content.equalsIgnoreCase("liste-meuble")) { %>
                             <%@ include file="../pages/liste-meuble.jsp" %>
+
+                            <% } else if(content.equalsIgnoreCase("vendre-meuble")) { %>
+                            <%@ include file="../pages/vendre-meuble.jsp" %>
 
                             <% } else if(content.equalsIgnoreCase("meuble-taille")) { %>
                             <%@ include file="../pages/meuble-taille.jsp" %>
 
                             <% } else if(content.equalsIgnoreCase("fabrication-meuble")) { %>
                             <%@ include file="../pages/fabrication-meuble.jsp" %>
-                            
+
                             <% } else if(content.equalsIgnoreCase("prix-vente-meuble")) { %>
                             <%@ include file="../pages/prix-vente-meuble.jsp" %>
 
@@ -487,33 +525,39 @@
 
                             <% } else if(content.equalsIgnoreCase("meuble-valeur")) { %>
                             <%@ include file="../pages/meuble-valeur.jsp" %>
-                            
+
                             <% } else if(content.equalsIgnoreCase("meuble-benefice")) { %>
                             <%@ include file="../pages/meuble-benefice.jsp" %>
 
                             <% } else if(content.equalsIgnoreCase("ajouter-ouvrier")) { %>
                             <%@ include file="../pages/ajouter-ouvrier.jsp" %>
-                            
+
                             <% } else if(content.equalsIgnoreCase("liste-ouvrier")) { %>
                             <%@ include file="../pages/liste-ouvrier.jsp" %>
-                            
+
                             <% } else if(content.equalsIgnoreCase("ajouter-main-oeuvre")) { %>
                             <%@ include file="../pages/ajouter-main-oeuvre.jsp" %>
-                            
+
                             <% } else if(content.equalsIgnoreCase("liste-main-oeuvre")) { %>
                             <%@ include file="../pages/liste-main-oeuvre.jsp" %>
-                            
+
                             <% } else if(content.equalsIgnoreCase("ajouter-profil")) { %>
                             <%@ include file="../pages/ajouter-profil.jsp" %>
-                            
+
                             <% } else if(content.equalsIgnoreCase("liste-profil")) { %>
                             <%@ include file="../pages/liste-profil.jsp" %>
-                            
+
                             <% } else if(content.equalsIgnoreCase("ajouter-employe")) { %>
                             <%@ include file="../pages/ajouter-employe.jsp" %>
-                            
+
                             <% } else if(content.equalsIgnoreCase("liste-employe")) { %>
                             <%@ include file="../pages/liste-employe.jsp" %>
+
+                            <% } else if(content.equalsIgnoreCase("ajouter-client")) { %>
+                            <%@ include file="../pages/ajouter-client.jsp" %>
+
+                            <% } else if(content.equalsIgnoreCase("statistique-vente")) { %>
+                            <%@ include file="../pages/statistique-vente.jsp" %>
                             <% } %>
                         </div>
                         <!-- / Content -->
@@ -541,6 +585,7 @@
 
         <!-- Vendors JS -->
         <script src="./assets/vendor/libs/apex-charts/apexcharts.js"></script>
+        <script src="./assets/vendor/chart.js"></script>
 
         <!-- Main JS -->
         <script src="./assets/js/main.js"></script>

@@ -80,6 +80,22 @@ create or replace view VMeubleBenefice as(
         and vprm.id = pvm.idMeuble
 );
 
+-- create or replace view VMeubleBenefice as(
+--     select vprm.id, vprm.nomMeuble, vprm.idTaille, vprm.nomTaille, coalesce((pvm.prixVente - vprm.prixRevient), 0) benefice
+--     from
+--         VPrixRevientMeuble vprm,
+--         (
+--             select m.id idMeuble, t.id idTaille, pvm.prixVente 
+--             from Meuble m
+--             join MeubleTaille mt on mt.idMeuble = m.id
+--             join Taille t on t.id = mt.idTaille
+--             left join PrixVenteMeuble pvm on pvm.id = m.id
+--         ) pvm
+--     where
+--         vprm.idTaille = pvm.idTaille
+--         and vprm.id = pvm.idMeuble
+-- );
+
 create or replace view VEmployeEmbauche as(
     select e.id, e.nom nomEmploye, emb.idOuvrier, o.nom nomOuvrier, emb.dateEmbauche
     from Employe e
@@ -107,5 +123,33 @@ create or replace view VProfilEmploye as(
         ) * vdo.tauxHoraire) tauxHoraire
     from VEmployeEmbauche vee
     join VDetailOuvrier vdo on vdo.id = vee.idOuvrier
+);
+
+-- create or replace view VStatistiqueVente as(
+--     select v.idMeuble, v.idTaille, c.idGenre, g.nom nomGenre, sum(v.quantite) nombreVente
+--     from Vente v
+--     join Meuble b on b.id = v.idMeuble
+--     join Client c on c.id = v.idClient
+--     join Genre g on g.id = c.idGenre
+--     group by v.idMeuble, v.idTaille, g.nom, c.idGenre
+-- );
+
+create or replace view VStatistiqueVente as(
+    select res.idMeuble, res.idTaille, res.idGenre, res.nomGenre, sum(res.nombreVente) nombreVente
+    from (
+        (
+            select v.idMeuble, v.idTaille, c.idGenre, g.nom nomGenre, v.quantite nombreVente
+            from Vente v
+            join Client c on c.id = v.idClient
+            join Genre g on g.id = c.idGenre
+        )
+            union
+        (
+            select m.id idMeuble, t.id idTaille, g.id idGenre, g.nom nomGenre, 0 nombreVente
+            from Meuble m, Taille t, Genre g
+        )
+    ) res
+    group by res.idMeuble, res.idTaille, res.idGenre, res.nomGenre
+    order by res.idGenre asc
 );
 

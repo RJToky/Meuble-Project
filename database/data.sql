@@ -52,3 +52,7 @@ insert into FabricationMeuble values
 
 insert into CommandeMeuble values
     (default, 1, 1, 1, '2024-01-02 10:00:00');
+
+insert into Genre values
+    (default, 'Homme'),
+    (default, 'Femme');

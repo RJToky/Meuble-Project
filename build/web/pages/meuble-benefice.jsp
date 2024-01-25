@@ -28,7 +28,7 @@
                                         required
                                         />
                                 </div>
-                                <div class="col-4 ps-0 mb-3">
+                                <div class="col-4 px-0 mb-3">
                                     <label class="form-label">Benefice max</label>
                                     <input
                                         type="number"
@@ -40,7 +40,7 @@
                                         />
                                 </div>
 
-                                <div class="col-auto ps-0 mb-3">
+                                <div class="col-auto mb-3">
                                     <button type="submit" class="btn btn-primary">Lister</button>
                                 </div>
                             </div>

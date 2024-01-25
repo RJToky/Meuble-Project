@@ -163,7 +163,7 @@ public class Meuble extends GenericDAO<Meuble> {
         }
     }
 
-    public void verifierStock(Connection con, ArrayList<FabricationMeuble> fabricationMeubles, int quantite) throws Exception {
+    public void verifierStockMatiere(Connection con, ArrayList<FabricationMeuble> fabricationMeubles, int quantite) throws Exception {
         StringBuilder message = new StringBuilder();
         boolean quantiteInsuffisante = false;
         for (FabricationMeuble fabricationMeuble : fabricationMeubles) {
@@ -190,7 +190,7 @@ public class Meuble extends GenericDAO<Meuble> {
             String dateNow = LocalDateTime.now().toString();
             ArrayList<FabricationMeuble> fabricationMeubles = this.getFabricationMeubles(idTaille);
 
-            this.verifierStock(con, fabricationMeubles, quantite);
+            this.verifierStockMatiere(con, fabricationMeubles, quantite);
 
             for (FabricationMeuble fabricationMeuble : fabricationMeubles) {
                 MouvementStockMatiere stockMatiere = new MouvementStockMatiere(0, fabricationMeuble.getIdMatiere(), 0, fabricationMeuble.getQuantite() * quantite, dateNow);
@@ -199,6 +199,13 @@ public class Meuble extends GenericDAO<Meuble> {
                 CommandeMeuble commandeMeuble = new CommandeMeuble(0, this.getId(), idTaille, quantite, dateCommande);
                 commandeMeuble.save(con);
             }
+        }
+    }
+
+    public void vendre(int idClient, int idTaille, int quantite, String dateVente) throws Exception {
+        try (Connection con = ConnectionPostgres.getConnection()) {
+            Vente vente = new Vente(0, this.getId(), idTaille, quantite, idClient, dateVente);
+            vente.insert();
         }
     }
 }

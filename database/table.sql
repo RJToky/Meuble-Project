@@ -137,3 +137,23 @@ create table Embauche(
     idOuvrier int references Ouvrier(id),
     dateEmbauche date not null
 );
+
+create table Genre(
+    id serial primary key,
+    nom varchar(50) not null
+);
+
+create table Client(
+    id serial primary key,
+    nom varchar(50) not null,
+    idGenre int references Genre(id)
+);
+
+create table Vente(
+    id serial primary key,
+    idMeuble int references Meuble(id),
+    idTaille int references Taille(id),
+    quantite int not null,
+    idClient int references Client(id),
+    dateVente date not null
+);

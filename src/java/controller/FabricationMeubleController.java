@@ -70,13 +70,8 @@ public class FabricationMeubleController extends HttpServlet {
                 int idMeuble = Integer.parseInt(req.getParameter("idMeuble"));
                 int idTaille = Integer.parseInt(req.getParameter("idTaille"));
                 int quantite = Integer.parseInt(req.getParameter("quantite"));
-                
                 String dateCommande = LocalDateTime.now().toString();
-                try {
-                    LocalDateTime localDateTime = LocalDateTime.parse(req.getParameter("dateCommande"));
-                    dateCommande = localDateTime.toString();
-                } catch (Exception e) {
-                }
+                
                 Meuble meuble = new Meuble();
                 meuble.setId(idMeuble);
                 meuble.commander(idTaille, quantite, dateCommande);

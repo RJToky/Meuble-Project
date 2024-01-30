@@ -89,35 +89,48 @@
                     <div>
                         <canvas id="chart" width="250px"></canvas>
                     </div>
+                    <%
+                        StringBuilder labels = new StringBuilder("[");
+                        StringBuilder data = new StringBuilder("[");
+
+                        for (int i = 0; i < vStatistiqueVentes.size(); i++) {
+                            labels.append("'" + vStatistiqueVentes.get(i).getNomGenre() + "'");
+                            data.append(vStatistiqueVentes.get(i).getNombreVente());
+
+                            if (i < vStatistiqueVentes.size() - 1) {
+                                labels.append(", ");
+                                data.append(", ");
+                            }
+                        }
+
+                        labels.append("]");
+                        data.append("]");
+                    %>
                     <script>
                         // Récupérez le contexte du canevas
                         var ctx = document.getElementById('chart').getContext('2d');
 
                         // Définissez vos données de graphique (à titre d'exemple)
                         var data = {
-                            labels: ['<%= vStatistiqueVentes.get(0).getNomGenre() %>', '<%= vStatistiqueVentes.get(1).getNomGenre() %>'],
+                            labels: <%= labels %>,
                             datasets: [{
-                                    label: 'Nombre de ventes',
-                                    data: [<%= vStatistiqueVentes.get(0).getNombreVente() %>, <%= vStatistiqueVentes.get(1).getNombreVente() %>],
-                                    backgroundColor: [
-                                        'rgba(75, 192, 192, 0.2)', // Couleur pour Homme
-                                        'rgba(255, 99, 132, 0.2)'   // Couleur pour Femme
-                                    ],
-                                    borderColor: [
-                                        'rgba(75, 192, 192, 1)',
-                                        'rgba(255, 99, 132, 1)'
-                                    ],
-                                    borderWidth: 1
-                                }]
+                                label: 'Nombre de ventes',
+                                data: <%= data %>,
+                                backgroundColor: [
+                                    'rgba(75, 192, 192, 0.2)', // Couleur pour Homme
+                                    'rgba(255, 99, 132, 0.2)'   // Couleur pour Femme
+                                ],
+                                borderColor: [
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(255, 99, 132, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
                         };
 
-                        // Configurez le type de graphique et créez le graphique
                         var myChart = new Chart(ctx, {
                             type: 'doughnut', // ou 'line', 'pie', etc.
-                            data: data,
-                            options: {
-                                // Configuration des options du graphique
-                            }
+                            data: data
                         });
                     </script>
                 </div>

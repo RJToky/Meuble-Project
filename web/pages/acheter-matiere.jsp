@@ -28,14 +28,6 @@
                                 required=""
                                 />
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Date achat</label>
-                            <input
-                                type="datetime-local"
-                                class="form-control"
-                                name="dateAchat"
-                                />
-                        </div>
                         <div>
                             <button type="submit" class="btn btn-success">Valider</button>
                         </div>

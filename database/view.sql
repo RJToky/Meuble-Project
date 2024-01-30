@@ -125,15 +125,6 @@ create or replace view VProfilEmploye as(
     join VDetailOuvrier vdo on vdo.id = vee.idOuvrier
 );
 
--- create or replace view VStatistiqueVente as(
---     select v.idMeuble, v.idTaille, c.idGenre, g.nom nomGenre, sum(v.quantite) nombreVente
---     from Vente v
---     join Meuble b on b.id = v.idMeuble
---     join Client c on c.id = v.idClient
---     join Genre g on g.id = c.idGenre
---     group by v.idMeuble, v.idTaille, g.nom, c.idGenre
--- );
-
 create or replace view VStatistiqueVente as(
     select res.idMeuble, res.idTaille, res.idGenre, res.nomGenre, sum(res.nombreVente) nombreVente
     from (
@@ -153,3 +144,29 @@ create or replace view VStatistiqueVente as(
     order by res.idGenre asc
 );
 
+create or replace view VEtatStockMeuble as(
+    select res.idMeuble, res.idTaille, max(res.quantite) quantite
+    from (
+        (
+        select m.id idMeuble, t.id idTaille, 0 quantite
+        from Meuble m, Taille t
+        )
+        union
+        (
+            select res.idMeuble, res.idTaille, sum(res.quantite) quantite
+            from (
+                (
+                    select cm.idMeuble, cm.idTaille, cm.quantite
+                    from CommandeMeuble cm
+                )
+                union
+                (
+                    select v.idMeuble, v.idTaille, v.quantite * -1
+                    from Vente v
+                )
+            ) res
+            group by res.idMeuble, res.idTaille
+        )
+    ) res
+    group by res.idMeuble, res.idTaille
+);

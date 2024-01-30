@@ -244,19 +244,24 @@
                                         <div>Liste</div>
                                     </a>
                                 </li>
+                                <li class="menu-item <% if(content.equalsIgnoreCase("fabrication-meuble")) { out.print("active"); } %>">
+                                    <a href="fabrication-meuble" class="menu-link">
+                                        <div>Fabrication</div>
+                                    </a>
+                                </li>
                                 <li class="menu-item <% if(content.equalsIgnoreCase("vendre-meuble")) { out.print("active"); } %>">
                                     <a href="vendre-meuble" class="menu-link">
                                         <div>Vendre</div>
                                     </a>
                                 </li>
+                                <li class="menu-item <% if(content.equalsIgnoreCase("etat-stock-meuble")) { out.print("active"); } %>">
+                                    <a href="etat-stock-meuble" class="menu-link">
+                                        <div>Etat stock</div>
+                                    </a>
+                                </li>
                                 <li class="menu-item <% if(content.equalsIgnoreCase("meuble-taille")) { out.print("active"); } %>">
                                     <a href="meuble-taille" class="menu-link">
                                         <div>Tailles utilisées</div>
-                                    </a>
-                                </li>
-                                <li class="menu-item <% if(content.equalsIgnoreCase("fabrication-meuble")) { out.print("active"); } %>">
-                                    <a href="fabrication-meuble" class="menu-link">
-                                        <div>Fabrication</div>
                                     </a>
                                 </li>
                                 <li class="menu-item <% if(content.equalsIgnoreCase("prix-vente-meuble")) { out.print("active"); } %>">
@@ -285,7 +290,7 @@
                         <li class="menu-item <% if(active.equalsIgnoreCase("ouvrier")) { out.print("active open"); } %>">
                             <a href="" class="menu-link menu-toggle">
                                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                                <div>Ouvrier</div>
+                                <div>Poste</div>
                             </a>
                             <ul class="menu-sub">
                                 <li class="menu-item <% if(content.equalsIgnoreCase("ajouter-ouvrier")) { out.print("active"); } %>">
@@ -367,6 +372,11 @@
                                 <li class="menu-item <% if(content.equalsIgnoreCase("ajouter-client")) { out.print("active"); } %>">
                                     <a href="ajouter-client" class="menu-link">
                                         <div>Ajouter</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item <% if(content.equalsIgnoreCase("liste-client")) { out.print("active"); } %>">
+                                    <a href="liste-client" class="menu-link">
+                                        <div>Liste</div>
                                     </a>
                                 </li>
                             </ul>
@@ -508,6 +518,9 @@
 
                             <% } else if(content.equalsIgnoreCase("vendre-meuble")) { %>
                             <%@ include file="../pages/vendre-meuble.jsp" %>
+                            
+                            <% } else if(content.equalsIgnoreCase("etat-stock-meuble")) { %>
+                            <%@ include file="../pages/etat-stock-meuble.jsp" %>
 
                             <% } else if(content.equalsIgnoreCase("meuble-taille")) { %>
                             <%@ include file="../pages/meuble-taille.jsp" %>
@@ -553,6 +566,9 @@
 
                             <% } else if(content.equalsIgnoreCase("ajouter-client")) { %>
                             <%@ include file="../pages/ajouter-client.jsp" %>
+                            
+                            <% } else if(content.equalsIgnoreCase("liste-client")) { %>
+                            <%@ include file="../pages/liste-client.jsp" %>
 
                             <% } else if(content.equalsIgnoreCase("statistique-vente")) { %>
                             <%@ include file="../pages/statistique-vente.jsp" %>

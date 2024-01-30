@@ -73,28 +73,37 @@ create or replace view VPrixRevientMeuble as(
 );
 
 create or replace view VMeubleBenefice as(
-    select vprm.id, vprm.nomMeuble, vprm.idTaille, vprm.nomTaille, (pvm.prixVente - vprm.prixRevient) benefice
-    from VPrixRevientMeuble vprm, prixVenteMeuble pvm
-    where
-        vprm.idTaille = pvm.idTaille
-        and vprm.id = pvm.idMeuble
+    select res.id, res.nomMeuble, res.idTaille, res.nomTaille, max(res.prixVente) prixVente, max(res.prixRevient) prixRevient, max(res.benefice) benefice
+    from (
+        (
+        select vprm.id, vprm.nomMeuble, vprm.idTaille, vprm.nomTaille, res.prixVente, vprm.prixRevient, (res.prixVente - vprm.prixRevient) benefice
+        from VPrixRevientMeuble vprm, (
+            select res.idMeuble, res.idTaille, max(res.prixVente) prixVente
+            from (
+                (
+                    select pvm.idMeuble, pvm.idTaille, pvm.prixVente
+                    from prixVenteMeuble pvm
+                )
+                union
+                (
+                    select m.id idMeuble, t.id idTaille, 0 prixVente
+                    from Meuble m, Taille t
+                )
+            ) res
+            group by res.idMeuble, res.idTaille
+        ) res
+        where
+            vprm.idTaille = res.idTaille
+            and vprm.id = res.idMeuble
+        )
+        union
+        (
+            select m.id, m.nom nomMeuble, t.id idTaille, t.nom nomTaille, 0 prixVente, 0 prixRevient, 0 benefice
+            from Meuble m, Taille t
+        )
+    ) res
+    group by res.id, res.nomMeuble, res.idTaille, res.nomTaille 
 );
-
--- create or replace view VMeubleBenefice as(
---     select vprm.id, vprm.nomMeuble, vprm.idTaille, vprm.nomTaille, coalesce((pvm.prixVente - vprm.prixRevient), 0) benefice
---     from
---         VPrixRevientMeuble vprm,
---         (
---             select m.id idMeuble, t.id idTaille, pvm.prixVente 
---             from Meuble m
---             join MeubleTaille mt on mt.idMeuble = m.id
---             join Taille t on t.id = mt.idTaille
---             left join PrixVenteMeuble pvm on pvm.id = m.id
---         ) pvm
---     where
---         vprm.idTaille = pvm.idTaille
---         and vprm.id = pvm.idMeuble
--- );
 
 create or replace view VEmployeEmbauche as(
     select e.id, e.nom nomEmploye, emb.idOuvrier, o.nom nomOuvrier, emb.dateEmbauche
@@ -129,10 +138,11 @@ create or replace view VStatistiqueVente as(
     select res.idMeuble, res.idTaille, res.idGenre, res.nomGenre, sum(res.nombreVente) nombreVente
     from (
         (
-            select v.idMeuble, v.idTaille, c.idGenre, g.nom nomGenre, v.quantite nombreVente
+            select v.idMeuble, v.idTaille, c.idGenre, g.nom nomGenre, sum(v.quantite) nombreVente
             from Vente v
             join Client c on c.id = v.idClient
             join Genre g on g.id = c.idGenre
+            group by v.idMeuble, v.idTaille, c.idGenre, g.nom
         )
             union
         (

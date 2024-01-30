@@ -28,7 +28,7 @@ public class MeubleBeneficeController extends HttpServlet {
                 req.setAttribute("beneficeMin", beneficeMin);
                 req.setAttribute("beneficeMax", beneficeMax);
             } else {
-                ArrayList<VMeubleBenefice> vMeubleBenefices = VMeubleBenefice.getByBeneficeMinMax(Double.MIN_VALUE, Double.MAX_VALUE);
+                ArrayList<VMeubleBenefice> vMeubleBenefices = VMeubleBenefice.getAll();
                 if (!vMeubleBenefices.isEmpty()) {
                     req.setAttribute("vMeubleBenefices", vMeubleBenefices);
                 }

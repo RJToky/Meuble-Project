@@ -57,6 +57,8 @@
                                         <th>Id</th>
                                         <th>Nom du meuble</th>
                                         <th>Taille</th>
+                                        <th>Prix de revient</th>
+                                        <th>Prix de vente</th>
                                         <th>Benefice</th>
                                     </tr>
                                 </thead>
@@ -66,6 +68,8 @@
                                         <td><%= vMeubleBenefice.getId() %></td>
                                         <td><%= vMeubleBenefice.getNomMeuble() %></td>
                                         <td><%= vMeubleBenefice.getNomTaille() %></td>
+                                        <td><%= vMeubleBenefice.getPrixRevient() %></td>
+                                        <td><%= vMeubleBenefice.getPrixVente() %></td>
                                         <td><%= vMeubleBenefice.getBenefice() %></td>
                                     </tr>
                                     <% } %>

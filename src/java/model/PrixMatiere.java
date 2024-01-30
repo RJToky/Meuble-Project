@@ -40,6 +40,9 @@ public class PrixMatiere extends GenericDAO<PrixMatiere> {
 
     public void insert() throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
+            if(this.prixUnitaire <= 0) {
+                throw new Exception("Le prix doit etre positive");
+            }
             this.save(con);
         }
     }

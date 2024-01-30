@@ -16,7 +16,7 @@
                                         <th>Id</th>
                                         <th>Nom de l'employe</th>
                                         <th>Profil</th>
-                                        <th>Ouvrier</th>
+                                        <th>Poste</th>
                                         <th>Date d'embauche</th>
                                         <th>Annee d'experience</th>
                                         <th>Taux horaire</th>

@@ -15,7 +15,7 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Style</th>
-                                        <th>Ouvrier</th>
+                                        <th>Poste</th>
                                         <th>Heure du travail</th>
                                         <th>Nombre de personne</th>
                                     </tr>

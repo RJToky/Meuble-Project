@@ -42,6 +42,9 @@ public class Vente extends GenericDAO<Vente> {
 
     public void insert() throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
+            if(this.quantite <= 0) {
+                throw new Exception("La quantite doit etre positive");
+            }
             this.save(con);
         }
     }

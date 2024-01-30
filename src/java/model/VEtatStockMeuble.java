@@ -32,9 +32,17 @@ public class VEtatStockMeuble extends GenericDAO<VEtatStockMeuble> {
         }
     }
 
-    public static VEtatStockMeuble getById(int id) throws Exception {
+    public static VEtatStockMeuble getByMeubleTaille(int idMeuble, int idTaille) throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
-            return new VEtatStockMeuble().findById(con, id);
+            String query = """
+                select *
+                from VEtatStockMeuble
+                where
+                    idMeuble = %s
+                    and idTaille = %s
+            """.formatted(idMeuble, idTaille);
+            
+            return new VEtatStockMeuble().find(con, query).get(0);
         }
     }
 

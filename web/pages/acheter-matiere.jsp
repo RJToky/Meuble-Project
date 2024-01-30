@@ -24,7 +24,7 @@
                                 type="number"
                                 class="form-control"
                                 name="quantite"
-                                placeholder="5"
+                                placeholder="Entrer la quantite"
                                 required=""
                                 />
                         </div>

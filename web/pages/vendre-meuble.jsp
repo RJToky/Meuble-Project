@@ -54,7 +54,6 @@
                                 type="date"
                                 class="form-control"
                                 name="dateVente"
-                                required=""
                                 />
                         </div>
                         <div>

@@ -1,7 +1,7 @@
 <% ArrayList<Ouvrier> ouvriers = (ArrayList<Ouvrier>) request.getAttribute("ouvriers"); %>
 
 <div>
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Ouvrier /</span> Ajouter</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Poste /</span> Ajouter</h4>
 
     <div class="row">
         <div class="col-md-6">
@@ -35,7 +35,7 @@
                 <div class="card-body">
                     <form action="ajouter-ouvrier" method="post">
                         <div class="mb-3">
-                            <label class="form-label">Ouvrier</label>
+                            <label class="form-label">Poste</label>
                             <select class="form-select" name="idOuvrier" required="">
                                 <option value="">Choisir...</option>
                                 <% for (Ouvrier ouvrier : ouvriers) { %>

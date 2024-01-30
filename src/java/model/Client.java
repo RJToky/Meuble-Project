@@ -14,6 +14,8 @@ public class Client extends GenericDAO<Client> {
     private int id;
     private String nom;
     private int idGenre;
+    
+    private Genre genre;
 
     public Client() {
     }
@@ -26,7 +28,11 @@ public class Client extends GenericDAO<Client> {
 
     public static ArrayList<Client> getAll() throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
-            return new Client().findAll(con);
+            ArrayList<Client> clients = new Client().findAll(con);
+            for (Client client : clients) {
+                client.setGenre(new Genre().findById(con, client.getIdGenre()));
+            }
+            return clients;
         }
     }
 

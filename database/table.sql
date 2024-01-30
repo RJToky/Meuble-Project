@@ -19,6 +19,9 @@ drop table MainOeuvre cascade;
 drop table Profil cascade;
 drop table Employe cascade;
 drop table Embauche cascade;
+drop table Genre cascade;
+drop table Client cascade;
+drop table Vente cascade;
 
 create table Matiere(
     id serial primary key,

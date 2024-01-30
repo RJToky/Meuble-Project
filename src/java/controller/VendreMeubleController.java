@@ -53,9 +53,8 @@ public class VendreMeubleController extends HttpServlet {
 
                 resp.sendRedirect("vendre-meuble");
             }
-        } catch(Exception e) {
-            PrintWriter out = resp.getWriter();
-            out.println(e.getMessage());
+        } catch (Exception e) {
+            resp.sendRedirect("alerte?message=" + e.getMessage());
         }
     }
 

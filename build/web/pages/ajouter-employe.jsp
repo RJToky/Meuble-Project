@@ -44,7 +44,7 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Ouvrier</label>
+                            <label class="form-label">Poste</label>
                             <select class="form-select" name="idOuvrier" required="">
                                 <option value="">Choisir...</option>
                                 <% for (Ouvrier ouvrier : ouvriers) { %>

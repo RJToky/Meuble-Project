@@ -2,11 +2,7 @@ package model;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import rj.util.GenericDAO;
 import util.ConnectionPostgres;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import rj.util.GenericDAO;
@@ -19,15 +15,9 @@ public class VMeubleBenefice extends GenericDAO<VMeubleBenefice> {
     private String nomMeuble;
     private int idTaille;
     private String nomTaille;
+    private double prixVente;
+    private double prixRevient;
     private double benefice;
-
-    public VMeubleBenefice(int id, String nomMeuble, int idTaille, String nomTaille, double benefice) {
-        this.id = id;
-        this.nomMeuble = nomMeuble;
-        this.idTaille = idTaille;
-        this.nomTaille = nomTaille;
-        this.benefice = benefice;
-    }
 
     public VMeubleBenefice() {
     }

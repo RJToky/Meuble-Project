@@ -51,6 +51,9 @@ public class MainOeuvre extends GenericDAO<MainOeuvre> {
     
     public void insert() throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
+            if(this.heureTravail <= 0 || this.nombrePersonne <= 0 ) {
+                throw new Exception("Le nombre doit etre positive");
+            }
             this.save(con);
         }
     }

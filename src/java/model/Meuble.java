@@ -195,15 +195,36 @@ public class Meuble extends GenericDAO<Meuble> {
             for (FabricationMeuble fabricationMeuble : fabricationMeubles) {
                 MouvementStockMatiere stockMatiere = new MouvementStockMatiere(0, fabricationMeuble.getIdMatiere(), 0, fabricationMeuble.getQuantite() * quantite, dateNow);
                 stockMatiere.sortirStock();
-
-                CommandeMeuble commandeMeuble = new CommandeMeuble(0, this.getId(), idTaille, quantite, dateCommande);
-                commandeMeuble.save(con);
             }
+            
+            CommandeMeuble commandeMeuble = new CommandeMeuble(0, this.getId(), idTaille, quantite, dateCommande);
+            commandeMeuble.save(con);
+        }
+    }
+    
+    public void verifierStockMeuble(Connection con, int idMeuble, int idTaille, int quantite) throws Exception {
+        StringBuilder message = new StringBuilder();
+        boolean quantiteInsuffisante = false;
+        VEtatStockMeuble vEtatStockMeuble = VEtatStockMeuble.getByMeubleTaille(idMeuble, idTaille);
+        
+        if(vEtatStockMeuble.getQuantite() - quantite < 0) {
+            quantiteInsuffisante = true;
+                message
+                        .append("<p>Quantite restante : ")
+                        .append(vEtatStockMeuble.getQuantite())
+                        .append("</p>");
+        }
+        if (quantiteInsuffisante) {
+            throw new Exception(message.toString());
         }
     }
 
     public void vendre(int idClient, int idTaille, int quantite, String dateVente) throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
+//            String dateNow = LocalDateTime.now().toString();
+
+            this.verifierStockMeuble(con, this.getId(), idTaille, quantite);
+            
             Vente vente = new Vente(0, this.getId(), idTaille, quantite, idClient, dateVente);
             vente.insert();
         }

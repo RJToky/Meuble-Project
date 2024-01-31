@@ -14,7 +14,7 @@
                             <div class="col-5 mb-3">
                                 <label class="form-label">Meuble</label>
                                 <select class="form-select" name="idMeuble" required="">
-                                    <option value="">Choisir...</option>
+                                    <option value="0">Tous</option>
                                     <% for (Meuble meuble : meubles) { %>
                                     <% 
                                         boolean isSelected = false;
@@ -32,7 +32,7 @@
                             <div class="col-5 px-0 mb-3">
                                 <label class="form-label">Taille</label>
                                 <select class="form-select" name="idTaille" required="">
-                                    <option value="">Choisir...</option>
+                                    <option value="0">Tous</option>
                                     <% for (Taille taille : tailles) { %>
                                     <% 
                                         boolean isSelected = false;

@@ -44,16 +44,8 @@
                                 type="number"
                                 class="form-control"
                                 name="quantite"
-                                placeholder="5"
+                                placeholder="Entrer la quantite"
                                 required=""
-                                />
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Date</label>
-                            <input
-                                type="date"
-                                class="form-control"
-                                name="dateVente"
                                 />
                         </div>
                         <div>

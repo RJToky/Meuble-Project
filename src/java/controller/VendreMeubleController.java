@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
 import model.Client;
 
 import model.Meuble;
@@ -36,17 +35,15 @@ public class VendreMeubleController extends HttpServlet {
         try {
 
             if (req.getParameter("idClient") != null && req.getParameter("idMeuble") != null
-                    && req.getParameter("idTaille") != null && req.getParameter("quantite") != null
-                    && req.getParameter("dateVente") != null) {
+                    && req.getParameter("idTaille") != null && req.getParameter("quantite") != null) {
                 int idClient = Integer.parseInt(req.getParameter("idClient"));
                 int idMeuble = Integer.parseInt(req.getParameter("idMeuble"));
                 int idTaille = Integer.parseInt(req.getParameter("idTaille"));
                 int quantite = Integer.parseInt(req.getParameter("quantite"));
-                String dateVente = LocalDate.now().toString();
 
                 Meuble meuble = new Meuble();
                 meuble.setId(idMeuble);
-                meuble.vendre(idClient, idTaille, quantite, dateVente);
+                meuble.vendre(idClient, idTaille, quantite);
 
                 resp.sendRedirect("vendre-meuble");
             }

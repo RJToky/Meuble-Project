@@ -1,12 +1,12 @@
 <% ArrayList<Style> styles = (ArrayList<Style>) request.getAttribute("styles"); %>
 
 <div>
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Style /</span> Matiï¿½res utilisï¿½es</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Style /</span> Matières utilisées</h4>
 
     <div class="row">
         <div class="col-md-8">
             <div class="card mb-4">
-                <h5 class="card-header">Liste matiï¿½res utilisï¿½es</h5>
+                <h5 class="card-header">Liste des matières</h5>
                 <div class="card-body">
                     <div class="row">
                         <form class="col-12" action="style-matiere" method="get">
@@ -69,7 +69,7 @@
         <% ArrayList<Matiere> autresMatieres = (ArrayList<Matiere>) request.getAttribute("autresMatieres"); %>
         <div class="col-md-4">
             <div class="card mb-4">
-                <h5 class="card-header">Ajouter autres matiï¿½res pour ce style</h5>
+                <h5 class="card-header">Ajouter autres matières pour ce style</h5>
                 <div class="card-body">
                     <form  action="style-matiere" method="post">
                         <input type="hidden" name="idStyle" value="<%= request.getAttribute("idStyle") %>" />

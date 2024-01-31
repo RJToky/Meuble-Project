@@ -114,7 +114,7 @@
         <% ArrayList<Matiere> matieres = (ArrayList<Matiere>) request.getAttribute("matieres"); %>
         <div class="col-md-4">
             <div class="card mb-4">
-                <h5 class="card-header">Fabrication</h5>
+                <h5 class="card-header">Formule</h5>
                 <div class="card-body">
                     <form action="fabrication-meuble" method="post">
                         <input type="hidden" name="idMeuble" value="<%= request.getAttribute("idMeuble") %>" />
@@ -135,7 +135,7 @@
                                 type="number"
                                 class="form-control"
                                 name="quantite-<%= matiere.getId() %>"
-                                placeholder="Quantitï¿½"
+                                placeholder="Quantité"
                                 />
                         </div>
                         <% } %>

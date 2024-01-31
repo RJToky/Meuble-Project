@@ -1,12 +1,12 @@
 <% ArrayList<Matiere> matieres = (ArrayList<Matiere>) request.getAttribute("matieres"); %>
 
 <div>
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Meuble /</span> Liste par mati�res</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Meuble /</span> Liste par matieres</h4>
 
     <div class="row">
         <div class="col-md-8">
             <div class="card mb-4">
-                <h5 class="card-header">Liste par mati�res</h5>
+                <h5 class="card-header">Liste par matieres</h5>
                 <div class="card-body">
                     <div class="row">
                         <form class="col-12" action="meuble-matiere" method="get">

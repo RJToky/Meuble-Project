@@ -2,6 +2,7 @@ package model;
 
 import lombok.Data;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import lombok.EqualsAndHashCode;
 import rj.util.GenericDAO;
@@ -16,18 +17,18 @@ public class VenteMeuble extends GenericDAO<VenteMeuble> {
     private int idTaille;
     private int quantite;
     private int idClient;
-    private String dateVente;
+    private String dateInsertion;
 
     public VenteMeuble() {
     }
 
-    public VenteMeuble(int id, int idMeuble, int idTaille, int quantite, int idClient, String dateVente) {
+    public VenteMeuble(int id, int idMeuble, int idTaille, int quantite, int idClient, String dateInsertion) {
         this.id = id;
         this.idMeuble = idMeuble;
         this.idTaille = idTaille;
         this.quantite = quantite;
         this.idClient = idClient;
-        this.dateVente = dateVente;
+        this.dateInsertion = dateInsertion;
     }
 
     public static ArrayList<VenteMeuble> getAll() throws Exception {
@@ -45,6 +46,7 @@ public class VenteMeuble extends GenericDAO<VenteMeuble> {
             if (this.quantite <= 0) {
                 throw new Exception("La quantite doit etre positive");
             }
+            this.setDateInsertion(LocalDateTime.now().toString());
             this.save(con);
         }
     }

@@ -16,7 +16,7 @@
                                 type="text"
                                 class="form-control"
                                 name="nom"
-                                placeholder="ex : Canapï¿½ gigogne"
+                                placeholder="ex : Canapé gigogne"
                                 required=""
                                 />
                         </div>

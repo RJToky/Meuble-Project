@@ -120,8 +120,13 @@ public class Meuble extends GenericDAO<Meuble> {
         StringBuilder message = new StringBuilder();
         boolean quantiteInsuffisante = false;
         for (FormuleMeuble formuleMeuble : formuleMeubles) {
-            VEtatStockMatiere vEtatStockMatiere = new VEtatStockMatiere().findById(con,
-                    formuleMeuble.getIdMatiere());
+            VEtatStockMatiere vEtatStockMatiere = new VEtatStockMatiere().find(con,
+                    """
+                        select *
+                        from VEtatStockMatiere
+                        where
+                            idMatiere = %s
+                    """.formatted(formuleMeuble.getIdMatiere())).get(0);
             if (vEtatStockMatiere.getQuantite() - formuleMeuble.getQuantite() * quantite < 0) {
                 quantiteInsuffisante = true;
                 message
@@ -174,12 +179,12 @@ public class Meuble extends GenericDAO<Meuble> {
         }
     }
 
-    public void vendre(int idClient, int idTaille, int quantite, String dateVente) throws Exception {
+    public void vendre(int idClient, int idTaille, int quantite) throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
             this.verifierStockMeuble(con, this.getId(), idTaille, quantite);
 
-            VenteMeuble venteMeuble = new VenteMeuble(0, this.getId(), idTaille, quantite, idClient, dateVente);
-            venteMeuble.insert();
+            VenteMeuble venteMeuble = new VenteMeuble(0, this.getId(), idTaille, quantite, idClient, LocalDateTime.now().toString());
+            venteMeuble.save(con);
         }
     }
 }

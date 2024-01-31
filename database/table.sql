@@ -1,5 +1,5 @@
-create database meuble2;
-\c meuble2
+create database meuble;
+\c meuble
 
 drop table Matiere cascade;
 drop table PrixMatiere cascade;
@@ -151,5 +151,5 @@ create table VenteMeuble(
     idTaille int references Taille(id),
     quantite int not null,
     idClient int references Client(id),
-    dateVente date not null
+    dateInsertion timestamp not null
 );

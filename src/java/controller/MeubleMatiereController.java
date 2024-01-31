@@ -21,7 +21,7 @@ public class MeubleMatiereController extends HttpServlet {
                 int idMatiere = Integer.parseInt(req.getParameter("idMatiere"));
                 Matiere matiere = new Matiere();
                 matiere.setId(idMatiere);
-                req.setAttribute("fabricationMeubles", matiere.getFabricationMeubles());
+                req.setAttribute("formuleMeubles", matiere.getFormuleMeubles());
                 req.setAttribute("idMatiere", idMatiere);
             }
             req.setAttribute("matieres", Matiere.getAll());

@@ -21,7 +21,7 @@
                                 <tbody>
                                     <% for(VEtatStockMatiere vEtatStockMatiere : vEtatStockMatieres) { %>
                                     <tr>
-                                        <td><%= vEtatStockMatiere.getId() %></td>
+                                        <td><%= vEtatStockMatiere.getIdMatiere() %></td>
                                         <td><%= vEtatStockMatiere.getNomMatiere() %></td>
                                         <td><%= vEtatStockMatiere.getQuantite() %></td>
                                     </tr>

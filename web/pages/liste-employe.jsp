@@ -1,4 +1,4 @@
-<% ArrayList<VProfilEmploye> vprofilEmployes = (ArrayList<VProfilEmploye>) request.getAttribute("vprofilEmployes"); %>
+<% ArrayList<VProfilEmploye> vProfilEmployes = (ArrayList<VProfilEmploye>) request.getAttribute("vProfilEmployes"); %>
 
 <div>
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Employe /</span> Liste</h4>
@@ -23,15 +23,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% for(VProfilEmploye vprofilEmploye : vprofilEmployes) { %>
+                                    <% for(VProfilEmploye vProfilEmploye : vProfilEmployes) { %>
                                     <tr>
-                                        <td><%= vprofilEmploye.getId() %></td>
-                                        <td><%= vprofilEmploye.getNomEmploye() %></td>
-                                        <td><%= vprofilEmploye.getProfil() %></td>
-                                        <td><%= vprofilEmploye.getNomOuvrier() %></td>
-                                        <td><%= vprofilEmploye.getDateEmbauche() %></td>
-                                        <td><%= vprofilEmploye.getAnneeExperience() %></td>
-                                        <td><%= vprofilEmploye.getTauxHoraire() %></td>
+                                        <td><%= vProfilEmploye.getIdEmploye() %></td>
+                                        <td><%= vProfilEmploye.getNomEmploye() %></td>
+                                        <td><%= vProfilEmploye.getProfil() %></td>
+                                        <td><%= vProfilEmploye.getNomPoste() %></td>
+                                        <td><%= vProfilEmploye.getDateEmbauche() %></td>
+                                        <td><%= vProfilEmploye.getAnneeExperience() %></td>
+                                        <td><%= vProfilEmploye.getTauxHoraire() %></td>
                                     </tr>
                                     <% } %>
                                 </tbody>

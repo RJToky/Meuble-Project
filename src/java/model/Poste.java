@@ -9,27 +9,27 @@ import util.ConnectionPostgres;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Ouvrier extends GenericDAO<Ouvrier> {
+public class Poste extends GenericDAO<Poste> {
 
     private int id;
     private String nom;
 
-    public Ouvrier() {
+    public Poste() {
     }
 
-    public Ouvrier(int id, String nom) {
+    public Poste(int id, String nom) {
         this.id = id;
         this.nom = nom;
     }
 
-    public static ArrayList<Ouvrier> getAll() throws Exception {
+    public static ArrayList<Poste> getAll() throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
-            return new Ouvrier().findAll(con);
+            return new Poste().findAll(con);
         }
     }
 
-    public static Ouvrier getById(Connection con, int id) throws Exception {
-        return new Ouvrier().findById(con, id);
+    public static Poste getById(Connection con, int id) throws Exception {
+        return new Poste().findById(con, id);
     }
 
     public void insert() throws Exception {

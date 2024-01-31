@@ -35,7 +35,7 @@
                             </div>
                         </form> 
                     </div>
-                    <% if(request.getAttribute("idMeuble") != null) { %>
+                    <% if(request.getAttribute("tailles") != null) { %>
                     <% ArrayList<Taille> tailles = (ArrayList<Taille>) request.getAttribute("tailles"); %>
                     <hr class="my-4">
                     <div class="row">
@@ -70,9 +70,9 @@
                 </div>
             </div>
 
-            <% if(request.getAttribute("fabricationMeubles") != null) { %>
+            <% if(request.getAttribute("formuleMeubles") != null && request.getAttribute("tailles") != null) { %>
+            <% ArrayList<FormuleMeuble> formuleMeubles = (ArrayList<FormuleMeuble>) request.getAttribute("formuleMeubles"); %>
             <% ArrayList<Taille> tailles = (ArrayList<Taille>) request.getAttribute("tailles"); %>
-            <% ArrayList<FabricationMeuble> fabricationMeubles = (ArrayList<FabricationMeuble>) request.getAttribute("fabricationMeubles"); %>
             <div class="card mb-4">
                 <div class="card-body">
                     <% int i = 0; %>
@@ -89,12 +89,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% for(FabricationMeuble fabricationMeuble : fabricationMeubles) { %>
-                                    <% if(fabricationMeuble.getTaille().getId() == taille.getId()) { %>
+                                    <% for(FormuleMeuble formuleMeuble : formuleMeubles) { %>
+                                    <% if(formuleMeuble.getTaille().getId() == taille.getId()) { %>
                                     <tr>
-                                        <td><%= fabricationMeuble.getMatiere().getId() %></td>
-                                        <td><%= fabricationMeuble.getMatiere().getNom() %></td>
-                                        <td><%= fabricationMeuble.getQuantite() %></td>
+                                        <td><%= formuleMeuble.getMatiere().getId() %></td>
+                                        <td><%= formuleMeuble.getMatiere().getNom() %></td>
+                                        <td><%= formuleMeuble.getQuantite() %></td>
                                     </tr>
                                     <% } %>
                                     <% } %>
@@ -135,7 +135,7 @@
                                 type="number"
                                 class="form-control"
                                 name="quantite-<%= matiere.getId() %>"
-                                placeholder="Quantité"
+                                placeholder="Quantitï¿½"
                                 />
                         </div>
                         <% } %>

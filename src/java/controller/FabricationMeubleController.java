@@ -11,7 +11,8 @@ import java.io.PrintWriter;
 import java.time.LocalDateTime;
 
 import model.Meuble;
-import model.FabricationMeuble;
+import model.Taille;
+import model.FormuleMeuble;
 
 @WebServlet("/fabrication-meuble")
 public class FabricationMeubleController extends HttpServlet {
@@ -27,11 +28,11 @@ public class FabricationMeubleController extends HttpServlet {
                 meuble.setId(idMeuble);
                 req.setAttribute("matieres", meuble.getMatieres());
 
-                FabricationMeuble fabricationMeuble = new FabricationMeuble();
-                fabricationMeuble.setIdMeuble(idMeuble);
-                req.setAttribute("fabricationMeubles", fabricationMeuble.getByIdMeuble());
+                req.setAttribute("tailles", Taille.getAll());
 
-                req.setAttribute("tailles", meuble.getTailles());
+                FormuleMeuble formuleMeuble = new FormuleMeuble();
+                formuleMeuble.setIdMeuble(idMeuble);
+                req.setAttribute("formuleMeubles", formuleMeuble.getByIdMeuble());
             }
             req.setAttribute("meubles", Meuble.getAll());
             req.setAttribute("active", "meuble");
@@ -46,7 +47,8 @@ public class FabricationMeubleController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            if (req.getParameter("idMeuble") != null && req.getParameter("idTaille") != null && req.getParameterValues("idMatiere[]") != null) {
+            if (req.getParameter("idMeuble") != null && req.getParameter("idTaille") != null
+                    && req.getParameterValues("idMatiere[]") != null) {
                 int idMeuble = Integer.parseInt(req.getParameter("idMeuble"));
                 int idTaille = Integer.parseInt(req.getParameter("idTaille"));
                 String[] listIdMatiere = req.getParameterValues("idMatiere[]");
@@ -59,22 +61,23 @@ public class FabricationMeubleController extends HttpServlet {
                     }
                 }
 
-                FabricationMeuble fabricationMeuble = new FabricationMeuble();
-                fabricationMeuble.setIdMeuble(idMeuble);
-                fabricationMeuble.setIdTaille(idTaille);
-                fabricationMeuble.insert(listIdMatiere, quantites);
+                FormuleMeuble formuleMeuble = new FormuleMeuble();
+                formuleMeuble.setIdMeuble(idMeuble);
+                formuleMeuble.setIdTaille(idTaille);
+                formuleMeuble.insert(listIdMatiere, quantites);
 
                 resp.sendRedirect("fabrication-meuble?idMeuble=" + idMeuble);
 
-            } else if (req.getParameter("idMeuble") != null && req.getParameter("idTaille") != null && req.getParameter("quantite") != null) {
+            } else if (req.getParameter("idMeuble") != null && req.getParameter("idTaille") != null
+                    && req.getParameter("quantite") != null) {
                 int idMeuble = Integer.parseInt(req.getParameter("idMeuble"));
                 int idTaille = Integer.parseInt(req.getParameter("idTaille"));
                 int quantite = Integer.parseInt(req.getParameter("quantite"));
-                String dateCommande = LocalDateTime.now().toString();
-                
+                String dateInsertion = LocalDateTime.now().toString();
+
                 Meuble meuble = new Meuble();
                 meuble.setId(idMeuble);
-                meuble.commander(idTaille, quantite, dateCommande);
+                meuble.fabriquer(idTaille, quantite, dateInsertion);
 
                 resp.sendRedirect("fabrication-meuble?idMeuble=" + idMeuble);
             }

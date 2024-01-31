@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 import model.MainOeuvre;
 
 import model.Style;
-import model.Ouvrier;
+import model.Poste;
 
 @WebServlet("/ajouter-main-oeuvre")
 public class AjouterMainOeuvreController extends HttpServlet {
@@ -20,7 +20,7 @@ public class AjouterMainOeuvreController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             req.setAttribute("styles", Style.getAll());
-            req.setAttribute("ouvriers", Ouvrier.getAll());
+            req.setAttribute("postes", Poste.getAll());
             req.setAttribute("active", "main-oeuvre");
             req.setAttribute("content", "ajouter-main-oeuvre");
             req.getRequestDispatcher("layouts/layout-app.jsp").forward(req, resp);
@@ -33,13 +33,14 @@ public class AjouterMainOeuvreController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            if (req.getParameter("idStyle") != null && req.getParameter("idOuvrier") != null && req.getParameter("heureTravail") != null && req.getParameter("nombrePersonne") != null) {
+            if (req.getParameter("idStyle") != null && req.getParameter("idPoste") != null
+                    && req.getParameter("heureTravail") != null && req.getParameter("nombrePersonne") != null) {
                 int idStyle = Integer.parseInt(req.getParameter("idStyle"));
-                int idOuvrier = Integer.parseInt(req.getParameter("idOuvrier"));
+                int idPoste = Integer.parseInt(req.getParameter("idPoste"));
                 double heureTravail = Double.parseDouble(req.getParameter("heureTravail"));
                 int nombrePersonne = Integer.parseInt(req.getParameter("nombrePersonne"));
-                
-                MainOeuvre mainOeuvre = new MainOeuvre(0, idStyle, idOuvrier, heureTravail, nombrePersonne);
+
+                MainOeuvre mainOeuvre = new MainOeuvre(0, idStyle, idPoste, heureTravail, nombrePersonne);
                 mainOeuvre.insert();
             }
             resp.sendRedirect("ajouter-main-oeuvre");

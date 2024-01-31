@@ -259,11 +259,6 @@
                                         <div>Etat stock</div>
                                     </a>
                                 </li>
-                                <li class="menu-item <% if(content.equalsIgnoreCase("meuble-taille")) { out.print("active"); } %>">
-                                    <a href="meuble-taille" class="menu-link">
-                                        <div>Tailles utilisées</div>
-                                    </a>
-                                </li>
                                 <li class="menu-item <% if(content.equalsIgnoreCase("prix-vente-meuble")) { out.print("active"); } %>">
                                     <a href="prix-vente-meuble" class="menu-link">
                                         <div>Prix de vente</div>
@@ -287,19 +282,19 @@
                             </ul>
                         </li>
 
-                        <li class="menu-item <% if(active.equalsIgnoreCase("ouvrier")) { out.print("active open"); } %>">
+                        <li class="menu-item <% if(active.equalsIgnoreCase("poste")) { out.print("active open"); } %>">
                             <a href="" class="menu-link menu-toggle">
                                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
                                 <div>Poste</div>
                             </a>
                             <ul class="menu-sub">
-                                <li class="menu-item <% if(content.equalsIgnoreCase("ajouter-ouvrier")) { out.print("active"); } %>">
-                                    <a href="ajouter-ouvrier" class="menu-link">
+                                <li class="menu-item <% if(content.equalsIgnoreCase("ajouter-poste")) { out.print("active"); } %>">
+                                    <a href="ajouter-poste" class="menu-link">
                                         <div>Ajouter</div>
                                     </a>
                                 </li>
-                                <li class="menu-item <% if(content.equalsIgnoreCase("liste-ouvrier")) { out.print("active"); } %>">
-                                    <a href="liste-ouvrier" class="menu-link">
+                                <li class="menu-item <% if(content.equalsIgnoreCase("liste-poste")) { out.print("active"); } %>">
+                                    <a href="liste-poste" class="menu-link">
                                         <div>Liste</div>
                                     </a>
                                 </li>
@@ -522,9 +517,6 @@
                             <% } else if(content.equalsIgnoreCase("etat-stock-meuble")) { %>
                             <%@ include file="../pages/etat-stock-meuble.jsp" %>
 
-                            <% } else if(content.equalsIgnoreCase("meuble-taille")) { %>
-                            <%@ include file="../pages/meuble-taille.jsp" %>
-
                             <% } else if(content.equalsIgnoreCase("fabrication-meuble")) { %>
                             <%@ include file="../pages/fabrication-meuble.jsp" %>
 
@@ -540,11 +532,11 @@
                             <% } else if(content.equalsIgnoreCase("meuble-benefice")) { %>
                             <%@ include file="../pages/meuble-benefice.jsp" %>
 
-                            <% } else if(content.equalsIgnoreCase("ajouter-ouvrier")) { %>
-                            <%@ include file="../pages/ajouter-ouvrier.jsp" %>
+                            <% } else if(content.equalsIgnoreCase("ajouter-poste")) { %>
+                            <%@ include file="../pages/ajouter-poste.jsp" %>
 
-                            <% } else if(content.equalsIgnoreCase("liste-ouvrier")) { %>
-                            <%@ include file="../pages/liste-ouvrier.jsp" %>
+                            <% } else if(content.equalsIgnoreCase("liste-poste")) { %>
+                            <%@ include file="../pages/liste-poste.jsp" %>
 
                             <% } else if(content.equalsIgnoreCase("ajouter-main-oeuvre")) { %>
                             <%@ include file="../pages/ajouter-main-oeuvre.jsp" %>

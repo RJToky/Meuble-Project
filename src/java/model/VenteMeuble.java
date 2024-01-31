@@ -9,7 +9,7 @@ import util.ConnectionPostgres;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Vente extends GenericDAO<Vente> {
+public class VenteMeuble extends GenericDAO<VenteMeuble> {
 
     private int id;
     private int idMeuble;
@@ -18,10 +18,10 @@ public class Vente extends GenericDAO<Vente> {
     private int idClient;
     private String dateVente;
 
-    public Vente() {
+    public VenteMeuble() {
     }
 
-    public Vente(int id, int idMeuble, int idTaille, int quantite, int idClient, String dateVente) {
+    public VenteMeuble(int id, int idMeuble, int idTaille, int quantite, int idClient, String dateVente) {
         this.id = id;
         this.idMeuble = idMeuble;
         this.idTaille = idTaille;
@@ -30,19 +30,19 @@ public class Vente extends GenericDAO<Vente> {
         this.dateVente = dateVente;
     }
 
-    public static ArrayList<Vente> getAll() throws Exception {
+    public static ArrayList<VenteMeuble> getAll() throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
-            return new Vente().findAll(con);
+            return new VenteMeuble().findAll(con);
         }
     }
 
-    public static Vente getById(Connection con, int id) throws Exception {
-        return new Vente().findById(con, id);
+    public static VenteMeuble getById(Connection con, int id) throws Exception {
+        return new VenteMeuble().findById(con, id);
     }
 
     public void insert() throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
-            if(this.quantite <= 0) {
+            if (this.quantite <= 0) {
                 throw new Exception("La quantite doit etre positive");
             }
             this.save(con);

@@ -25,7 +25,7 @@
                                     <tr>
                                         <td><%= mainOeuvre.getId() %></td>
                                         <td><%= mainOeuvre.getStyle().getNom() %></td>
-                                        <td><%= mainOeuvre.getOuvrier().getNom() %></td>
+                                        <td><%= mainOeuvre.getPoste().getNom() %></td>
                                         <td><%= mainOeuvre.getHeureTravail() %></td>
                                         <td><%= mainOeuvre.getNombrePersonne() %></td>
                                     </tr>

@@ -1,12 +1,12 @@
 <% ArrayList<Matiere> matieres = (ArrayList<Matiere>) request.getAttribute("matieres"); %>
 
 <div>
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Meuble /</span> Liste par matières</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Meuble /</span> Liste par matiï¿½res</h4>
 
     <div class="row">
         <div class="col-md-8">
             <div class="card mb-4">
-                <h5 class="card-header">Liste par matières</h5>
+                <h5 class="card-header">Liste par matiï¿½res</h5>
                 <div class="card-body">
                     <div class="row">
                         <form class="col-12" action="meuble-matiere" method="get">
@@ -36,8 +36,8 @@
                         </form> 
                     </div>
 
-                    <% if(request.getAttribute("fabricationMeubles") != null) { %>
-                    <% ArrayList<FabricationMeuble> fabricationMeubles = (ArrayList<FabricationMeuble>) request.getAttribute("fabricationMeubles"); %>
+                    <% if(request.getAttribute("formuleMeubles") != null) { %>
+                    <% ArrayList<FormuleMeuble> formuleMeubles = (ArrayList<FormuleMeuble>) request.getAttribute("formuleMeubles"); %>
                     <div class="row mt-4">
                         <div class="table-responsive col-12">
                             <table class="table">
@@ -52,14 +52,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% for(FabricationMeuble fabricationMeuble : fabricationMeubles) { %>
+                                    <% for(FormuleMeuble formuleMeuble : formuleMeubles) { %>
                                     <tr>
-                                        <td><%= fabricationMeuble.getIdMeuble() %></td>
-                                        <td><%= fabricationMeuble.getMeuble().getNom() %></td>
-                                        <td><%= fabricationMeuble.getMeuble().getCategorie().getNom() %></td>
-                                        <td><%= fabricationMeuble.getMeuble().getStyle().getNom() %></td>
-                                        <td><%= fabricationMeuble.getTaille().getNom() %></td>
-                                        <td><%= fabricationMeuble.getQuantite() %></td>
+                                        <td><%= formuleMeuble.getIdMeuble() %></td>
+                                        <td><%= formuleMeuble.getMeuble().getNom() %></td>
+                                        <td><%= formuleMeuble.getMeuble().getCategorie().getNom() %></td>
+                                        <td><%= formuleMeuble.getMeuble().getStyle().getNom() %></td>
+                                        <td><%= formuleMeuble.getTaille().getNom() %></td>
+                                        <td><%= formuleMeuble.getQuantite() %></td>
                                     </tr>
                                     <% } %>
                                 </tbody>

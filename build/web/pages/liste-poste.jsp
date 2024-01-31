@@ -1,4 +1,4 @@
-<% ArrayList<VDetailOuvrier> vDetailOuvriers = (ArrayList<VDetailOuvrier>) request.getAttribute("vDetailOuvriers"); %>
+<% ArrayList<VDetailPoste> vDetailPostes = (ArrayList<VDetailPoste>) request.getAttribute("vDetailPostes"); %>
 
 <div>
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Poste /</span> Liste</h4>
@@ -19,11 +19,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% for(VDetailOuvrier vDetailOuvrier : vDetailOuvriers) { %>
+                                    <% for(VDetailPoste vDetailPoste : vDetailPostes) { %>
                                     <tr>
-                                        <td><%= vDetailOuvrier.getId() %></td>
-                                        <td><%= vDetailOuvrier.getNomOuvrier() %></td>
-                                        <td><%= vDetailOuvrier.getTauxHoraire() %></td>
+                                        <td><%= vDetailPoste.getIdPoste() %></td>
+                                        <td><%= vDetailPoste.getNomPoste() %></td>
+                                        <td><%= vDetailPoste.getTauxHoraire() %></td>
                                     </tr>
                                     <% } %>
                                 </tbody>
@@ -35,3 +35,4 @@
         </div>
     </div>
 </div>
+    

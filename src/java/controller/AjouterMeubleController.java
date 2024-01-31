@@ -35,14 +35,14 @@ public class AjouterMeubleController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            if (req.getParameter("nom") != null && req.getParameter("idCategorie") != null && req.getParameter("idStyle") != null) {
-                String[] listIdTaille = req.getParameterValues("idTaille[]");
+            if (req.getParameter("nom") != null && req.getParameter("idCategorie") != null
+                    && req.getParameter("idStyle") != null) {
                 String nom = req.getParameter("nom").trim();
                 int idCategorie = Integer.parseInt(req.getParameter("idCategorie"));
                 int idStyle = Integer.parseInt(req.getParameter("idStyle"));
                 if (!nom.equals("")) {
                     Meuble meuble = new Meuble(0, nom, idCategorie, idStyle);
-                    meuble.insert(listIdTaille);
+                    meuble.insert();
                 }
             }
             Meuble lastMeuble = Meuble.getLast();

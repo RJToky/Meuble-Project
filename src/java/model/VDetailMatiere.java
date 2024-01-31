@@ -11,7 +11,7 @@ import util.ConnectionPostgres;
 @EqualsAndHashCode(callSuper = false)
 public class VDetailMatiere extends GenericDAO<VDetailMatiere> {
 
-    private int id;
+    private int idMatiere;
     private String nomMatiere;
     private double prixUnitaire;
 

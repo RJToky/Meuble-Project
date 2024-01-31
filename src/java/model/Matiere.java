@@ -1,7 +1,6 @@
 package model;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -34,28 +33,28 @@ public class Matiere extends GenericDAO<Matiere> {
             return new Matiere().findById(con, id);
         }
     }
-    
+
     public void insert() throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
             this.save(con);
         }
     }
 
-    public ArrayList<FabricationMeuble> getFabricationMeubles() throws ClassNotFoundException, SQLException, Exception {
+    public ArrayList<FormuleMeuble> getFormuleMeubles() throws ClassNotFoundException, SQLException, Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
             String query = """
-                select *
-                from FabricationMeuble
-                where idMatiere = %s
-                order by idMeuble asc
-            """.formatted(this.getId());
-            ArrayList<FabricationMeuble> fabricationMeubles = new FabricationMeuble().find(con, query);
-            for (FabricationMeuble fabricationMeuble : fabricationMeubles) {
-                fabricationMeuble.setMeuble(Meuble.getById(con, fabricationMeuble.getIdMeuble()));
-                fabricationMeuble.setTaille(new Taille().findById(con, fabricationMeuble.getIdTaille()));
-                fabricationMeuble.setMatiere(new Matiere().findById(con, fabricationMeuble.getIdMatiere()));
+                        select *
+                        from FormuleMeuble
+                        where idMatiere = %s
+                        order by idMeuble asc
+                    """.formatted(this.getId());
+            ArrayList<FormuleMeuble> formuleMeubles = new FormuleMeuble().find(con, query);
+            for (FormuleMeuble formuleMeuble : formuleMeubles) {
+                formuleMeuble.setMeuble(Meuble.getById(con, formuleMeuble.getIdMeuble()));
+                formuleMeuble.setTaille(new Taille().findById(con, formuleMeuble.getIdTaille()));
+                formuleMeuble.setMatiere(new Matiere().findById(con, formuleMeuble.getIdMatiere()));
             }
-            return fabricationMeubles;
+            return formuleMeubles;
         }
     }
 }

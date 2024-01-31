@@ -1,4 +1,4 @@
-<% ArrayList<Ouvrier> ouvriers = (ArrayList<Ouvrier>) request.getAttribute("ouvriers"); %>
+<% ArrayList<Poste> postes = (ArrayList<Poste>) request.getAttribute("postes"); %>
 
 <div>
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Poste /</span> Ajouter</h4>
@@ -8,7 +8,7 @@
             <div class="card mb-4">
                 <h5 class="card-header">Formulaire</h5>
                 <div class="card-body">
-                    <form action="ajouter-ouvrier" method="post">
+                    <form action="ajouter-poste" method="post">
                         <div class="mb-3">
                             <label class="form-label">Nom</label>
                             <input
@@ -33,13 +33,13 @@
             <div class="card mb-4">
                 <h5 class="card-header">Modifier taux horaire</h5>
                 <div class="card-body">
-                    <form action="ajouter-ouvrier" method="post">
+                    <form action="ajouter-poste" method="post">
                         <div class="mb-3">
                             <label class="form-label">Poste</label>
-                            <select class="form-select" name="idOuvrier" required="">
+                            <select class="form-select" name="idPoste" required="">
                                 <option value="">Choisir...</option>
-                                <% for (Ouvrier ouvrier : ouvriers) { %>
-                                <option value="<%= ouvrier.getId() %>"><%= ouvrier.getNom() %></option>
+                                <% for (Poste poste : postes) { %>
+                                <option value="<%= poste.getId() %>"><%= poste.getNom() %></option>
                                 <% } %>
                             </select>
                         </div>

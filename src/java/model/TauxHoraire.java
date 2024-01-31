@@ -12,19 +12,19 @@ import util.ConnectionPostgres;
 public class TauxHoraire extends GenericDAO<TauxHoraire> {
 
     private int id;
-    private int idOuvrier;
+    private int idPoste;
     private double valeur;
     private String dateInsertion;
 
     public TauxHoraire() {
     }
 
-    public TauxHoraire(int id, int idOuvrier, double valeur) {
+    public TauxHoraire(int id, int idPoste, double valeur) {
         this.id = id;
-        this.idOuvrier = idOuvrier;
+        this.idPoste = idPoste;
         this.valeur = valeur;
     }
-    
+
     public void insert() throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
             this.setDateInsertion(LocalDateTime.now().toString());

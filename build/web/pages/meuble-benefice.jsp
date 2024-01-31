@@ -65,7 +65,7 @@
                                 <tbody>
                                     <% for(VMeubleBenefice vMeubleBenefice : vMeubleBenefices) { %>
                                     <tr>
-                                        <td><%= vMeubleBenefice.getId() %></td>
+                                        <td><%= vMeubleBenefice.getIdMeuble() %></td>
                                         <td><%= vMeubleBenefice.getNomMeuble() %></td>
                                         <td><%= vMeubleBenefice.getNomTaille() %></td>
                                         <td><%= vMeubleBenefice.getPrixRevient() %></td>

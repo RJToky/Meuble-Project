@@ -17,7 +17,7 @@ public class ListeEmployeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            req.setAttribute("vprofilEmployes", VProfilEmploye.getAll());
+            req.setAttribute("vProfilEmployes", VProfilEmploye.getAll());
             req.setAttribute("active", "employe");
             req.setAttribute("content", "liste-employe");
             req.getRequestDispatcher("layouts/layout-app.jsp").forward(req, resp);

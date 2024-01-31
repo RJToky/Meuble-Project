@@ -11,7 +11,7 @@ import util.ConnectionPostgres;
 @EqualsAndHashCode(callSuper = false)
 public class VMeubleValeur extends GenericDAO<VMeubleValeur> {
 
-    private int id;
+    private int idMeuble;
     private String nomMeuble;
     private int idTaille;
     private String nomTaille;
@@ -36,10 +36,10 @@ public class VMeubleValeur extends GenericDAO<VMeubleValeur> {
         try (Connection con = ConnectionPostgres.getConnection()) {
             VMeubleValeur vMeubleValeur = new VMeubleValeur();
             String query = """
-                select *
-                from VMeubleValeur
-                where valeur between %s and %s
-            """.formatted(valeurMin, valeurMax);
+                        select *
+                        from VMeubleValeur
+                        where valeur between %s and %s
+                    """.formatted(valeurMin, valeurMax);
             ArrayList<VMeubleValeur> vMeubleValeurs = vMeubleValeur.find(con, query);
             return vMeubleValeurs;
         }

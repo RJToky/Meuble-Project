@@ -11,27 +11,16 @@ import util.ConnectionPostgres;
 @EqualsAndHashCode(callSuper = false)
 public class VProfilEmploye extends GenericDAO<VProfilEmploye> {
 
-    private int id;
+    private int idEmploye;
     private String nomEmploye;
-    private int idOuvrier;
-    private String nomOuvrier;
+    private int idPoste;
+    private String nomPoste;
     private String dateEmbauche;
     private int anneeExperience;
     private String profil;
     private double tauxHoraire;
 
     public VProfilEmploye() {
-    }
-
-    public VProfilEmploye(int id, int idOuvrier, String nomEmploye, String nomOuvrier, String dateEmbauche, int anneeExperience, String profil, double tauxHoraire) {
-        this.id = id;
-        this.nomEmploye = nomEmploye;
-        this.idOuvrier = idOuvrier;
-        this.nomOuvrier = nomOuvrier;
-        this.dateEmbauche = dateEmbauche;
-        this.anneeExperience = anneeExperience;
-        this.profil = profil;
-        this.tauxHoraire = tauxHoraire;
     }
 
     public static ArrayList<VProfilEmploye> getAll() throws Exception {

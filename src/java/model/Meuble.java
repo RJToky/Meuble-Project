@@ -30,29 +30,9 @@ public class Meuble extends GenericDAO<Meuble> {
         this.idStyle = idStyle;
     }
 
-    public void insert(String[] listIdTaille) throws Exception {
+    public void insert() throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
             this.save(con);
-            if (listIdTaille != null) {
-                Meuble lastMeuble = this.findLast(con);
-                lastMeuble.addTaille(con, listIdTaille);
-            }
-        }
-    }
-
-    public void addTaille(Connection con, String[] listIdTaille) throws Exception {
-        for (String idTaille : listIdTaille) {
-            MeubleTaille meubleTaille = new MeubleTaille(0, this.getId(), Integer.parseInt(idTaille));
-            meubleTaille.save(con);
-        }
-    }
-
-    public void addTaille(String[] listIdTaille) throws Exception {
-        try (Connection con = ConnectionPostgres.getConnection()) {
-            for (String idTaille : listIdTaille) {
-                MeubleTaille meubleTaille = new MeubleTaille(0, this.getId(), Integer.parseInt(idTaille));
-                meubleTaille.save(con);
-            }
         }
     }
 
@@ -93,88 +73,62 @@ public class Meuble extends GenericDAO<Meuble> {
         ArrayList<Matiere> matieres;
         try (Connection con = ConnectionPostgres.getConnection()) {
             String query = """
-                select *
-                from Matiere
-                where id in (
-                    select idMatiere
-                    from StyleMatiere
-                    where idStyle in (
-                        select s.id
-                        from Meuble m
-                        join Style s on s.id = m.idStyle
-                        where m.id = %s
-                    )
-                )
-            """.formatted(this.getId());
+                        select *
+                        from Matiere
+                        where id in (
+                            select idMatiere
+                            from StyleMatiere
+                            where idStyle in (
+                                select s.id
+                                from Meuble m
+                                join Style s on s.id = m.idStyle
+                                where m.id = %s
+                            )
+                        )
+                    """.formatted(this.getId());
             matieres = new Matiere().find(con, query);
         }
         return matieres;
     }
 
-    public ArrayList<Taille> getTailles() throws Exception {
+    public ArrayList<FormuleMeuble> getFormuleMeubles() throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
             String query = """
-                select t.*
-                from Taille t
-                join MeubleTaille mt on t.id = mt.idTaille
-                where mt.idMeuble = %s
-            """.formatted(this.getId());
-            return new Taille().find(con, query);
+                        select *
+                        from FormuleMeuble
+                        where idMeuble = %s
+                    """.formatted(this.getId());
+            return new FormuleMeuble().find(con, query);
         }
     }
 
-    public ArrayList<Taille> getNotTailles() throws Exception {
+    public ArrayList<FormuleMeuble> getFormuleMeubles(int idTaille) throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
             String query = """
-                select t.*
-                from Taille t
-                where id not in (
-                    select t.id
-                    from Taille t
-                    join MeubleTaille mt on t.id = mt.idTaille
-                    where mt.idMeuble = %s
-                )
-            """.formatted(this.getId());
-            return new Taille().find(con, query);
+                        select *
+                        from FormuleMeuble
+                        where
+                            idMeuble = %s
+                            and idTaille = %s
+                    """.formatted(this.getId(), idTaille);
+            return new FormuleMeuble().find(con, query);
         }
     }
 
-    public ArrayList<FabricationMeuble> getFabricationMeubles() throws Exception {
-        try (Connection con = ConnectionPostgres.getConnection()) {
-            String query = """
-                select *
-                from FabricationMeuble
-                where idMeuble = %s
-            """.formatted(this.getId());
-            return new FabricationMeuble().find(con, query);
-        }
-    }
-
-    public ArrayList<FabricationMeuble> getFabricationMeubles(int idTaille) throws Exception {
-        try (Connection con = ConnectionPostgres.getConnection()) {
-            String query = """
-                select *
-                from FabricationMeuble
-                where
-                    idMeuble = %s
-                    and idTaille = %s
-            """.formatted(this.getId(), idTaille);
-            return new FabricationMeuble().find(con, query);
-        }
-    }
-
-    public void verifierStockMatiere(Connection con, ArrayList<FabricationMeuble> fabricationMeubles, int quantite) throws Exception {
+    public void verifierStockMatiere(Connection con, ArrayList<FormuleMeuble> formuleMeubles, int quantite)
+            throws Exception {
         StringBuilder message = new StringBuilder();
         boolean quantiteInsuffisante = false;
-        for (FabricationMeuble fabricationMeuble : fabricationMeubles) {
-            VEtatStockMatiere vEtatStockMatiere = new VEtatStockMatiere().findById(con, fabricationMeuble.getIdMatiere());
-            if (vEtatStockMatiere.getQuantite() - fabricationMeuble.getQuantite() * quantite < 0) {
+        for (FormuleMeuble formuleMeuble : formuleMeubles) {
+            VEtatStockMatiere vEtatStockMatiere = new VEtatStockMatiere().findById(con,
+                    formuleMeuble.getIdMatiere());
+            if (vEtatStockMatiere.getQuantite() - formuleMeuble.getQuantite() * quantite < 0) {
                 quantiteInsuffisante = true;
                 message
                         .append("<p>Matiere : ")
                         .append(vEtatStockMatiere.getNomMatiere())
                         .append(", Quantite necessaire : ")
-                        .append(fabricationMeuble.getQuantite() * quantite)
+                        .append(formuleMeuble.getQuantite() * quantite)
                         .append(", Quantite restante : ")
                         .append(vEtatStockMatiere.getQuantite())
                         .append("</p>");
@@ -185,34 +139,35 @@ public class Meuble extends GenericDAO<Meuble> {
         }
     }
 
-    public void commander(int idTaille, int quantite, String dateCommande) throws Exception {
+    public void fabriquer(int idTaille, int quantite, String dateInsertion) throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
             String dateNow = LocalDateTime.now().toString();
-            ArrayList<FabricationMeuble> fabricationMeubles = this.getFabricationMeubles(idTaille);
+            ArrayList<FormuleMeuble> formuleMeubles = this.getFormuleMeubles(idTaille);
 
-            this.verifierStockMatiere(con, fabricationMeubles, quantite);
+            this.verifierStockMatiere(con, formuleMeubles, quantite);
 
-            for (FabricationMeuble fabricationMeuble : fabricationMeubles) {
-                MouvementStockMatiere stockMatiere = new MouvementStockMatiere(0, fabricationMeuble.getIdMatiere(), 0, fabricationMeuble.getQuantite() * quantite, dateNow);
+            for (FormuleMeuble formuleMeuble : formuleMeubles) {
+                MouvementStockMatiere stockMatiere = new MouvementStockMatiere(0, formuleMeuble.getIdMatiere(), 0,
+                        formuleMeuble.getQuantite() * quantite, dateNow);
                 stockMatiere.sortirStock();
             }
-            
-            CommandeMeuble commandeMeuble = new CommandeMeuble(0, this.getId(), idTaille, quantite, dateCommande);
-            commandeMeuble.save(con);
+
+            StockMeuble stockMeuble = new StockMeuble(0, this.getId(), idTaille, quantite, dateInsertion);
+            stockMeuble.save(con);
         }
     }
-    
+
     public void verifierStockMeuble(Connection con, int idMeuble, int idTaille, int quantite) throws Exception {
         StringBuilder message = new StringBuilder();
         boolean quantiteInsuffisante = false;
         VEtatStockMeuble vEtatStockMeuble = VEtatStockMeuble.getByMeubleTaille(idMeuble, idTaille);
-        
-        if(vEtatStockMeuble.getQuantite() - quantite < 0) {
+
+        if (vEtatStockMeuble.getQuantite() - quantite < 0) {
             quantiteInsuffisante = true;
-                message
-                        .append("<p>Quantite restante : ")
-                        .append(vEtatStockMeuble.getQuantite())
-                        .append("</p>");
+            message
+                    .append("<p>Quantite restante : ")
+                    .append(vEtatStockMeuble.getQuantite())
+                    .append("</p>");
         }
         if (quantiteInsuffisante) {
             throw new Exception(message.toString());
@@ -221,12 +176,10 @@ public class Meuble extends GenericDAO<Meuble> {
 
     public void vendre(int idClient, int idTaille, int quantite, String dateVente) throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
-//            String dateNow = LocalDateTime.now().toString();
-
             this.verifierStockMeuble(con, this.getId(), idTaille, quantite);
-            
-            Vente vente = new Vente(0, this.getId(), idTaille, quantite, idClient, dateVente);
-            vente.insert();
+
+            VenteMeuble venteMeuble = new VenteMeuble(0, this.getId(), idTaille, quantite, idClient, dateVente);
+            venteMeuble.insert();
         }
     }
 }

@@ -38,11 +38,7 @@ insert into Taille values
 insert into Meuble values
     (default, 'Canape Boheme', 3, 1);
 
-insert into MeubleTaille values
-    (default, 1, 1),
-    (default, 1, 2);
-
-insert into FabricationMeuble values
+insert into FormuleMeuble values
     (default, 1, 1, 1, 2),
     (default, 1, 1, 2, 10),
     (default, 1, 1, 3, 3),
@@ -50,7 +46,7 @@ insert into FabricationMeuble values
     (default, 1, 2, 2, 30),
     (default, 1, 2, 3, 5);
 
-insert into CommandeMeuble values
+insert into StockMeuble values
     (default, 1, 1, 1, '2024-01-02 10:00:00');
 
 insert into Genre values

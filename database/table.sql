@@ -1,5 +1,5 @@
-create database meuble;
-\c meuble
+create database meuble2;
+\c meuble2
 
 drop table Matiere cascade;
 drop table PrixMatiere cascade;
@@ -9,10 +9,9 @@ drop table StyleMatiere cascade;
 drop table Categorie cascade;
 drop table Taille cascade;
 drop table Meuble cascade;
-drop table MeubleTaille cascade;
-drop table FabricationMeuble cascade;
-drop table CommandeMeuble cascade;
-drop table Ouvrier cascade;
+drop table FormuleMeuble cascade;
+drop table StockMeuble cascade;
+drop table Poste cascade;
 drop table TauxHoraire cascade;
 drop table PrixVenteMeuble cascade;
 drop table MainOeuvre cascade;
@@ -21,7 +20,7 @@ drop table Employe cascade;
 drop table Embauche cascade;
 drop table Genre cascade;
 drop table Client cascade;
-drop table Vente cascade;
+drop table VenteMeuble cascade;
 
 create table Matiere(
     id serial primary key,
@@ -72,13 +71,7 @@ create table Meuble(
     idStyle int references Style(id)
 );
 
-create table MeubleTaille(
-    id serial primary key,
-    idMeuble int references Meuble(id),
-    idTaille int references Taille(id)
-);
-
-create table FabricationMeuble(
+create table FormuleMeuble(
     id serial primary key,
     idMeuble int references Meuble(id),
     idTaille int references Taille(id),
@@ -86,22 +79,22 @@ create table FabricationMeuble(
     quantite double precision not null
 );
 
-create table CommandeMeuble(
+create table StockMeuble(
     id serial primary key,
     idMeuble int references Meuble(id),
     idTaille int references Taille(id),
     quantite int not null,
-    dateCommande timestamp not null
+    dateInsertion timestamp not null
 );
 
-create table Ouvrier(
+create table Poste(
     id serial primary key,
     nom varchar(50) not null
 );
 
 create table TauxHoraire(
     id serial primary key,
-    idOuvrier int references Ouvrier(id),
+    idPoste int references Poste(id),
     valeur double precision not null,
     dateInsertion timestamp not null
 );
@@ -117,7 +110,7 @@ create table PrixVenteMeuble(
 create table MainOeuvre(
     id serial primary key,
     idStyle int references Style(id),
-    idOuvrier int references Ouvrier(id),
+    idPoste int references Poste(id),
     heureTravail double precision not null,
     nombrePersonne int not null
 );
@@ -137,7 +130,7 @@ create table Employe(
 create table Embauche(
     id serial primary key,
     idEmploye int references Employe(id),
-    idOuvrier int references Ouvrier(id),
+    idPoste int references Poste(id),
     dateEmbauche date not null
 );
 
@@ -152,7 +145,7 @@ create table Client(
     idGenre int references Genre(id)
 );
 
-create table Vente(
+create table VenteMeuble(
     id serial primary key,
     idMeuble int references Meuble(id),
     idTaille int references Taille(id),

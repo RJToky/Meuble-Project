@@ -11,7 +11,7 @@ import rj.util.GenericDAO;
 @EqualsAndHashCode(callSuper = false)
 public class VMeubleBenefice extends GenericDAO<VMeubleBenefice> {
 
-    private int id;
+    private int idMeuble;
     private String nomMeuble;
     private int idTaille;
     private String nomTaille;
@@ -21,14 +21,15 @@ public class VMeubleBenefice extends GenericDAO<VMeubleBenefice> {
 
     public VMeubleBenefice() {
     }
-    
+
     public static ArrayList<VMeubleBenefice> getAll() throws Exception {
         try (Connection con = ConnectionPostgres.getConnection()) {
             return new VMeubleBenefice().findAll(con);
         }
     }
 
-    public static ArrayList<VMeubleBenefice> getByBeneficeMinMax(double beneficeMin, double beneficeMax) throws Exception {
+    public static ArrayList<VMeubleBenefice> getByBeneficeMinMax(double beneficeMin, double beneficeMax)
+            throws Exception {
         if (beneficeMin < 0 || beneficeMax < 0) {
             throw new Exception("La benefice doit etre positive");
         }
@@ -38,10 +39,10 @@ public class VMeubleBenefice extends GenericDAO<VMeubleBenefice> {
         try (Connection con = ConnectionPostgres.getConnection()) {
             VMeubleBenefice vMeubleBenefice = new VMeubleBenefice();
             String query = """
-                select *
-                from VMeubleBenefice
-                where benefice between %s and %s
-            """.formatted(beneficeMin, beneficeMax);
+                        select *
+                        from VMeubleBenefice
+                        where benefice between %s and %s
+                    """.formatted(beneficeMin, beneficeMax);
             ArrayList<VMeubleBenefice> vMeubleBenefices = vMeubleBenefice.find(con, query);
             return vMeubleBenefices;
         }

@@ -8,26 +8,26 @@ import util.ConnectionPostgres;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class CommandeMeuble extends GenericDAO<CommandeMeuble> {
+public class StockMeuble extends GenericDAO<StockMeuble> {
 
     private int id;
     private int idMeuble;
     private int idTaille;
     private int quantite;
-    private String dateCommande;
+    private String dateInsertion;
 
     private Meuble meuble;
     private Taille taille;
 
-    public CommandeMeuble() {
+    public StockMeuble() {
     }
 
-    public CommandeMeuble(int id, int idMeuble, int idTaille, int quantite, String dateCommande) {
+    public StockMeuble(int id, int idMeuble, int idTaille, int quantite, String dateInsertion) {
         this.id = id;
         this.idMeuble = idMeuble;
         this.idTaille = idTaille;
         this.quantite = quantite;
-        this.dateCommande = dateCommande;
+        this.dateInsertion = dateInsertion;
     }
 
     public void insert() throws Exception {

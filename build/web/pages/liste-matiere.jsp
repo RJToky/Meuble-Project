@@ -14,14 +14,14 @@
                                 <thead class="table-active">
                                     <tr>
                                         <th>Id</th>
-                                        <th>Nom du meuble</th>
+                                        <th>Nom de la matiere</th>
                                         <th>Prix unitaire actuel</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <% for(VDetailMatiere vDetailMatiere : vDetailMatieres) { %>
                                     <tr>
-                                        <td><%= vDetailMatiere.getId() %></td>
+                                        <td><%= vDetailMatiere.getIdMatiere() %></td>
                                         <td><%= vDetailMatiere.getNomMatiere() %></td>
                                         <td><%= vDetailMatiere.getPrixUnitaire() %></td>
                                     </tr>

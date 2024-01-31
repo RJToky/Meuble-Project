@@ -8,18 +8,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 
-import model.Ouvrier;
+import model.Poste;
 import model.TauxHoraire;
 
-@WebServlet("/ajouter-ouvrier")
-public class AjouterOuvrierController extends HttpServlet {
+@WebServlet("/ajouter-poste")
+public class AjouterPosteController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            req.setAttribute("ouvriers", Ouvrier.getAll());
-            req.setAttribute("active", "ouvrier");
-            req.setAttribute("content", "ajouter-ouvrier");
+            req.setAttribute("postes", Poste.getAll());
+            req.setAttribute("active", "poste");
+            req.setAttribute("content", "ajouter-poste");
             req.getRequestDispatcher("layouts/layout-app.jsp").forward(req, resp);
         } catch (Exception e) {
             PrintWriter out = resp.getWriter();
@@ -33,16 +33,16 @@ public class AjouterOuvrierController extends HttpServlet {
             if (req.getParameter("nom") != null) {
                 String nom = req.getParameter("nom").trim();
                 if (!nom.equals("")) {
-                    Ouvrier ouvrier = new Ouvrier(0, nom);
-                    ouvrier.insert();
+                    Poste poste = new Poste(0, nom);
+                    poste.insert();
                 }
-            } else if (req.getParameter("idOuvrier") != null && req.getParameter("valeur") != null) {
-                int idOuvrier = Integer.parseInt(req.getParameter("idOuvrier"));
+            } else if (req.getParameter("idPoste") != null && req.getParameter("valeur") != null) {
+                int idPoste = Integer.parseInt(req.getParameter("idPoste"));
                 double valeur = Double.parseDouble(req.getParameter("valeur"));
-                TauxHoraire tauxHoraire = new TauxHoraire(0, idOuvrier, valeur);
+                TauxHoraire tauxHoraire = new TauxHoraire(0, idPoste, valeur);
                 tauxHoraire.insert();
             }
-            resp.sendRedirect("ajouter-ouvrier");
+            resp.sendRedirect("ajouter-poste");
         } catch (Exception e) {
             PrintWriter out = resp.getWriter();
             out.println(e.getMessage());

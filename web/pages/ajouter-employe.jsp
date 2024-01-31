@@ -1,5 +1,5 @@
 <% ArrayList<Employe> employes = (ArrayList<Employe>) request.getAttribute("employes"); %>
-<% ArrayList<Ouvrier> ouvriers = (ArrayList<Ouvrier>) request.getAttribute("ouvriers"); %>
+<% ArrayList<Poste> postes = (ArrayList<Poste>) request.getAttribute("postes"); %>
 
 <div>
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Employe /</span> Ajouter</h4>
@@ -45,10 +45,10 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Poste</label>
-                            <select class="form-select" name="idOuvrier" required="">
+                            <select class="form-select" name="idPoste" required="">
                                 <option value="">Choisir...</option>
-                                <% for (Ouvrier ouvrier : ouvriers) { %>
-                                <option value="<%= ouvrier.getId() %>"><%= ouvrier.getNom() %></option>
+                                <% for (Poste poste : postes) { %>
+                                <option value="<%= poste.getId() %>"><%= poste.getNom() %></option>
                                 <% } %>
                             </select>
                         </div>
@@ -70,3 +70,4 @@
         </div>
     </div>
 </div>
+    
